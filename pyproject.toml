@@ -1,0 +1,8 @@
+[project]
+name = "bundesliga-predict"
+version = "0.1.0"
+description = "Dixon-Coles-Poisson-Modell zur Vorhersage der Bundesliga-Saison"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]

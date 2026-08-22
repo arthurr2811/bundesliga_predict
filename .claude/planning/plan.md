@@ -8,6 +8,9 @@ Zusätzlich Portfolio-/Übungsprojekt: `documentation.md` im Projekt-Root wird
 laufend gepflegt (was gebaut wurde, welche Entscheidungen
 warum getroffen wurden) als Basis für einen späteren Blogpost.
 
+## Aktueller Stand
+- Projektsetup abgeschlossen. Weiter mit Modellarchitektur.
+
 ## 1. Projektsetup
 Python-Projektstruktur aufsetzen (venv/Poetry, Abhängigkeiten wie pandas,
 scipy, numpy). Datenbeschaffung: historische Saisons von football-data.co.uk
