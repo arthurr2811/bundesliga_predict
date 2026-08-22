@@ -18,6 +18,36 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 - Weiter mit Schritt 3: Backtest und Hyperparameter-Tuning. Erst danach sind
   Halbwertszeit, Saison-Abschlag und Prior-Staerke belegt statt geraten.
 
+### Naechster Schritt (Stand 22.08.2026)
+1. Backtest bauen (walk-forward, RPS/Log-Loss/Brier gegen die beiden
+   Baselines). Der muss zuerst stehen, weil er die Messgrundlage fuer alles
+   Weitere ist.
+2. Danach als erste Verbesserung den Aufsteiger-Prior gegen den Backtest
+   testen (siehe Befund unten).
+3. Erst dann Hyperparameter-Grid-Search.
+
+### Befund: der Aufsteiger-Prior sitzt an der falschen Stelle
+Die Shrinkage zieht datenarme Teams aktuell Richtung 0, und 0 ist wegen
+`sum(attack) = 0` exakt der Ligadurchschnitt. Das ist ein neutraler Prior
+("wir wissen nichts ueber das Team") -- wir wissen aber mehr: intuitiv und gemessen ueber
+19 Aufsteiger-Saisons in unseren Daten liegt ein Aufsteiger im Schnitt bei
+attack -0.31 und defense -0.13, und 95 % der Aufsteiger sind im Angriff unter
+Ligaschnitt. Die Shrinkage macht Aufsteiger also systematisch zu stark.
+
+Am haertesten trifft es Teams ganz ohne Bundesliga-Historie (z. B.
+Elversberg): die starten bei exakt 0, also als Durchschnittsteam. Teams wie
+Hamburg oder Nuernberg haben wenigstens alte, abgewertete BL-Spiele.
+
+Geplante Korrektur: Shrinkage nicht Richtung 0, sondern Richtung eines
+Prior-Mittelwerts, der fuer datenarme Teams negativ ist. Das Shrinkage-Gewicht
+dafuer existiert bereits (es haengt an der gewichteten Spielmasse je Team),
+greift also automatisch nur dort, wo ein Team neu ist. Wichtig: die Streuung
+ist gross (sigma ~ 0.25 im Angriff; Stuttgart 2020/21 kam mit +0.08 hoch,
+Nuernberg 2018/19 mit -0.73) -- der Prior darf die Erwartung verschieben, aber
+nicht so eng sein, dass ein starker Aufsteiger zu lange braucht, um im Modell
+anzukommen. Ob es die Vorhersage wirklich verbessert, entscheidet der
+Backtest, nicht die Plausibilitaet.
+
 ## Architektur
 
 Vier entkoppelte Schichten, jede mit reinen Funktionen (DataFrame/Dataclass
