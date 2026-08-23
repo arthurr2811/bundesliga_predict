@@ -11,6 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 from bundesliga_predict.config import PLACE_RULES
+from bundesliga_predict.model.bootstrap import BootstrapConfig, bootstrap_params
 from bundesliga_predict.model.fit import fit
 from bundesliga_predict.model.params import DixonColesParams
 from bundesliga_predict.model.prior import PriorConfig, with_unknown_teams
@@ -40,6 +41,14 @@ class ForecastRun:
     predictions: pd.DataFrame
     forecast: SeasonForecast
     simulation: SimulationConfig
+    # Die Bootstrap-Ziehungen, auf denen die Simulation lief. Leer, wenn ohne
+    # gerechnet wurde; `params` bleibt in beiden Faellen die Punktschaetzung,
+    # aus der die Spielvorhersagen stammen.
+    replicates: tuple[DixonColesParams, ...] = ()
+
+    @property
+    def n_replicates(self) -> int:
+        return len(self.replicates)
 
 
 def target_season(matches: pd.DataFrame, as_of: pd.Timestamp) -> str:
@@ -72,11 +81,16 @@ def run_forecast(
     weight_config: WeightConfig | None = None,
     prior: PriorConfig | None = None,
     simulation: SimulationConfig | None = None,
+    bootstrap: BootstrapConfig | None = None,
 ) -> ForecastRun:
-    """Fit, Spielvorhersagen und Saison-Simulation zum Stichtag."""
+    """Fit, Spielvorhersagen und Saison-Simulation zum Stichtag.
+
+    Die Spielvorhersagen laufen immer auf der Punktschaetzung
+    """
     as_of = pd.Timestamp(as_of or pd.Timestamp.today().normalize())
     simulation = simulation or SimulationConfig()
     prior = prior or PriorConfig()
+    bootstrap = bootstrap if bootstrap is not None else BootstrapConfig()
 
     season = target_season(matches, as_of)
     state = season_state(matches, season, as_of)
@@ -93,7 +107,23 @@ def run_forecast(
     params = with_unknown_teams(params, set(teams), prior)
 
     predictions = predict_matches(params, open_matches(state))
-    forecast = simulate_season(params, state, teams=teams, config=simulation)
+
+    replicates = (
+        bootstrap_params(
+            matches,
+            teams=set(teams),
+            reference_date=as_of,
+            reference_season=season,
+            weight_config=weight_config,
+            prior=prior,
+            config=bootstrap,
+        )
+        if bootstrap.active
+        else []
+    )
+    forecast = simulate_season(
+        replicates or params, state, teams=teams, config=simulation
+    )
 
     return ForecastRun(
         season=season,
@@ -103,6 +133,7 @@ def run_forecast(
         predictions=predictions,
         forecast=forecast,
         simulation=simulation,
+        replicates=tuple(replicates),
     )
 
 
@@ -197,6 +228,7 @@ def _meta_payload(run: ForecastRun) -> dict:
         "matches_played": len(run.matches) - offen,
         "matches_open": offen,
         "n_simulations": run.simulation.n_simulations,
+        "n_bootstrap": run.n_replicates,
         "seed": run.simulation.seed,
         "model": {
             "home_advantage": round(run.params.home_advantage, 4),

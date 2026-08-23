@@ -29,23 +29,8 @@ def fit(
     weight_config: WeightConfig | None = None,
     prior: PriorConfig | None = None,
     reference_season: str | None = None,
+    bootstrap_rng: np.random.Generator | None = None,
 ) -> DixonColesParams:
-    """Schätzt die Modellparameter auf allen Spielen bis `reference_date`.
-
-    Der Stichtag ist zugleich Filter und Bezugspunkt der Zeitgewichtung. Ohne
-    Angabe wird das letzte gespielte Spiel im Datensatz verwendet. Der Schnitt
-    läuft über das Datum, nicht über den Spieltag.
-
-    `reference_season` ist die Saison, für die vorhergesagt werden soll, und
-    bestimmt den Saisonwechsel-Malus. Ohne Angabe die Saison des letzten
-    gespielten Spiels. Vor dem ersten Spiel einer neuen Saison ist das die
-    falsche -- dann muss der Aufrufer die Zielsaison mitgeben, sonst bleibt der
-    Malus für den gerade erfolgten Saisonwechsel aus.
-
-    `prior` regularisiert datenarme Teams (siehe `model/prior.py`). Teams ohne
-    jede Historie kommen im Ergebnis nicht vor -- sie haben keine Partie, aus
-    der sich etwas schätzen liesse; dafür gibt es `prior.with_unknown_teams`.
-    """
     prior = prior or PriorConfig()
     played = finished_matches(matches).copy()
     played["date"] = pd.to_datetime(played["date"])
@@ -63,6 +48,8 @@ def fit(
     weights = match_weights(
         played["date"], played["season"], reference_date, reference_season, weight_config
     )
+    if bootstrap_rng is not None:
+        weights = weights * bootstrap_rng.exponential(1.0, size=len(weights))
     data = likelihood.prepare(played, weights, prior)
 
     goals_per_team = (played["home_goals"].sum() + played["away_goals"].sum()) / (

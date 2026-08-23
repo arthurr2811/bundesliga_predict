@@ -479,11 +479,208 @@ Zwischen zwei Saisons ist das die kommende, was richtig ist -- die alte ist
 entschieden.
 
 Das Frontend bekommt vier Dateien in `data/output/` und keinerlei Modellcode:
-`meta.json` (Stand, Seed, Hyperparameter), `matches.json` (alle 306 Partien --
-gespielte mit Ergebnis, offene mit 1X2, erwarteten Toren und
-wahrscheinlichstem Ergebnis), `table.json` (aktuelle und erwartete
-Abschlusstabelle) und `probabilities.json` (Platzverteilung und die Ereignisse
-aus `PLACE_RULES`). Zusammen rund 120 KB.
+`meta.json` (Stand, Seed, Hyperparameter, Zahl der Parameter-Ziehungen), `matches.json` (alle 306 Partien --
+gespielte mit Ergebnis, offene mit 1X2, erwarteten Toren und den drei
+wahrscheinlichsten Ergebnissen in `likely_scores`), `table.json` (aktuelle und
+erwartete Abschlusstabelle) und `probabilities.json` (Platzverteilung und die
+Ereignisse aus `PLACE_RULES`). Zusammen rund 130 KB.
+
+## Das Frontend: drei Dateien, kein Build
+
+`frontend/` ist eine statische Seite aus Vanilla-JS, die per `fetch` nur die
+vier JSON-Dateien liest -- kein Server, kein Build-Schritt, keine Abhaengigkeit,
+ueber GitHub Pages deploybar. Oben die erwartete Abschlusstabelle, beim
+Hovern einer Zeile die Wahrscheinlichkeiten und die volle Platzverteilung;
+darunter die Spiele mit Blaettern durch die Spieltage.
+
+Zwei Kleinigkeiten, die beim Bauen dazukamen:
+
+**Nie 0 % oder 100 % anzeigen.** Beides waere gelogen -- die Simulation zieht
+10.000 Laeufe, mehr als "in keinem davon" oder "in allen" sagt eine Null nicht
+aus. Werte, die auf der angezeigten Genauigkeit an einen Rand runden, werden
+feiner formatiert; bleibt es dabei, steht dort `<0,01 %` bzw. `>99,99 %`.
+
+**"Wahrscheinlichstes Ergebnis" ist nicht "wahrscheinlichster Ausgang".** In
+der Prognose 2026/27 steht bei 202 von 306 Partien ein 1:1 als
+wahrscheinlichstes Einzelergebnis -- und in keiner einzigen ist X der
+wahrscheinlichste Ausgang. Kein Widerspruch: die Siegwahrscheinlichkeit
+verteilt sich auf viele Ergebnisse (2:1, 2:0, 3:1, ...), das Remis
+konzentriert sich auf wenige. Der Modus einer flachen Verteilung ist eine
+schwache Aussage, und das sieht man erst, wenn Platz zwei und drei danebenstehen:
+Bayern -- Stuttgart geht mit 3:1 (7,8 %), 2:1 (7,5 %), 4:1 (6,1 %) hinein.
+Deshalb zeigt die Tipp-Spalte beim Hovern die Top 3 samt Wahrscheinlichkeit.
+
+## Kalibrierung: heisst 90 % auch 90 %?
+
+Der Backtest misst die Spielvorhersagen. Ueber die Simulationsschicht sagt er
+nichts -- und genau deren Ausgaben liest am Ende jemand ab ("93 % Meister",
+"Endpunktzahl 72 bis 91"). Weil `--as-of` die Prognose eines beliebigen
+Stichtags rekonstruiert, laesst sich das nachzaehlen: fuer jeden Spieltag der
+acht abgeschlossenen Saisons einmal die volle Kette rechnen, am Saisonende
+gegen die Wahrheit halten. 272 Stichtage, 4.896 Team-Prognosen, je 10.000
+Simulationen; `cli.py calibrate` faehrt das in rund zwei Minuten.
+
+**Erste Frage: treten Ereignisse mit 90-%-Prognose in 90 % der Faelle ein?**
+Ueber alle Ereignisse aus `PLACE_RULES`, gebinnt nach prognostizierter
+Wahrscheinlichkeit (Brier 0.0409):
+
+| Bin | n | prognostiziert | eingetreten | Luecke |
+|---|---|---|---|---|
+| 0-2 % | 18940 | 0.2 % | 0.4 % | -0.2 |
+| 2-5 % | 2090 | 3.3 % | 4.7 % | -1.4 |
+| 5-10 % | 2092 | 7.3 % | 8.9 % | -1.6 |
+| 10-25 % | 3290 | 16.1 % | 14.5 % | +1.6 |
+| 25-50 % | 1121 | 34.7 % | 33.6 % | +1.0 |
+| 50-75 % | 558 | 62.8 % | 59.5 % | +3.3 |
+| 75-90 % | 399 | 82.4 % | 78.5 % | +4.0 |
+| 90-95 % | 184 | 92.7 % | 92.9 % | -0.2 |
+| 95-98 % | 133 | 96.6 % | 96.2 % | +0.4 |
+| 98-100 % | 569 | 99.7 % | 100.0 % | -0.3 |
+
+Die Vorzeichen sind bemerkenswert konsistent: unten zu niedrig, in der Mitte
+zu hoch. Das ist genau die Signatur zu enger Verteilungen -- Unwahrscheinliches
+passiert oefter als versprochen, Wahrscheinliches seltener. Deutlich wird es
+in den Raendern: Ereignissen mit hoechstens 1 % Wahrscheinlichkeit wurden
+insgesamt 14.3 Eintritte zugestanden, tatsaechlich waren es 27. Der Betrag
+bleibt aber klein; die groesste Luecke sind 4 Prozentpunkte.
+
+**Zweite Frage: liegt die echte Endpunktzahl im 90-%-Intervall?** Hier wird es
+deutlicher:
+
+| Phase | n | Abdeckung | Intervallbreite | MAE |
+|---|---|---|---|---|
+| vor Saisonstart | 144 | 75.0 % | 22.9 | 8.31 |
+| Spieltag 1-8 | 1152 | 79.3 % | 21.4 | 7.11 |
+| Spieltag 9-17 | 1296 | 85.8 % | 17.9 | 5.31 |
+| Spieltag 18-25 | 1152 | 91.0 % | 13.7 | 3.46 |
+| ab Spieltag 26 | 1152 | 94.0 % | 7.8 | 2.13 |
+| **gesamt** | **4896** | **87.1 %** | **15.5** | **4.64** |
+
+Ueber alles gerechnet 87.1 % statt 90 % -- das allein waere ein Achselzucken
+wert. Der Verlauf ist der Befund: **die Intervalle sind am Saisonanfang zu
+eng und werden gegen Ende zu weit.** Vor dem ersten Spieltag deckt das
+90-%-Intervall nur drei von vier Faellen ab.
+
+Das passt exakt zur bekannten Vereinfachung. Die Simulation haelt die
+Modellparameter in allen 10.000 Laeufen fest und zieht nur die Ergebnisse; sie
+kennt die Unsicherheit ueber die *Spiele*, nicht die ueber die *Teamstaerken*.
+Wie stark Letztere ins Gewicht faellt, haengt daran, wie viel von der Saison
+noch offen ist: vor dem ersten Spieltag traegt sie fast alles, im April kaum
+noch etwas. Genau so sieht die Tabelle aus. Dass es am Saisonende umschlaegt
+(94 %), hat einen anderen Grund: Punkte sind ganzzahlig, und Perzentile einer
+schmalen diskreten Verteilung fallen konservativ aus.
+
+**Was das nicht zeigt.** Acht Saisons sind acht Meister, nicht 272 -- die
+Stichtage innerhalb einer Saison sind stark korreliert, die Fallzahlen in den
+Bins also viel weniger aussagekraeftig, als sie aussehen. Die Abdeckung je
+Saison schwankt entsprechend zwischen 77.8 % (2018/19) und 92.2 % (2022/23).
+Und die auffaelligste Einzelzahl geht in die andere Richtung: vor Saisonstart
+war Bayern achtmal Favorit, im Schnitt mit 76 % -- gewonnen haben sie sieben
+davon. Auf der Spitzenposition ist das Modell also eher zu vorsichtig als zu
+forsch. Bei n = 8 heisst das nichts, es warnt nur davor, aus dem Gesamtbefund
+mehr zu machen, als drinsteht.
+
+**Konsequenz.** Der Check war die Entscheidung ueber die zurueckgestellte
+Parameter-Unsicherheit, und er faellt sie: sie lohnt sich, aber nur fuer den
+frueh-saisonalen Fall. Ein Bayesian Bootstrap ueber die vorhandenen
+Spielgewichte wuerde genau dort ansetzen, wo die Luecke sitzt, und dort
+nichts kaputtmachen, wo die Intervalle ohnehin schon eher zu weit sind.
+
+## Parameter-Unsicherheit: was der Bootstrap wirklich tut
+
+Der Kalibrierungs-Check hatte den Auftrag erteilt, also wurde die
+zurueckgestellte Sache gebaut: statt eines Fits rechnet `model/bootstrap.py`
+jetzt 100 Fits, jeder mit einem zusaetzlichen Exp(1)-Faktor auf jedem
+Spielgewicht (Bayesian Bootstrap). Die Simulation verteilt ihre 10.000 Laeufe
+gleichmaessig auf diese 100 Parametersaetze -- jeder Lauf sieht damit eine
+Liga, deren Staerken *eine* plausible Schaetzung sind statt immer derselben.
+Kosten: rund 30 s je Update statt einer halben Sekunde.
+
+Aufsteiger ohne jede Bundesliga-Historie brauchen eine Sonderbehandlung. Sie
+kommen im Fit nicht vor, der Bootstrap kann aus ihnen also nichts ziehen --
+ausgerechnet die Teams, ueber die am wenigsten bekannt ist, haetten sonst gar
+keine Unsicherheit. Sie bekommen den Prior-Mittelwert plus eine Streuung, die
+an den zwoelf Aufsteigern seit 2017/18 gemessen ist (RMS ihrer am Saisonende
+geschaetzten Staerke um den Prior-Mittelwert: 0.40 im Angriff, 0.32 in der
+Abwehr). Die Zahl ist grosszuegig, weil sie neben der echten Streuung auch
+enthaelt, dass der Prior die Aufsteiger im Schnitt zu schwach ansetzt -- und
+zwoelf Faelle sind eine duenne Grundlage.
+
+### Der Mechanismus ist nicht der, den man vermutet
+
+Die naheliegende Erwartung: die Parameter-Streuung ist am Saisonanfang gross
+und schrumpft, je mehr gespielt wird. **Das stimmt nicht.** Gemessen an
+2025/26 ist sie ueber die ganze Saison praktisch konstant:
+
+| Stichtag | mittlere SD der Angriffsstaerke |
+|---|---|
+| vor Saisonstart | 0.052 |
+| Spieltag 10 | 0.063 |
+| Spieltag 30 | 0.055 |
+
+Kein Wunder: der Fit steht auf mehreren Jahren Historie, 25 zusaetzliche
+Spiele verschieben die Datenmenge kaum.
+
+Was schrumpft, ist die *Wirkung* dieser Streuung. Eine falsch geschaetzte
+Teamstaerke verzerrt nur die Partien, die ueberhaupt noch ausstehen -- vor
+Saisonstart 34 Spieltage, am 30. noch vier. Deshalb faellt das Profil
+trotzdem richtig aus, ohne dass irgendwo eine Schraube "Unsicherheit je
+Spieltag" haengt:
+
+| Stichtag | Intervallbreite ohne | mit | Zuwachs |
+|---|---|---|---|
+| vor Saisonstart | 23.5 | 25.7 | +2.2 |
+| Spieltag 5 | 21.6 | 24.1 | +2.4 |
+| Spieltag 17 | 12.7 | 13.0 | +0.3 |
+| Spieltag 30 | 8.1 | 8.1 | 0.0 |
+
+### Die Gegenprobe
+
+Derselbe Kalibrierungs-Check, zweimal auf denselben 96 Stichtagen (acht
+Saisons, jeder dritte Spieltag) -- einmal mit `--bootstrap 0`, einmal mit 40
+Ziehungen:
+
+| Phase | Abdeckung ohne | mit | Breite ohne | mit |
+|---|---|---|---|---|
+| vor Saisonstart | 75.0 % | **84.0 %** | 22.9 | 26.6 |
+| Spieltag 1-8 | 77.3 % | 80.8 % | 21.9 | 24.1 |
+| Spieltag 9-17 | 85.2 % | 88.4 % | 18.4 | 20.0 |
+| Spieltag 18-25 | 90.7 % | 92.4 % | 13.9 | 14.6 |
+| ab Spieltag 26 | 92.0 % | 92.0 % | 9.1 | 9.3 |
+| **gesamt** | **84.9 %** | **87.7 %** | 17.0 | 18.4 |
+
+Genau das gewuenschte Profil: der groesste Zuwachs (+9 Prozentpunkte) dort,
+wo die Luecke war, und am Saisonende exakt null Veraenderung -- die Stelle,
+an der die Intervalle ohnehin schon eher zu weit waren.
+
+Die Ereignis-Wahrscheinlichkeiten bessern sich mit (Brier 0.0441 -> 0.0437),
+und zwar dort, wo die Ueberheblichkeit sass:
+
+| Bin | Luecke ohne | mit |
+|---|---|---|
+| 0-2 % | -0.0022 | -0.0001 |
+| 50-75 % | +0.0501 | +0.0224 |
+| 75-90 % | +0.0423 | +0.0292 |
+| 90-95 % | +0.0319 | -0.0122 |
+
+Die groesste Einzelluecke faellt von 5.0 auf 3.5 Prozentpunkte.
+
+### Was offen bleibt
+
+Behoben ist der Befund nicht, nur halbiert. Vor Saisonstart fehlen weiterhin
+6 Prozentpunkte, im Fenster Spieltag 1-8 sogar 9 -- ausgerechnet dort hat der
+Bootstrap am wenigsten geholfen. Die Vermutung: kurz nach Saisonstart liegen
+ein paar echte Ergebnisse vor, die die Zeitgewichtung noch kaum beruecksichtigt;
+das Modell haengt dann laenger an der Vorsaison, als es sollte. Das waere eine
+Frage an die Gewichtung, nicht an die Simulation -- und der Grid-Search hat
+diese Schrauben auf RPS je Spiel optimiert, nicht auf Saison-Kalibrierung.
+
+Nebenwirkung, die man im Blick behalten sollte: die Prognose fuer 2026/27
+verschiebt sich sichtbar. Bayern faellt von 93 % auf 90 % Meisterschaft,
+Elversberg von 94 % auf 76 % Abstieg. Der zweite Sprung geht fast ganz auf die
+Aufsteiger-Streuung von 0.40/0.32 zurueck -- die am duennsten belegte Zahl im
+ganzen Modell. Wer sie halbiert, bekommt Elversberg wieder deutlich naeher an
+90 %.
 
 ## Log
 
@@ -517,8 +714,28 @@ gegen die zehn echten Abschlusstabellen und gegen die Torematrix selbst.
 **Pipeline und Ausgabe.** `pipeline.py` plus `cli.py simulate|update`. Die
 Prognose fuer 2026/27 vor dem 1. Spieltag steht in `data/output/`: Bayern 93 %
 Meister, Elversberg 94 % Abstieg, erwartete Punkte von 81.9 bis 19.7. Ein
-kompletter Lauf dauert eine halbe Sekunde. Naechstes: Frontend, danach der
-Kalibrierungs-Check der Simulation.
+kompletter Lauf dauert eine halbe Sekunde.
+
+**Frontend.** Statische Seite unter `frontend/`, Vanilla-JS auf den vier
+JSON-Dateien. Dabei nachgezogen: `matches.json` liefert jetzt die drei
+wahrscheinlichsten Ergebnisse statt nur des einen, weil der Modus allein eine
+irrefuehrend starke Aussage ist.
+
+**Kalibrierungs-Check.** `evaluation/calibration.py` plus `cli.py calibrate`:
+272 Stichtage aus acht Saisons gegen den echten Ausgang. Ergebnis: die
+Ereignis-Wahrscheinlichkeiten sind brauchbar kalibriert (Luecken bis 4
+Prozentpunkte, Vorzeichen konsistent Richtung "zu eng"), die
+Punkte-Intervalle decken 87.1 % statt 90 % ab -- mit klarem Verlauf von 75 %
+vor Saisonstart auf 94 % ab Spieltag 26. Damit ist die zurueckgestellte
+Parameter-Unsicherheit belegt noetig, und zwar fuer die frueh-saisonalen
+Prognosen.
+
+**Parameter-Unsicherheit.** `model/bootstrap.py`, 100 Fits je Lauf, in der
+Simulation auf die 10.000 Laeufe verteilt. Abdeckung des 90-%-Intervalls vor
+Saisonstart 75.0 % -> 84.0 %, gesamt 84.9 % -> 87.7 %, am Saisonende
+unveraendert. Beim Bauen widerlegt: die Parameter-Streuung schrumpft im
+Saisonverlauf *nicht*: sie ist konstant, nur ihre Wirkung auf die
+Endpunktzahl haengt an der Zahl offener Spiele.
 
 ## Quellen / Inspiration
 

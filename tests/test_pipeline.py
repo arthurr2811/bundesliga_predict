@@ -7,10 +7,12 @@ import pandas as pd
 import pytest
 
 from bundesliga_predict import pipeline
+from bundesliga_predict.model.bootstrap import BootstrapConfig
 from bundesliga_predict.simulation.season import SimulationConfig
 from tests.test_backtest import _synthetic_matches
 
 KLEIN = SimulationConfig(n_simulations=200, seed=5)
+OHNE_BOOTSTRAP = BootstrapConfig(n_replicates=0)
 
 
 @pytest.fixture(scope="module")
@@ -52,7 +54,7 @@ def test_stichtag_macht_gespielte_partien_wieder_offen(matches):
 
 
 def test_lauf_liefert_vorhersagen_fuer_jedes_offene_spiel(matches):
-    run = pipeline.run_forecast(matches, simulation=KLEIN)
+    run = pipeline.run_forecast(matches, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP)
 
     offen = (~run.matches["finished"]).sum()
     assert len(run.predictions) == offen
@@ -64,7 +66,7 @@ def test_vor_dem_ersten_spieltag_ist_die_ganze_saison_offen(matches):
     saison = sorted(matches["season"].unique())[-1]
     anpfiff = pd.to_datetime(matches.loc[matches["season"] == saison, "date"]).min()
     run = pipeline.run_forecast(
-        matches, as_of=anpfiff - pd.Timedelta(days=1), simulation=KLEIN
+        matches, as_of=anpfiff - pd.Timedelta(days=1), simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP
     )
 
     assert run.season == saison
@@ -76,7 +78,7 @@ def test_spiel_am_stichtag_zaehlt_als_gespielt(matches):
     """Der Lauf am Sonntagabend muss den Spieltag schon kennen."""
     saison = sorted(matches["season"].unique())[-1]
     anpfiff = pd.to_datetime(matches.loc[matches["season"] == saison, "date"]).min()
-    run = pipeline.run_forecast(matches, as_of=anpfiff, simulation=KLEIN)
+    run = pipeline.run_forecast(matches, as_of=anpfiff, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP)
 
     gespielt = run.matches[run.matches["finished"]]
     assert len(gespielt) == 1
@@ -85,14 +87,14 @@ def test_spiel_am_stichtag_zaehlt_als_gespielt(matches):
 
 def test_gleicher_stichtag_gleiche_prognose(matches):
     laeufe = [
-        pipeline.run_forecast(matches, as_of="2018-10-01", simulation=KLEIN)
+        pipeline.run_forecast(matches, as_of="2018-10-01", simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP)
         for _ in range(2)
     ]
     assert np.array_equal(laeufe[0].forecast.position, laeufe[1].forecast.position)
 
 
 def test_payload_enthaelt_alle_vier_dokumente(matches):
-    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN))
+    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP))
     assert set(payload) == {"meta", "matches", "table", "probabilities"}
 
     meta = payload["meta"]
@@ -101,7 +103,7 @@ def test_payload_enthaelt_alle_vier_dokumente(matches):
 
 
 def test_gespielte_partien_tragen_das_ergebnis_offene_die_vorhersage(matches):
-    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN))
+    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP))
 
     gespielt = [m for m in payload["matches"] if m["finished"]]
     offen = [m for m in payload["matches"] if not m["finished"]]
@@ -111,7 +113,7 @@ def test_gespielte_partien_tragen_das_ergebnis_offene_die_vorhersage(matches):
 
 
 def test_platzverteilung_im_payload_summiert_je_team_auf_eins(matches):
-    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN))
+    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP))
 
     for team in payload["probabilities"]:
         assert sum(team["positions"]) == pytest.approx(1.0, abs=1e-6)
@@ -119,7 +121,7 @@ def test_platzverteilung_im_payload_summiert_je_team_auf_eins(matches):
 
 
 def test_write_payload_schreibt_lesbares_json(matches, tmp_path):
-    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN))
+    payload = pipeline.to_payload(pipeline.run_forecast(matches, simulation=KLEIN, bootstrap=OHNE_BOOTSTRAP))
     geschrieben = pipeline.write_payload(payload, tmp_path)
 
     assert {pfad.name for pfad in geschrieben} == {

@@ -41,6 +41,15 @@ N_SIMULATIONS = 10_000
 # Fester Seed: dieselben Daten müssen dieselbe Prognose ergeben.
 SIMULATION_SEED = 20262027
 
+# Bootstrap-Ziehungen der Modellparameter
+N_BOOTSTRAP = 100
+BOOTSTRAP_SEED = 8112026
+
+# Streuung, mit der Teams ohne jede Bundesliga-Historie je Ziehung um den
+# Prior-Mittelwert gestreut werden
+DEFAULT_UNKNOWN_ATTACK_SD = 0.40
+DEFAULT_UNKNOWN_DEFENSE_SD = 0.32
+
 # Was welcher Tabellenplatz bedeutet, als Platzbereich (von, bis).
 PLACE_RULES = {
     "champion": (1, 1),

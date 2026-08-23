@@ -3,12 +3,12 @@
 Gezogen wird aus der Torematrix jedes offenen Spiels, nicht aus zwei
 unabhaengigen Poissons -- sonst geht die Dixon-Coles-Korrektur verloren.
 
-Die Modellparameter sind ueber alle Laeufe hinweg dieselben.
+`simulate_season` nimmt entweder einen Parametersatz oder mehrere.
 """
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -117,40 +117,34 @@ def sample_scores(
     return home_goals, away_goals
 
 
-def simulate_season(
-    params: DixonColesParams,
-    matches: pd.DataFrame,
-    teams: Iterable[str] | None = None,
-    config: SimulationConfig | None = None,
-) -> SeasonForecast:
-    """Spielt die offenen Partien in `matches` `n_simulations` mal durch.
-
-    `matches` ist eine einzelne Saison: gespielte Partien liefern den
-    Startstand, offene werden simuliert. Ist nichts mehr offen, kommt die
-    Abschlusstabelle heraus, in jedem Lauf dieselbe.
+def split_runs(n_simulations: int, n_parameter_sets: int) -> list[int]:
+    """Verteilt die Laeufe moeglichst gleichmaessig auf die Parametersaetze.
     """
-    config = config or SimulationConfig()
-    if teams is None:
-        teams = sorted(set(matches["home_team"]) | set(matches["away_team"]))
-    teams = tuple(teams)
-    index = {team: number for number, team in enumerate(teams)}
+    if n_parameter_sets > n_simulations:
+        raise ValueError(
+            f"{n_parameter_sets} Parametersaetze, aber nur {n_simulations} Laeufe."
+        )
+    basis, rest = divmod(n_simulations, n_parameter_sets)
+    return [basis + (1 if number < rest else 0) for number in range(n_parameter_sets)]
 
-    start = team_records(matches, teams)
-    fixtures = open_matches(matches)
-    unknown = (set(fixtures["home_team"]) | set(fixtures["away_team"])) - index.keys()
-    if unknown:
-        raise ValueError(f"Offene Spiele von Teams ausserhalb der Liga: {sorted(unknown)}")
 
-    rng = np.random.default_rng(config.seed)
-    home_goals, away_goals = sample_scores(params, fixtures, rng, config.n_simulations)
+def _play_out(
+    params: DixonColesParams,
+    fixtures: pd.DataFrame,
+    start: pd.DataFrame,
+    home_index: np.ndarray,
+    away_index: np.ndarray,
+    n_simulations: int,
+    rng: np.random.Generator,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Spielt die offenen Partien mit *einem* Parametersatz durch.
+    """
+    home_goals, away_goals = sample_scores(params, fixtures, rng, n_simulations)
 
-    shape = (config.n_simulations, len(teams))
-    points = np.tile(start["points"].to_numpy(), (config.n_simulations, 1))
-    scored = np.tile(start["goals_for"].to_numpy(), (config.n_simulations, 1))
-    conceded = np.tile(start["goals_against"].to_numpy(), (config.n_simulations, 1))
+    points = np.tile(start["points"].to_numpy(), (n_simulations, 1))
+    scored = np.tile(start["goals_for"].to_numpy(), (n_simulations, 1))
+    conceded = np.tile(start["goals_against"].to_numpy(), (n_simulations, 1))
 
-    home_index = fixtures["home_team"].map(index).to_numpy()
-    away_index = fixtures["away_team"].map(index).to_numpy()
     for number, (home, away) in enumerate(zip(home_index, away_index)):
         scored_home = home_goals[:, number]
         scored_away = away_goals[:, number]
@@ -167,9 +161,61 @@ def simulate_season(
         conceded[:, home] += scored_away
         conceded[:, away] += scored_home
 
+    return points, scored, conceded
+
+
+def simulate_season(
+    params: DixonColesParams | Sequence[DixonColesParams],
+    matches: pd.DataFrame,
+    teams: Iterable[str] | None = None,
+    config: SimulationConfig | None = None,
+) -> SeasonForecast:
+    """Spielt die offenen Partien in `matches` `n_simulations` mal durch.
+
+    `matches` ist eine einzelne Saison: gespielte Partien liefern den
+    Startstand, offene werden simuliert. Ist nichts mehr offen, kommt die
+    Abschlusstabelle heraus, in jedem Lauf dieselbe.
+
+    `params` darf eine Liste sein (Bootstrap-Ziehungen aus
+    `model/bootstrap.py`). Die Laeufe werden dann gleichmaessig darauf
+    verteilt: jeder Lauf sieht eine Liga, deren Staerken *eine* plausible
+    Schaetzung sind statt immer derselben.
+    """
+    config = config or SimulationConfig()
+    parameter_sets = [params] if isinstance(params, DixonColesParams) else list(params)
+    if not parameter_sets:
+        raise ValueError("Kein Parametersatz uebergeben.")
+
+    if teams is None:
+        teams = sorted(set(matches["home_team"]) | set(matches["away_team"]))
+    teams = tuple(teams)
+    index = {team: number for number, team in enumerate(teams)}
+
+    start = team_records(matches, teams)
+    fixtures = open_matches(matches)
+    unknown = (set(fixtures["home_team"]) | set(fixtures["away_team"])) - index.keys()
+    if unknown:
+        raise ValueError(f"Offene Spiele von Teams ausserhalb der Liga: {sorted(unknown)}")
+
+    rng = np.random.default_rng(config.seed)
+    home_index = fixtures["home_team"].map(index).to_numpy()
+    away_index = fixtures["away_team"].map(index).to_numpy()
+
+    chunks = [
+        _play_out(parameters, fixtures, start, home_index, away_index, runs, rng)
+        for parameters, runs in zip(
+            parameter_sets, split_runs(config.n_simulations, len(parameter_sets))
+        )
+    ]
+    points = np.concatenate([chunk[0] for chunk in chunks])
+    scored = np.concatenate([chunk[1] for chunk in chunks])
+    conceded = np.concatenate([chunk[2] for chunk in chunks])
+
     goal_difference = scored - conceded
     # Voelliger Gleichstand wird ausgelost
-    position = positions(points, goal_difference, scored, tiebreak=rng.random(shape))
+    position = positions(
+        points, goal_difference, scored, tiebreak=rng.random(points.shape)
+    )
 
     return SeasonForecast(
         teams=teams,
