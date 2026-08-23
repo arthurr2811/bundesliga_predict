@@ -38,22 +38,15 @@ Nach der Vereinheitlichung landet jedes Spiel als eine Zeile in
 `data/processed/matches.csv` mit den Spalten `season`, `date`, `matchday`,
 `home_team`, `away_team`, `home_goals`, `away_goals`, `finished`.
 
-Begründung für die Auswahl:
-- **Gebraucht:** `home_goals`/`away_goals` sind die einzige Zielgröße, die das
-  Dixon-Coles-Poisson-Modell braucht; `date`/`season` werden für die
-  Zeit-Gewichtung und die Saisonwechsel-Behandlung benötigt; `matchday` zum
-  Gruppieren (Neufitten nach Spieltag, offene Spiele für die Simulation
-  bestimmen); `finished` unterscheidet gespielte von noch ausstehenden
-  Spielen (letztere braucht die Saison-Simulation als Startpunkt).
-  Teamnamen werden auf eine feste, kanonische Schreibweise gemappt (Basis:
-  football-data.co.uk-Namen, da sie über alle Saisons konsistent sind),
-  damit ein Team über beide Quellen hinweg als dasselbe Team erkannt wird.
-- **Weggelassen:** Halbzeitstände, Schüsse, Ecken, Karten, Schiedsrichter,
-  Zuschauerzahlen, Torschützen/Torminuten und sämtliche Wettquoten – all das
-  fließt in ein reines Tor-basiertes Dixon-Coles-Modell nicht ein und bläht
-  nur den Datensatz auf. (Wettquoten könnten später optional für einen
-  Modell-Vergleich/Backtest gegen den Wettmarkt interessant sein, werden
-  dafür aber aus den Rohdaten neu gelesen statt dauerhaft mitgeführt.)
+Mehr braucht das Modell nicht: Tore sind die Zielgröße, `date`/`season`
+steuern die Zeitgewichtung, `matchday` gruppiert, `finished` trennt Gespieltes
+von Offenem. Teamnamen werden auf eine kanonische Schreibweise gemappt (Basis:
+football-data.co.uk, über alle Saisons konsistent).
+
+Weggelassen: Halbzeitstände, Schüsse, Karten, Schiedsrichter, Torschützen und
+sämtliche Wettquoten. Nichts davon fließt in ein reines Tor-Modell ein. Die
+Quoten werden später für den Backtest gebraucht, dann aber aus den Rohdaten
+gelesen statt dauerhaft mitgeführt.
 
 ## Modellkern
 
@@ -117,60 +110,43 @@ selbst oder spaetere Partien bewertet. Das ist genau der Ablauf, in dem die
 Pipeline spaeter auch produktiv laeuft.
 
 **Spieltage, die es angeblich nicht gab.** football-data.co.uk liefert keine
-Spieltagsnummer, deshalb stand im Plan, die Bloecke muessten aus dem Kalender
-rekonstruiert werden. Das war ein langer Umweg. Der naheliegende Ansatz --
-neuer Block nach genuegend Tagen Pause -- ist naemlich unloesbar: innerhalb
-eines Spieltags liegen Freitag bis Montag lauter Ein-Tages-Schritte, zum
-naechsten Spieltag sind es normalerweise fuenf, in einer englischen Woche aber
-nur zwei. Zwei Tage Abstand bedeuten also mal "derselbe Spieltag" und mal
-"naechster Spieltag", und das kam in acht Saisons 35 Mal vor.
+Spieltagsnummer, deshalb sollten die Bloecke aus dem Kalender rekonstruiert
+werden. Der naheliegende Ansatz -- neuer Block nach genuegend Tagen Pause --
+ist unloesbar: zum naechsten Spieltag sind es normalerweise fuenf Tage, in
+einer englischen Woche aber nur zwei, also genauso viel wie innerhalb eines
+gestreckten Spieltags. In acht Saisons kam das 35 Mal vor.
 
-Die naechste Idee war besser, aber auch nicht richtig: jedes Team spielt pro
-Spieltag genau einmal, also neuer Block, sobald ein Team sich wiederholt. Das
-loest die englischen Wochen -- scheitert aber an einer Nachholpartie am Vortag
-eines Spieltags. Deren zwei Teams treten am Auftakttag nicht an, es gibt also
-keine Kollision, das Nachholspiel klebt am Spieltag fest, und der wird spaeter
-an der Stelle zerschnitten, an der das nachgeholte Team regulaer antritt. Genau
-das ist am 06.05.2021 passiert (Hertha - Freiburg vom 30. Spieltag, gefolgt vom
-32.).
+Die naechste Idee war besser, aber auch falsch: jedes Team spielt pro Spieltag
+einmal, also neuer Block, sobald ein Team sich wiederholt. Das loest die
+englischen Wochen, scheitert aber an einer Nachholpartie am Vortag eines
+Spieltags -- deren Teams treten am Auftakttag nicht an, es gibt keine
+Kollision, und der Spieltag wird spaeter an der falschen Stelle zerschnitten
+(06.05.2021, Hertha - Freiburg vom 30. Spieltag, gefolgt vom 32.).
 
-Gefunden wurde das erst, als echte Spieltagsnummern zum Abgleich herangezogen
-wurden -- und dabei stellte sich die Ausgangsannahme als falsch heraus:
-**OpenLigaDB liefert die Spieltagsnummern auch fuer vergangene Saisons**,
-nicht nur fuer die laufende. Dieselbe API, die das Projekt ohnehin benutzt.
-Der Abgleich passte bei 3060 von 3060 Partien, ohne eine einzige
-Datumsabweichung zwischen den Quellen.
+Gefunden wurde das erst beim Abgleich mit echten Spieltagsnummern -- und dabei
+stellte sich die Ausgangsannahme als falsch heraus: **OpenLigaDB liefert die
+Spieltagsnummern auch fuer vergangene Saisons.** Dieselbe API, die das Projekt
+ohnehin benutzt, Abgleich bei 3060 von 3060 Partien ohne eine einzige
+Abweichung. Damit verschwindet die Heuristik ersatzlos: ein Block *ist* ein
+Spieltag. Abgeschlossene Saisons werden einmal abgerufen und in
+`data/raw/matchdays.csv` abgelegt.
 
-Damit verschwindet die Heuristik ersatzlos: ein Block *ist* ein Spieltag.
-Abgeschlossene Saisons aendern sich nicht mehr, also werden sie einmal
-abgerufen und in `data/raw/matchdays.csv` abgelegt; danach geht nur noch die
-laufende Saison ueber das Netz.
+Uebrig bleibt eine harmlose Datumsregel: innerhalb eines Spieltags wird
+abgetrennt, was mehr als drei Tage entfernt liegt, also verlegte Partien. Der
+Schwellenwert ist jetzt beliebig, weil er nur zwei weit auseinanderliegende
+Faelle trennen muss (gestreckter Spieltag 1-2 Tage, echte Verlegung 10-94
+Tage); jeder Wert zwischen 3 und 9 liefert dasselbe. Verlegte Spiele bleiben
+bewusst eigene Bloecke -- sie sind ein eigener Vorhersage-Zeitpunkt, an dem
+das Modell mehr weiss. Ergebnis: 352 Bloecke, keiner mischt zwei Spieltage,
+12 abgetrennte Nachholpartien.
 
-Uebrig bleibt eine einzige Datumsregel, und die ist jetzt harmlos: innerhalb
-eines Spieltags wird abgetrennt, was mehr als drei Tage entfernt liegt --
-also verlegte Partien. Der Schwellenwert war vorher unmoeglich zu waehlen und
-ist jetzt beliebig, weil er nur noch zwei weit auseinanderliegende Faelle
-trennen muss:
-
-    regulaer gestreckter Spieltag:   1-2 Tage
-    echte Verlegung:                10-94 Tage  (alle 12 Faelle)
-
-Dazwischen liegt eine Woche Luft; jeder Wert zwischen 3 und 9 liefert dasselbe
-Ergebnis. Ein verlegtes Spiel bleibt bewusst ein eigener Block: es findet
-Wochen spaeter statt und ist damit ein eigener Vorhersage-Zeitpunkt, an dem
-das Modell mehr weiss. Es zurueck in seinen nominellen Spieltag zu zwingen
-hiesse, es mit veralteten Parametern vorherzusagen.
-
-Ergebnis auf den echten Daten: 352 Bloecke, kein einziger mischt zwei
-Spieltage, Nummerierung chronologisch, 12 abgetrennte Nachholpartien.
-
-**Die Lehre daraus** steckt weniger in der Regel als im Weg dorthin. Drei
-Runden lang wurde eine Heuristik verfeinert, deren Grundannahme ("wir haben
-die Spieltage nicht") nie geprueft worden war. Und die Kontrolle, die
-zwischendurch "passt" meldete, war eine Tautologie: dass sich die Bloecke je
-Saison zu 34 Spieltagen aufaddieren, ist bei 306 Spielen und Bloecken zu je 9
-Spielen rechnerisch gar nicht anders moeglich. Erst eine unabhaengige Quelle
-hat sowohl den Fehler als auch die ueberfluessige Heuristik sichtbar gemacht.
+**Die Lehre** steckt weniger in der Regel als im Weg dorthin. Drei Runden lang
+wurde eine Heuristik verfeinert, deren Grundannahme ("wir haben die Spieltage
+nicht") nie geprueft worden war. Und die Kontrolle, die zwischendurch "passt"
+meldete, war eine Tautologie: dass sich die Bloecke je Saison zu 34 Spieltagen
+aufaddieren, ist bei 306 Spielen und je 9 Spielen pro Block gar nicht anders
+moeglich. Erst eine unabhaengige Quelle hat beides sichtbar gemacht -- den
+Fehler und die ueberfluessige Heuristik.
 
 **Ein Detail, das leicht durchrutscht:** vor dem ersten Spiel einer neuen
 Saison ist das letzte gespielte Spiel noch aus der alten. Wer den
@@ -229,21 +205,17 @@ Der Rueckstand auf den Markt ist bei Aufsteigern gut doppelt so gross wie
 sonst. Genau das erwartet man, wenn der Prior datenarme Teams zu optimistisch
 behandelt. Absolut sind Aufsteiger-Partien uebrigens *leichter* vorherzusagen
 (beide Spalten kleiner) -- die Ergebnisse sind einseitiger. Nur die Baseline
-dafuer ist eben auch niedriger, und deshalb zaehlt hier der Abstand zum Markt,
-nicht die absolute Zahl.
+dafuer ist eben auch niedriger, und deshalb zaehlt hier der Abstand zum Markt.
 
-**Eine Teil-Erklaerung ist dabei weggebrochen.** Solange die Bloecke aus dem
-Kalender rekonstruiert wurden, sah es so aus, als konzentriere sich der
-Rueckstand auf die Hinrunde (+0.0141 gegen +0.0086) -- die schoene Geschichte
-"das Modell kennt die Aufsteiger noch nicht". Mit echten Spieltagsnummern
-teilt sich die Menge sauber in 279/279 und der Unterschied schrumpft auf
-+0.0125 gegen +0.0112, also fast nichts. Die alte Aufteilung war schief (258
-und 286 ergeben nicht einmal die 558); der scheinbare Verlauf ueber die Saison
-war ueberwiegend ein Artefakt der Blockbildung. Uebrig bleibt der Befund, der
-zaehlt: der Rueckstand haengt am Aufsteiger, nicht am Zeitpunkt. Das passt
-weniger zu "zu wenig Daten am Saisonanfang" als zu "der Prior selbst zieht auf
-den falschen Wert" -- und ein falscher Prior-Mittelwert wirkt tatsaechlich die
-ganze Saison ueber, weil ein Aufsteiger auch im Mai noch die mit Abstand
+**Eine Teil-Erklaerung ist dabei weggebrochen.** Mit den alten,
+kalenderbasierten Bloecken sah es so aus, als konzentriere sich der Rueckstand
+auf die Hinrunde (+0.0141 gegen +0.0086) -- die schoene Geschichte "das Modell
+kennt die Aufsteiger noch nicht". Mit echten Spieltagsnummern teilt sich die
+Menge sauber in 279/279 und der Unterschied schrumpft auf fast nichts. Der
+scheinbare Saisonverlauf war ueberwiegend ein Artefakt der Blockbildung.
+Uebrig bleibt der Befund, der zaehlt: der Rueckstand haengt am Aufsteiger,
+nicht am Zeitpunkt. Das passt zu "der Prior zieht auf den falschen Wert" --
+und der wirkt die ganze Saison, weil ein Aufsteiger auch im Mai noch die
 duennste Datenbasis hat.
 
 ## Der Aufsteiger-Prior: die erste Aenderung, die sich beweisen musste
@@ -267,19 +239,17 @@ Mittelwert statt auf 0.
 
 **Wer Aufsteiger ist, muss nirgends stehen.** Das Shrinkage-Gewicht haengt an
 der gewichteten Spielmasse je Team und geht mit wachsender Datenmenge gegen 0
--- fuer etablierte Teams verschwindet der Mittelwert also mit. Es braucht
-keine Liste, keine Fallunterscheidung, keinen Aufsteiger-Flag im Datensatz.
-Der Backtest bestaetigt das schaerfer, als ein Test es koennte: ueber alle
-Prior-Staerken hinweg bleiben die 1890 Partien *ohne* Aufsteiger bei RPS
-0.2054, Abstand zum Markt +0.0057 -- identisch bis zur vierten Nachkommastelle.
+-- fuer etablierte Teams verschwindet der Mittelwert also mit. Keine Liste,
+keine Fallunterscheidung, kein Aufsteiger-Flag. Der Backtest bestaetigt das
+schaerfer, als ein Test es koennte: ueber alle Prior-Staerken hinweg bleiben
+die 1890 Partien *ohne* Aufsteiger bei RPS 0.2054 -- identisch bis zur vierten
+Nachkommastelle.
 
 Am haertesten traf der alte Prior Teams ganz ohne Erstliga-Historie
-(Elversberg, Heidenheim vor 2023): die tauchen im Fit ueberhaupt nicht auf,
-weil es keine Partie von ihnen gibt, und wurden vom Backtest als exaktes
-Durchschnittsteam ergaenzt -- das denkbar optimistischste Urteil ueber einen
-Aufsteiger. Sie bekommen jetzt den Prior-Mittelwert, also genau den Wert, den
-der Fit ihnen geben wuerde (ihre Shrinkage waere 1, der Prior damit allein
-bestimmend).
+(Elversberg, Heidenheim vor 2023): die tauchen im Fit gar nicht auf und wurden
+als exaktes Durchschnittsteam ergaenzt -- das denkbar optimistischste Urteil
+ueber einen Aufsteiger. Sie bekommen jetzt den Prior-Mittelwert, also genau
+den Wert, den der Fit ihnen geben wuerde.
 
 **Was es bringt.** Skalierung 1.0 heisst: Prior-Mittelwert genau auf dem
 gemessenen Wert.
@@ -341,27 +311,19 @@ Ein Faktor 12 bis 40. Der Prior-Effekt von 0.00051 hat damit ein
 
 **Und wie viel schoent die Auswahl selbst?** Laesst man K gleichwertige
 Kombinationen gegeneinander antreten, gewinnt die beste allein durch Zufall.
-Simuliert man das mit dem gemessenen Standardfehler:
+Simuliert mit dem gemessenen Standardfehler waechst dieser Bonus mit
+Wurzel-Log-K, also praktisch gar nicht: 0.00010 bei K = 10, 0.00021 bei
+K = 500. Ein groesserer Grid ist also nicht das Problem -- die
+Modellkomplexitaet aendert sich durch mehr Grid-Punkte ueberhaupt nicht,
+ueberangepasst werden kann nur die *Auswahl* der Hyperparameter.
 
-    K = 10    Kombinationen -> bestes scheint 0.00010 besser
-    K = 108   Kombinationen -> bestes scheint 0.00017 besser
-    K = 500   Kombinationen -> bestes scheint 0.00021 besser
+Praktische Folge: der Grid wird **breit** statt fein. Feinere Aufloesung auf
+einer flachen Flaeche siebt nur Rauschen; ein Optimum am Rand des Grids ist
+dagegen ein echter Fehler, weil man nicht weiss, was dahinter kommt -- genau
+das war beim Aufsteiger-Prior passiert.
 
-Das waechst mit Wurzel-Log-K, also praktisch gar nicht: von 108 auf 500
-Kombinationen kostet 0.00004. Damit ist eine verbreitete Sorge widerlegt --
-ein groesserer Grid ist nicht das Problem. Wichtig ist die begriffliche
-Trennung: die Modellkomplexitaet aendert sich durch mehr Grid-Punkte
-ueberhaupt nicht, es bleiben dieselben Parameter auf denselben Daten.
-Ueberangepasst werden kann nur die *Auswahl* der Hyperparameter.
-
-Praktische Folge fuer den Zuschnitt: der Grid wird **breit** statt fein.
-Feinere Aufloesung auf einer flachen Flaeche siebt nur Rauschen; ein Optimum,
-das am Rand des Grids liegt, ist dagegen ein echter Fehler -- man weiss dann
-schlicht nicht, ob dahinter noch etwas kommt. Genau das war beim
-Aufsteiger-Prior passiert.
-
-Ein Vorbehalt bleibt: die 0.00007 stammen aus Varianten, die sich nur im
-Prior unterscheiden. Bei sehr verschiedenen Konfigurationen war der Wert schon
+Ein Vorbehalt bleibt: die 0.00007 stammen aus Varianten, die sich nur im Prior
+unterscheiden. Bei sehr verschiedenen Konfigurationen war der Wert schon
 0.00023, die Plateau-Schwelle von 0.0002 ist also eher die untere Kante.
 
 ## Der Grid-Search: 504 Laeufe, und das Ergebnis ist ein Plateau
@@ -402,12 +364,11 @@ aber nicht von einer gluecklichen Ecke abhaengig.
 ab welcher Datenmenge ein Team als datenreich gilt. Erhoeht man ihn, steigt die
 Zugkraft des Priors fuer *jedes* Team -- der Aufsteiger von 0.80 auf 0.97, der
 Dauergast aber von 0.07 auf 0.41. Und weil `sum(attack) = 0` gilt, faellt
-heraus, was alle gleich betrifft: eine Verschiebung der ganzen Liga kann es in
-diesem Modell gar nicht geben. Uebrig bleibt nur der *Unterschied* in der
-Zugkraft, und der schrumpft. Ein groesserer Wert macht den Prior also
-stumpfer, nicht schaerfer. Gemessen am Abstand des Aufsteigers zum
-Ligadurchschnitt: -0.139 bei 8, -0.084 bei 68. Aufgefallen ist das, weil ein
-Test mit der intuitiven Erwartung durchfiel.
+heraus, was alle gleich betrifft. Uebrig bleibt nur der *Unterschied* in der
+Zugkraft, und der schrumpft: ein groesserer Wert macht den Prior stumpfer,
+nicht schaerfer (Abstand des Aufsteigers zum Ligadurchschnitt -0.139 bei 8,
+-0.084 bei 68). Aufgefallen ist das, weil ein Test mit der intuitiven
+Erwartung durchfiel.
 
 ### Der Holdout
 
@@ -526,65 +487,38 @@ aus `PLACE_RULES`). Zusammen rund 120 KB.
 
 ## Log
 
-**Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
-Dabei aufgefallen: football-data.co.uk liefert keine Spieltagsnummer. Statt
-sie kuenstlich zu rekonstruieren, laufen alle Schnitte in Modell und Backtest
-ueber das Datum; `matchday` bleibt reine Anzeige-Information der laufenden
-Saison.
+Nur die Stationen; das Warum steht in den Abschnitten oben.
 
-**Modellkern.** Parameter-Container, Zeitgewichtung, Likelihood und Fit
-gebaut, abgesichert durch den Recovery-Test. Erster Fit auf echten Daten:
-Heimvorteil 0.19 (rund 20 % mehr Tore zu Hause), Ligaschnitt 1.39 Tore je
-Team, Bayern mit Abstand vorn. Noch offen: Backtest und Hyperparameter-Tuning
--- bis dahin sind die Default-Hyperparameter geraten, nicht belegt.
+**Datenpipeline.** Historische und laufende Saison vereinheitlicht.
 
-**Backtest.** Walk-forward ueber acht Saisons gebaut, dazu 1X2-Auswertung,
-die drei Masse und beide Baselines. Das Modell schlaegt die Baseline klar und
-liegt knapp hinter dem Markt. Beim Bauen aufgefallen: der Saisonwechsel-Malus
-lief vor dem ersten Spieltag einer Saison ins Leere, weil er sich an der
-Saison des letzten gespielten Spiels orientierte -- der Fit nimmt die
-Zielsaison jetzt explizit entgegen. Erster belegter Befund: der Rueckstand auf
-den Markt konzentriert sich auf Partien mit Aufsteigern.
+**Modellkern.** Parameter, Zeitgewichtung, Likelihood, Fit, abgesichert durch
+den Recovery-Test. Erster Fit auf echten Daten: Heimvorteil 0.19 (rund 20 %
+mehr Tore zu Hause), Ligaschnitt 1.39 Tore je Team.
 
-**Bloecke auf echte Spieltage umgestellt, Backtest neu erhoben.** Die Zahlen
-oben stammen aus diesem Lauf (2448 Spiele, 2018/19-2025/26). Gegenueber der
-kalenderbasierten Blockbildung aendert sich das Gesamtbild kaum (RPS 0.2052 ->
-0.2049), die Aufteilung nach Aufsteigern dagegen deutlich: der
-Hinrunden-/Rueckrunden-Unterschied war groesstenteils ein Artefakt der alten
-Bloecke.
+**Backtest.** Walk-forward ueber acht Saisons, drei Masse, zwei Baselines.
+Beim Bauen aufgefallen: der Saisonwechsel-Malus lief vor dem ersten Spieltag
+einer Saison ins Leere, weil er sich an der Saison des letzten gespielten
+Spiels orientierte -- der Fit nimmt die Zielsaison jetzt explizit entgegen.
+Erster belegter Befund: der Rueckstand auf den Markt sitzt bei den Aufsteigern.
 
-**Aufsteiger-Prior.** Shrinkage zieht nicht mehr auf den Ligadurchschnitt,
-sondern auf einen gemessenen Mittelwert. Erste Modellaenderung, die der
-Backtest genehmigt hat statt der Plausibilitaet: RPS 0.2049 -> 0.2044, und der
-Rueckstand auf den Markt bei Aufsteigern in der Hinrunde faellt von +0.0125 auf
-+0.0079. Nebenbei ist der Sonderfall "Team ohne jede Historie" aus dem
-Backtest verschwunden -- er ist jetzt derselbe Prior wie fuer alle anderen.
-Naechstes: Grid-Search ueber Halbwertszeit, Saison-Abschlag, Prior-Staerke und
-Prior-Mittelwert gemeinsam.
+**Bloecke auf echte Spieltage umgestellt.** Gesamtbild kaum veraendert
+(RPS 0.2052 -> 0.2049), die Aufteilung nach Aufsteigern dagegen deutlich.
 
-**Grid-Search.** 504 Laeufe in zwei Stufen, getunt auf sechs Saisons, geprueft
-auf zwei zurueckgehaltenen. RPS ueber alle acht Saisons 0.2044 -> 0.2031, im
-Holdout 0.2046 -> 0.2022. Die Halbwertszeit war mit 180 Tagen deutlich zu kurz
-geraten (jetzt 480), der Prior-Mittelwert mit dem reinen Messwert zu schwach
-(jetzt das Doppelte). Wichtigster Nebenbefund: das Optimum ist ein breites
-Plateau, keine Spitze -- 49 sehr verschiedene Kombinationen liegen gleichauf.
-Damit sind die Defaults in `config.py` belegt statt geraten, und weiteres
-Feintuning an diesen vier Schrauben lohnt nicht. Naechstes: Simulation.
+**Aufsteiger-Prior.** RPS 0.2049 -> 0.2044. Erste Modellaenderung, die der
+Backtest genehmigt hat statt der Plausibilitaet.
 
-**Tabellenberechnung.** `simulation/table.py` gebaut, gegen die zehn echten
-Abschlusstabellen geprueft. Der direkte Vergleich entfaellt (siehe oben).
+**Grid-Search.** 504 Laeufe, RPS 0.2044 -> 0.2031, im Holdout 0.2046 ->
+0.2022. Damit sind die Defaults in `config.py` belegt statt geraten, und
+weiteres Feintuning an diesen vier Schrauben lohnt nicht.
 
-**Monte-Carlo.** `simulation/season.py` gebaut: Ziehen aus der Torematrix,
-Punkte und Tore je Lauf, Platzverteilung. Geprueft unter anderem gegen die
-Torematrix selbst (gezogene Haeufigkeiten gegen Zellwahrscheinlichkeiten) und
-im degenerierten Fall ohne offene Spiele, wo die Abschlusstabelle herauskommen
-muss. Erste Prognose fuer 2026/27 steht.
+**Simulation.** `simulation/table.py` und `simulation/season.py`, geprueft
+gegen die zehn echten Abschlusstabellen und gegen die Torematrix selbst.
 
-**Pipeline und Ausgabe.** `pipeline.py` plus `cli.py simulate|update` gebaut,
-Platz-Regeln in `config.py`. Die Prognose fuer 2026/27 vor dem 1. Spieltag
-steht in `data/output/`: Bayern 93 % Meister, Elversberg 94 % Abstieg,
-erwartete Punkte von 81.9 bis 19.7. Ein kompletter Lauf dauert eine halbe
-Sekunde. Naechstes: Frontend.
+**Pipeline und Ausgabe.** `pipeline.py` plus `cli.py simulate|update`. Die
+Prognose fuer 2026/27 vor dem 1. Spieltag steht in `data/output/`: Bayern 93 %
+Meister, Elversberg 94 % Abstieg, erwartete Punkte von 81.9 bis 19.7. Ein
+kompletter Lauf dauert eine halbe Sekunde. Naechstes: Frontend, danach der
+Kalibrierungs-Check der Simulation.
 
 ## Quellen / Inspiration
 
