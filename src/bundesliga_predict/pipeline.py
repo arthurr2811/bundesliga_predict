@@ -148,6 +148,11 @@ def _matches_payload(run: ForecastRun) -> list[dict]:
                     int(prediction["likely_home_goals"]),
                     int(prediction["likely_away_goals"]),
                 ],
+                # Die drei wahrscheinlichsten Ergebnisse als [heim, gast, wkt.].
+                "likely_scores": [
+                    [home, away, round(probability, _DIGITS)]
+                    for home, away, probability in prediction["likely_scores"]
+                ],
             }
         rows.append(row)
     return rows

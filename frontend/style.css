@@ -1,0 +1,119 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --line: #e2e4e8;
+  --row: #f7f8fa;
+  --cl: #bcd9ff;
+  --el: #ffe2a8;
+  --ecl: #cfe9c8;
+  --po: #ffd9b0;
+  --rel: #ffc4c4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 1rem 4rem;
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+header, main { max-width: 1000px; margin: 0 auto; }
+
+h1 { font-size: 1.5rem; margin: 1.5rem 0 0.25rem; }
+h2 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+
+.meta, .hint, .legend { color: var(--muted); font-size: 0.85rem; margin: 0.25rem 0; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+th, td {
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+th { font-weight: 600; font-size: 0.8rem; color: var(--muted); }
+
+td.num, th.num { text-align: right; }
+
+tbody tr:nth-child(even) { background: var(--row); }
+tbody tr:hover { background: #eef2ff; }
+
+#table-expected tbody tr, #table-current tbody tr { cursor: default; }
+
+td.pos { position: relative; }
+td.pos::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+tr.zone-cl td.pos::before { background: var(--cl); }
+tr.zone-el td.pos::before { background: var(--el); }
+tr.zone-ecl td.pos::before { background: var(--ecl); }
+tr.zone-po td.pos::before { background: var(--po); }
+tr.zone-rel td.pos::before { background: var(--rel); }
+
+.legend { margin-top: 0.6rem; }
+.key {
+  display: inline-block;
+  width: 0.75rem; height: 0.75rem;
+  margin: 0 0.2rem 0 0.9rem;
+  vertical-align: -1px;
+  border-radius: 2px;
+}
+.key:first-child { margin-left: 0; }
+.key.cl { background: var(--cl); }
+.key.el { background: var(--el); }
+.key.ecl { background: var(--ecl); }
+.key.po { background: var(--po); }
+.key.rel { background: var(--rel); }
+
+.matchday-nav { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+.matchday-nav button, .matchday-nav select {
+  font: inherit;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.matchday-nav button:disabled { color: var(--muted); cursor: default; }
+
+td.hoverable { text-decoration: underline dotted var(--muted); }
+
+.bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: #93a7ff;
+  vertical-align: middle;
+  border-radius: 1px;
+}
+
+.tip {
+  position: absolute;
+  z-index: 10;
+  max-width: 340px;
+  padding: 0.6rem 0.75rem;
+  background: #fff;
+  border: 1px solid #cbd0d8;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  font-size: 0.82rem;
+  pointer-events: none;
+}
+.tip h3 { margin: 0 0 0.4rem; font-size: 0.9rem; }
+.tip table { font-size: 0.8rem; }
+.tip td { border: none; padding: 0.1rem 0.35rem 0.1rem 0; }
+.tip .sub { color: var(--muted); margin: 0.5rem 0 0.2rem; }
+
+.err { color: #b00020; }

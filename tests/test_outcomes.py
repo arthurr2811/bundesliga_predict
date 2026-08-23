@@ -61,6 +61,16 @@ def test_over_under_ergaenzt_sich_zu_eins():
     assert over + under == pytest.approx(1.0)
 
 
+def test_most_likely_scores_sind_absteigend_und_beginnen_beim_maximum():
+    matrix = score_matrix(_params(home_advantage=0.25), "A", "B")
+    top = outcomes.most_likely_scores(matrix, 3)
+    assert len(top) == 3
+    assert (top[0][0], top[0][1]) == outcomes.most_likely_score(matrix)
+    assert top[0][2] >= top[1][2] >= top[2][2]
+    for home, away, probability in top:
+        assert probability == pytest.approx(matrix[home, away])
+
+
 def test_predict_match_liefert_konsistente_erwartungswerte():
     params = _params(home_advantage=0.25)
     prediction = outcomes.predict_match(params, "A", "B")

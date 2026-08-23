@@ -56,6 +56,19 @@ def most_likely_score(matrix: np.ndarray) -> tuple[int, int]:
     return int(home_goals), int(away_goals)
 
 
+def most_likely_scores(
+    matrix: np.ndarray, count: int = 3
+) -> list[tuple[int, int, float]]:
+    """Die `count` wahrscheinlichsten Einzelergebnisse, absteigend sortiert."""
+    flat = matrix.ravel()
+    best = np.argsort(flat)[::-1][:count]
+    home_goals, away_goals = np.unravel_index(best, matrix.shape)
+    return [
+        (int(home), int(away), float(flat[index]))
+        for home, away, index in zip(home_goals, away_goals, best)
+    ]
+
+
 def over_under(matrix: np.ndarray, line: float = 2.5) -> tuple[float, float]:
     """Wahrscheinlichkeit für mehr / weniger Tore als `line`."""
     goals = np.arange(matrix.shape[0])
@@ -92,7 +105,8 @@ def predict_matches(params: DixonColesParams, fixtures: pd.DataFrame) -> pd.Data
     for match in fixtures.itertuples():
         matrix = score_matrix(params, match.home_team, match.away_team)
         home_win, draw, away_win = outcome_probabilities(matrix)
-        home_goals, away_goals = most_likely_score(matrix)
+        top = most_likely_scores(matrix)
+        home_goals, away_goals, _ = top[0]
         expected_home, expected_away = params.expected_goals(
             match.home_team, match.away_team
         )
@@ -105,6 +119,7 @@ def predict_matches(params: DixonColesParams, fixtures: pd.DataFrame) -> pd.Data
                 "expected_away_goals": expected_away,
                 "likely_home_goals": home_goals,
                 "likely_away_goals": away_goals,
+                "likely_scores": top,
             }
         )
 

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bundesliga-Vorhersage</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Bundesliga-Vorhersage</h1>
+  <p id="meta" class="meta">lade ...</p>
+</header>
+
+<main>
+  <section>
+    <h2>Erwartete Abschlusstabelle</h2>
+    <p class="hint">Hover über Zeile fuer Wahrscheinlichkeiten und Platzverteilung.</p>
+    <table id="table-expected">
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th>Verein</th>
+          <th class="num">Punkte (&#216;)</th>
+          <th class="num">5 %</th>
+          <th class="num">95 %</th>
+          <th class="num">Tordiff.</th>
+          <th class="num">Meister</th>
+          <th class="num">CL</th>
+          <th class="num">Abstieg</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="legend">
+      <span class="key cl"></span> Champions League
+      <span class="key el"></span> Europa League
+      <span class="key ecl"></span> Conference League
+      <span class="key po"></span> Relegation
+      <span class="key rel"></span> Abstieg
+    </p>
+  </section>
+
+  <section id="current-section" hidden>
+    <h2>Aktuelle Tabelle</h2>
+    <table id="table-current">
+      <thead>
+        <tr>
+          <th class="num">#</th><th>Verein</th><th class="num">Sp</th>
+          <th class="num">S</th><th class="num">U</th><th class="num">N</th>
+          <th class="num">Tore</th><th class="num">Diff</th><th class="num">Pkt</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Spiele</h2>
+    <div class="matchday-nav">
+      <button id="md-prev" type="button">&laquo;</button>
+      <select id="md-select"></select>
+      <button id="md-next" type="button">&raquo;</button>
+    </div>
+    <table id="table-matches">
+      <thead>
+        <tr>
+          <th>Datum</th><th>Heim</th><th>Gast</th>
+          <th class="num">1</th><th class="num">X</th><th class="num">2</th>
+          <th class="num">xG</th><th class="num">Tipp</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
+
+<div id="tip" class="tip" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
