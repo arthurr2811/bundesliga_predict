@@ -23,11 +23,12 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 - Blockbildung auf echte Spieltagsnummern umgestellt (`matchday_source`),
   `team_mapping` auf alle Vereine 2016/17-2026/27 vervollstaendigt.
   352 Bloecke, keiner mischt Spieltage, 12 abgetrennte Nachholpartien.
-- Backtest-Zahlen sind seit der Umstellung noch nicht neu erhoben.
+- Backtest nach der Umstellung neu erhoben (23.08.2026), `documentation.md`
+  aktualisiert. Referenzwerte: Modell RPS 0.2049 / Log-Loss 0.9983 /
+  Brier 0.5957, Ligadurchschnitt 0.2320, Markt 0.1978.
 
 ### Naechster Schritt (Stand 23.08.2026)
-1. Backtest neu laufen lassen und die Zahlen in `documentation.md`
-   aktualisieren (die dortige Tabelle stammt aus der alten Blockbildung).
+1. ~~Backtest neu laufen lassen und `documentation.md` aktualisieren.~~ erledigt
 2. Aufsteiger-Prior gegen den Backtest testen (siehe Befund unten). Der
    Backtest hat den Befund bestaetigt und beziffert, also los damit.
 3. Danach Hyperparameter-Grid-Search (`evaluation/tuning.py`) ueber
@@ -40,11 +41,15 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 ### Befund: der Aufsteiger-Prior sitzt an der falschen Stelle -- vom Backtest bestaetigt
 
 Der Backtest misst den Rueckstand auf den Markt getrennt nach Partien mit und
-ohne Aufsteiger (RPS, Abstand zum Markt): ohne Aufsteiger +0.0062 (n=1890),
-mit Aufsteiger +0.0118 (n=558), davon Hinrunde +0.0141 und Rueckrunde +0.0086.
-Der Rueckstand ist bei Aufsteigern also fast doppelt so gross und genau dann am
-groessten, wenn am wenigsten Daten vorliegen. Das ist die erwartete Signatur
-eines zu optimistischen Priors.
+ohne Aufsteiger (RPS, Abstand zum Markt): ohne Aufsteiger +0.0057 (n=1890),
+mit Aufsteiger +0.0118 (n=558), davon Hinrunde +0.0125 und Rueckrunde +0.0112
+(je n=279). Der Rueckstand ist bei Aufsteigern also gut doppelt so gross --
+die erwartete Signatur eines zu optimistischen Priors.
+
+Achtung, revidiert: mit den alten (kalenderbasierten) Bloecken sah der
+Hinrunden-/Rueckrunden-Unterschied viel groesser aus (+0.0141 gegen +0.0086).
+Mit echten Spieltagsnummern schrumpft er auf +0.0125 gegen +0.0112. Der
+Rueckstand haengt am Aufsteiger, nicht am Zeitpunkt in der Saison.
 
 Der Backtest behandelt Teams ganz ohne BL-Historie derzeit als exakten
 Ligadurchschnitt (`_with_neutral_teams` in `backtest.py`) -- diese Stelle

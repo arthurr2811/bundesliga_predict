@@ -199,13 +199,13 @@ Ergebnis ueber 2448 Spiele (2018/19 bis 2025/26):
 | | RPS | Log-Loss | Brier |
 |---|---|---|---|
 | Ligadurchschnitt | 0.2320 | 1.0736 | 0.6499 |
-| **Modell** | **0.2052** | **0.9993** | **0.5963** |
+| **Modell** | **0.2049** | **0.9983** | **0.5957** |
 | Markt | 0.1978 | 0.9741 | 0.5788 |
 
 Das Modell liegt dort, wo es liegen soll: deutlich ueber der Untergrenze und
-nah, aber messbar unter dem Markt. Es holt rund 78 % des Abstands zwischen
+nah, aber messbar unter dem Markt. Es holt rund 79 % des Abstands zwischen
 Baseline und Markt. In allen acht Saisons schlaegt es die Baseline; die
-Streuung zwischen den Saisons (RPS 0.192 bis 0.213) ist groesser als der
+Streuung zwischen den Saisons (RPS 0.193 bis 0.213) ist groesser als der
 Abstand zum Markt -- eine einzelne Saison beweist also nichts.
 
 ### Was der Backtest sofort verraten hat
@@ -216,19 +216,31 @@ Aufsteiger, jeweils Abstand zum Markt:
 
 | Teilmenge | n | Modell | Markt | Abstand |
 |---|---|---|---|---|
-| ohne Aufsteiger | 1890 | 0.2058 | 0.1997 | +0.0062 |
+| ohne Aufsteiger | 1890 | 0.2054 | 0.1997 | +0.0057 |
 | mit Aufsteiger | 558 | 0.2032 | 0.1914 | +0.0118 |
-| davon Hinrunde | 258 | 0.2128 | 0.1987 | +0.0141 |
-| davon Rueckrunde | 286 | 0.1948 | 0.1862 | +0.0086 |
+| davon Hinrunde | 279 | 0.2104 | 0.1980 | +0.0125 |
+| davon Rueckrunde | 279 | 0.1960 | 0.1848 | +0.0112 |
 
-Der Rueckstand auf den Markt ist bei Aufsteigern fast doppelt so gross wie
-sonst -- und in der Hinrunde am groessten, wenn am wenigsten Daten vorliegen.
-Zur Rueckrunde hin schliesst sich die Luecke, weil das Modell die Teams
-inzwischen kennt. Genau das erwartet man, wenn der Prior datenarme Teams zu
-optimistisch behandelt. Absolut sind Aufsteiger-Partien uebrigens *leichter*
-vorherzusagen (beide Spalten kleiner) -- die Ergebnisse sind einseitiger. Nur
-die Baseline dafuer ist eben auch niedriger, und deshalb zaehlt hier der
-Abstand zum Markt, nicht die absolute Zahl.
+Der Rueckstand auf den Markt ist bei Aufsteigern gut doppelt so gross wie
+sonst. Genau das erwartet man, wenn der Prior datenarme Teams zu optimistisch
+behandelt. Absolut sind Aufsteiger-Partien uebrigens *leichter* vorherzusagen
+(beide Spalten kleiner) -- die Ergebnisse sind einseitiger. Nur die Baseline
+dafuer ist eben auch niedriger, und deshalb zaehlt hier der Abstand zum Markt,
+nicht die absolute Zahl.
+
+**Eine Teil-Erklaerung ist dabei weggebrochen.** Solange die Bloecke aus dem
+Kalender rekonstruiert wurden, sah es so aus, als konzentriere sich der
+Rueckstand auf die Hinrunde (+0.0141 gegen +0.0086) -- die schoene Geschichte
+"das Modell kennt die Aufsteiger noch nicht". Mit echten Spieltagsnummern
+teilt sich die Menge sauber in 279/279 und der Unterschied schrumpft auf
++0.0125 gegen +0.0112, also fast nichts. Die alte Aufteilung war schief (258
+und 286 ergeben nicht einmal die 558); der scheinbare Verlauf ueber die Saison
+war ueberwiegend ein Artefakt der Blockbildung. Uebrig bleibt der Befund, der
+zaehlt: der Rueckstand haengt am Aufsteiger, nicht am Zeitpunkt. Das passt
+weniger zu "zu wenig Daten am Saisonanfang" als zu "der Prior selbst zieht auf
+den falschen Wert" -- und ein falscher Prior-Mittelwert wirkt tatsaechlich die
+ganze Saison ueber, weil ein Aufsteiger auch im Mai noch die mit Abstand
+duennste Datenbasis hat.
 
 ## Log
 
@@ -250,8 +262,15 @@ liegt knapp hinter dem Markt. Beim Bauen aufgefallen: der Saisonwechsel-Malus
 lief vor dem ersten Spieltag einer Saison ins Leere, weil er sich an der
 Saison des letzten gespielten Spiels orientierte -- der Fit nimmt die
 Zielsaison jetzt explizit entgegen. Erster belegter Befund: der Rueckstand auf
-den Markt konzentriert sich auf Aufsteiger in der Hinrunde. Naechstes:
-Aufsteiger-Prior gegen den Backtest testen, danach Grid-Search.
+den Markt konzentriert sich auf Partien mit Aufsteigern.
+
+**Bloecke auf echte Spieltage umgestellt, Backtest neu erhoben.** Die Zahlen
+oben stammen aus diesem Lauf (2448 Spiele, 2018/19-2025/26). Gegenueber der
+kalenderbasierten Blockbildung aendert sich das Gesamtbild kaum (RPS 0.2052 ->
+0.2049), die Aufteilung nach Aufsteigern dagegen deutlich: der
+Hinrunden-/Rueckrunden-Unterschied war groesstenteils ein Artefakt der alten
+Bloecke. Naechstes: Aufsteiger-Prior gegen den Backtest testen, danach
+Grid-Search.
 
 ## Quellen / Inspiration
 
