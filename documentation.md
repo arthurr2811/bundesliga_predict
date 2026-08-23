@@ -104,6 +104,132 @@ und der Fehler halbiert sich sauber, wenn man die Datenmenge vervierfacht.
 Ein Vorzeichenfehler, ein vertauschter Index oder eine falsch normierte
 Torematrix faellt damit sofort auf.
 
+## Backtest: die Messlatte
+
+Ab hier hoert das Raten auf. Jede weitere Aenderung am Modell -- der
+Aufsteiger-Prior, die Halbwertszeit, der Saison-Abschlag -- muss sich an einer
+Zahl messen lassen, statt an Plausibilitaet.
+
+**Walk-forward.** Die Spiele werden in Spieltags-Bloecke zerlegt. Vor jedem
+Block wird das Modell ausschliesslich auf Spielen *davor* neu gefittet und
+sagt dann dessen Partien vorher. Kein Spiel wird also mit Wissen ueber sich
+selbst oder spaetere Partien bewertet. Das ist genau der Ablauf, in dem die
+Pipeline spaeter auch produktiv laeuft.
+
+**Spieltage, die es angeblich nicht gab.** football-data.co.uk liefert keine
+Spieltagsnummer, deshalb stand im Plan, die Bloecke muessten aus dem Kalender
+rekonstruiert werden. Das war ein langer Umweg. Der naheliegende Ansatz --
+neuer Block nach genuegend Tagen Pause -- ist naemlich unloesbar: innerhalb
+eines Spieltags liegen Freitag bis Montag lauter Ein-Tages-Schritte, zum
+naechsten Spieltag sind es normalerweise fuenf, in einer englischen Woche aber
+nur zwei. Zwei Tage Abstand bedeuten also mal "derselbe Spieltag" und mal
+"naechster Spieltag", und das kam in acht Saisons 35 Mal vor.
+
+Die naechste Idee war besser, aber auch nicht richtig: jedes Team spielt pro
+Spieltag genau einmal, also neuer Block, sobald ein Team sich wiederholt. Das
+loest die englischen Wochen -- scheitert aber an einer Nachholpartie am Vortag
+eines Spieltags. Deren zwei Teams treten am Auftakttag nicht an, es gibt also
+keine Kollision, das Nachholspiel klebt am Spieltag fest, und der wird spaeter
+an der Stelle zerschnitten, an der das nachgeholte Team regulaer antritt. Genau
+das ist am 06.05.2021 passiert (Hertha - Freiburg vom 30. Spieltag, gefolgt vom
+32.).
+
+Gefunden wurde das erst, als echte Spieltagsnummern zum Abgleich herangezogen
+wurden -- und dabei stellte sich die Ausgangsannahme als falsch heraus:
+**OpenLigaDB liefert die Spieltagsnummern auch fuer vergangene Saisons**,
+nicht nur fuer die laufende. Dieselbe API, die das Projekt ohnehin benutzt.
+Der Abgleich passte bei 3060 von 3060 Partien, ohne eine einzige
+Datumsabweichung zwischen den Quellen.
+
+Damit verschwindet die Heuristik ersatzlos: ein Block *ist* ein Spieltag.
+Abgeschlossene Saisons aendern sich nicht mehr, also werden sie einmal
+abgerufen und in `data/raw/matchdays.csv` abgelegt; danach geht nur noch die
+laufende Saison ueber das Netz.
+
+Uebrig bleibt eine einzige Datumsregel, und die ist jetzt harmlos: innerhalb
+eines Spieltags wird abgetrennt, was mehr als drei Tage entfernt liegt --
+also verlegte Partien. Der Schwellenwert war vorher unmoeglich zu waehlen und
+ist jetzt beliebig, weil er nur noch zwei weit auseinanderliegende Faelle
+trennen muss:
+
+    regulaer gestreckter Spieltag:   1-2 Tage
+    echte Verlegung:                10-94 Tage  (alle 12 Faelle)
+
+Dazwischen liegt eine Woche Luft; jeder Wert zwischen 3 und 9 liefert dasselbe
+Ergebnis. Ein verlegtes Spiel bleibt bewusst ein eigener Block: es findet
+Wochen spaeter statt und ist damit ein eigener Vorhersage-Zeitpunkt, an dem
+das Modell mehr weiss. Es zurueck in seinen nominellen Spieltag zu zwingen
+hiesse, es mit veralteten Parametern vorherzusagen.
+
+Ergebnis auf den echten Daten: 352 Bloecke, kein einziger mischt zwei
+Spieltage, Nummerierung chronologisch, 12 abgetrennte Nachholpartien.
+
+**Die Lehre daraus** steckt weniger in der Regel als im Weg dorthin. Drei
+Runden lang wurde eine Heuristik verfeinert, deren Grundannahme ("wir haben
+die Spieltage nicht") nie geprueft worden war. Und die Kontrolle, die
+zwischendurch "passt" meldete, war eine Tautologie: dass sich die Bloecke je
+Saison zu 34 Spieltagen aufaddieren, ist bei 306 Spielen und Bloecken zu je 9
+Spielen rechnerisch gar nicht anders moeglich. Erst eine unabhaengige Quelle
+hat sowohl den Fehler als auch die ueberfluessige Heuristik sichtbar gemacht.
+
+**Ein Detail, das leicht durchrutscht:** vor dem ersten Spiel einer neuen
+Saison ist das letzte gespielte Spiel noch aus der alten. Wer den
+Saisonwechsel-Malus daran festmacht, wendet ihn genau dann nicht an, wenn er
+am wichtigsten ist. Der Backtest gibt dem Fit deshalb die *Zielsaison* explizit
+mit.
+
+**Drei Masse statt einem.** RPS ist das Standardmass fuer Fussball, weil es
+die Ordnung der Ausgaenge kennt: statt eines Heimsiegs ein Remis zu erwarten
+ist ein kleinerer Fehler als ein Auswaertssieg. Log-Loss bestraft
+selbstsichere Fehlprognosen unbeschraenkt hart und ist zugleich genau das, was
+der Fit maximiert -- der ehrlichste Blick darauf, ob out-of-sample dasselbe
+passiert wie in-sample. Brier ist beschraenkt und robust. Alle drei sind
+negativ orientiert.
+
+**Zwei Baselines rahmen ein, was ueberhaupt gut ist.** Unten der
+Ligadurchschnitt: immer dieselben drei Wahrscheinlichkeiten, geschaetzt aus
+den Spielen vor dem Stichtag -- wer den nicht schlaegt, hat aus Teamstaerken
+nichts gelernt. Oben der Buchmachermarkt, margenbereinigt aus den Quoten in
+den Rohdaten. Der Markt kennt Aufstellungen, Verletzungen und Transfers; er
+ist Vergleichsmassstab, keine Zielgroesse. Bewertet wird er wie das Modell
+gegen die tatsaechlichen Ergebnisse.
+
+Ergebnis ueber 2448 Spiele (2018/19 bis 2025/26):
+
+| | RPS | Log-Loss | Brier |
+|---|---|---|---|
+| Ligadurchschnitt | 0.2320 | 1.0736 | 0.6499 |
+| **Modell** | **0.2052** | **0.9993** | **0.5963** |
+| Markt | 0.1978 | 0.9741 | 0.5788 |
+
+Das Modell liegt dort, wo es liegen soll: deutlich ueber der Untergrenze und
+nah, aber messbar unter dem Markt. Es holt rund 78 % des Abstands zwischen
+Baseline und Markt. In allen acht Saisons schlaegt es die Baseline; die
+Streuung zwischen den Saisons (RPS 0.192 bis 0.213) ist groesser als der
+Abstand zum Markt -- eine einzelne Saison beweist also nichts.
+
+### Was der Backtest sofort verraten hat
+
+Die Vermutung, dass der Aufsteiger-Prior an der falschen Stelle sitzt, laesst
+sich jetzt messen statt begruenden. Aufgeteilt nach Partien mit und ohne
+Aufsteiger, jeweils Abstand zum Markt:
+
+| Teilmenge | n | Modell | Markt | Abstand |
+|---|---|---|---|---|
+| ohne Aufsteiger | 1890 | 0.2058 | 0.1997 | +0.0062 |
+| mit Aufsteiger | 558 | 0.2032 | 0.1914 | +0.0118 |
+| davon Hinrunde | 258 | 0.2128 | 0.1987 | +0.0141 |
+| davon Rueckrunde | 286 | 0.1948 | 0.1862 | +0.0086 |
+
+Der Rueckstand auf den Markt ist bei Aufsteigern fast doppelt so gross wie
+sonst -- und in der Hinrunde am groessten, wenn am wenigsten Daten vorliegen.
+Zur Rueckrunde hin schliesst sich die Luecke, weil das Modell die Teams
+inzwischen kennt. Genau das erwartet man, wenn der Prior datenarme Teams zu
+optimistisch behandelt. Absolut sind Aufsteiger-Partien uebrigens *leichter*
+vorherzusagen (beide Spalten kleiner) -- die Ergebnisse sind einseitiger. Nur
+die Baseline dafuer ist eben auch niedriger, und deshalb zaehlt hier der
+Abstand zum Markt, nicht die absolute Zahl.
+
 ## Log
 
 **Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
@@ -117,6 +243,15 @@ gebaut, abgesichert durch den Recovery-Test. Erster Fit auf echten Daten:
 Heimvorteil 0.19 (rund 20 % mehr Tore zu Hause), Ligaschnitt 1.39 Tore je
 Team, Bayern mit Abstand vorn. Noch offen: Backtest und Hyperparameter-Tuning
 -- bis dahin sind die Default-Hyperparameter geraten, nicht belegt.
+
+**Backtest.** Walk-forward ueber acht Saisons gebaut, dazu 1X2-Auswertung,
+die drei Masse und beide Baselines. Das Modell schlaegt die Baseline klar und
+liegt knapp hinter dem Markt. Beim Bauen aufgefallen: der Saisonwechsel-Malus
+lief vor dem ersten Spieltag einer Saison ins Leere, weil er sich an der
+Saison des letzten gespielten Spiels orientierte -- der Fit nimmt die
+Zielsaison jetzt explizit entgegen. Erster belegter Befund: der Rueckstand auf
+den Markt konzentriert sich auf Aufsteiger in der Hinrunde. Naechstes:
+Aufsteiger-Prior gegen den Backtest testen, danach Grid-Search.
 
 ## Quellen / Inspiration
 

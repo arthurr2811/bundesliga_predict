@@ -3,8 +3,7 @@
 Wir erzeugen synthetische Saisons aus bekannten Parametern, fitten diese
 zurueck und pruefen, ob die Schaetzung die Wahrheit trifft. Faengt praktisch
 jeden Vorzeichen-, Index- oder Normierungsfehler in Likelihood, Parameter-
-Packing und Torematrix -- anders als ein Test gegen fest verdrahtete Zahlen,
-der nur zementiert, was der Code heute tut.
+Packing und Torematrix
 """
 
 import numpy as np

@@ -27,12 +27,19 @@ def fit(
     reference_date: pd.Timestamp | None = None,
     weight_config: WeightConfig | None = None,
     prior_sd: float = DEFAULT_PRIOR_SD,
+    reference_season: str | None = None,
 ) -> DixonColesParams:
     """Schätzt die Modellparameter auf allen Spielen bis `reference_date`.
 
     Der Stichtag ist zugleich Filter und Bezugspunkt der Zeitgewichtung. Ohne
     Angabe wird das letzte gespielte Spiel im Datensatz verwendet. Der Schnitt
     läuft über das Datum, nicht über den Spieltag.
+
+    `reference_season` ist die Saison, für die vorhergesagt werden soll, und
+    bestimmt den Saisonwechsel-Malus. Ohne Angabe die Saison des letzten
+    gespielten Spiels. Vor dem ersten Spiel einer neuen Saison ist das die
+    falsche -- dann muss der Aufrufer die Zielsaison mitgeben, sonst bleibt der
+    Malus für den gerade erfolgten Saisonwechsel aus.
     """
     played = finished_matches(matches).copy()
     played["date"] = pd.to_datetime(played["date"])
@@ -45,7 +52,8 @@ def fit(
     if played.empty:
         raise ValueError(f"Keine gespielten Partien bis {reference_date.date()}.")
 
-    reference_season = played.loc[played["date"].idxmax(), "season"]
+    if reference_season is None:
+        reference_season = played.loc[played["date"].idxmax(), "season"]
     weights = match_weights(
         played["date"], played["season"], reference_date, reference_season, weight_config
     )

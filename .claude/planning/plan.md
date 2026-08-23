@@ -10,23 +10,47 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 
 ## Aktueller Stand
 - Projektsetup und Datenpipeline abgeschlossen (`data/processed/matches.csv`,
-  3367 Spiele, Saisons 2016/17–2026/27).
+  3366 Spiele = 11 Saisons a 306, 2016/17–2026/27, mit Spieltagsnummer).
 - Architektur festgelegt (siehe unten).
 - Modellkern gebaut: `config`, `model/params`, `model/weights`,
   `model/likelihood`, `model/fit`, `predict/matrix`, abgesichert durch
   Parameter-Recovery-Test. Fit auf echten Daten laeuft (0,3 s, 30 Teams).
-- Weiter mit Schritt 3: Backtest und Hyperparameter-Tuning. Erst danach sind
-  Halbwertszeit, Saison-Abschlag und Prior-Staerke belegt statt geraten.
+- Vorhersage-Ebene gebaut: `predict/outcomes` (Matrix -> 1X2, exaktes
+  Ergebnis, Over/Under).
+- Backtest steht: `evaluation/metrics`, `evaluation/baselines`,
+  `evaluation/backtest`, `evaluation/report`, plus `cli.py backtest`.
+  Walk-forward ueber 2448 Spiele (2018/19-2025/26), ~5 min Laufzeit.
+- Blockbildung auf echte Spieltagsnummern umgestellt (`matchday_source`),
+  `team_mapping` auf alle Vereine 2016/17-2026/27 vervollstaendigt.
+  352 Bloecke, keiner mischt Spieltage, 12 abgetrennte Nachholpartien.
+- Backtest-Zahlen sind seit der Umstellung noch nicht neu erhoben.
 
-### Naechster Schritt (Stand 22.08.2026)
-1. Backtest bauen (walk-forward, RPS/Log-Loss/Brier gegen die beiden
-   Baselines). Der muss zuerst stehen, weil er die Messgrundlage fuer alles
-   Weitere ist.
-2. Danach als erste Verbesserung den Aufsteiger-Prior gegen den Backtest
-   testen (siehe Befund unten).
-3. Erst dann Hyperparameter-Grid-Search.
+### Naechster Schritt (Stand 23.08.2026)
+1. Backtest neu laufen lassen und die Zahlen in `documentation.md`
+   aktualisieren (die dortige Tabelle stammt aus der alten Blockbildung).
+2. Aufsteiger-Prior gegen den Backtest testen (siehe Befund unten). Der
+   Backtest hat den Befund bestaetigt und beziffert, also los damit.
+3. Danach Hyperparameter-Grid-Search (`evaluation/tuning.py`) ueber
+   Halbwertszeit, Saison-Abschlag und Prior-Staerke. Erst danach sind die
+   Defaults in `config.py` belegt statt geraten. Achtung Laufzeit: ein
+   Backtest-Lauf kostet ~5 min, ein Grid mit 50 Kombinationen also ~4 h --
+   Grid klein halten oder auf weniger Saisons einschraenken.
+4. Dann Schritt 4 (Simulation) und Schritt 5 (Frontend).
 
-### Befund: der Aufsteiger-Prior sitzt an der falschen Stelle
+### Befund: der Aufsteiger-Prior sitzt an der falschen Stelle -- vom Backtest bestaetigt
+
+Der Backtest misst den Rueckstand auf den Markt getrennt nach Partien mit und
+ohne Aufsteiger (RPS, Abstand zum Markt): ohne Aufsteiger +0.0062 (n=1890),
+mit Aufsteiger +0.0118 (n=558), davon Hinrunde +0.0141 und Rueckrunde +0.0086.
+Der Rueckstand ist bei Aufsteigern also fast doppelt so gross und genau dann am
+groessten, wenn am wenigsten Daten vorliegen. Das ist die erwartete Signatur
+eines zu optimistischen Priors.
+
+Der Backtest behandelt Teams ganz ohne BL-Historie derzeit als exakten
+Ligadurchschnitt (`_with_neutral_teams` in `backtest.py`) -- diese Stelle
+verschwindet, sobald der Prior richtig sitzt.
+
+Die urspruengliche Herleitung:
 Die Shrinkage zieht datenarme Teams aktuell Richtung 0, und 0 ist wegen
 `sum(attack) = 0` exakt der Ligadurchschnitt. Das ist ein neutraler Prior
 ("wir wissen nichts ueber das Team") -- wir wissen aber mehr: intuitiv und gemessen ueber
@@ -67,7 +91,8 @@ Backtest dieselben Funktionen mit abgeschnittenen Daten aufrufen kann.
 ### Modul-Layout
 
     src/bundesliga_predict/
-      data/           historic_source, live_source, team_mapping, build_dataset
+      data/           historic_source, live_source, matchday_source,
+                      team_mapping, build_dataset
       model/
         params.py     Dataclass DixonColesParams (attack, defense, home_adv, rho)
         weights.py    Zeitgewichtung (Tages-Decay + Saisonwechsel-Malus)
@@ -80,17 +105,23 @@ Backtest dieselben Funktionen mit abgeschnittenen Daten aufrufen kann.
         table.py      Spiele -> Tabelle (Punkte, Tordifferenz, Tore)
         season.py     Monte-Carlo Restsaison -> Platzverteilung je Team
       evaluation/
-        backtest.py   Walk-forward, RPS/LogLoss/Brier gegen Baselines
-        tuning.py     Grid-Search der Hyperparameter ueber den Backtest
+        metrics.py    RPS, Log-Loss, Brier fuer 1X2
+        baselines.py  Ligadurchschnitt + margenbereinigte Buchmacherquoten
+        backtest.py   Walk-forward: Bloecke, Fit je Block, Vorhersagen
+        report.py     Vergleichstabellen Modell vs. Baselines
+        tuning.py     Grid-Search der Hyperparameter ueber den Backtest (offen)
       pipeline.py     update -> fit -> predict -> simulate -> JSON
       config.py       Decay, Saison-Malus, Sim-Anzahl, Platz-Regeln
       cli.py          update | fit | simulate | backtest
 
 ### Querschnittliche Festlegungen
-- **Zeitachse ist `date`, nicht `matchday`.** football-data liefert keinen
-  Spieltag, deshalb ist `matchday` fuer die historischen Saisons leer. Alle
-  Schnitte in Modell und Backtest laufen ueber das Datum; `matchday` ist reine
-  Anzeige-Information der laufenden Saison.
+- **Zeitachse ist `date`, nicht `matchday`.** Alle Schnitte in Modell und
+  Backtest laufen ueber das Datum. `matchday` gruppiert nur (ein Block im
+  Backtest = ein Spieltag), es schneidet nie.
+- **`matchday` ist fuer alle Saisons gefuellt.** football-data liefert keine
+  Spieltagsnummer, OpenLigaDB dagegen auch fuer vergangene Saisons.
+  Abgeschlossene Saisons werden einmal abgerufen und liegen in
+  `data/raw/matchdays.csv`; laufend geht nur die aktuelle Saison uebers Netz.
 - **Platz-Regeln in `config.py`**, nicht hart in der Simulation (Anzahl der
   CL-/EL-/Conference-Plaetze aendert sich mit dem UEFA-Koeffizienten).
 - **Reproduzierbarkeit:** fester Seed fuer alle Monte-Carlo-Laeufe.
