@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 from scipy.special import gammaln
 
-from bundesliga_predict.config import PRIOR_MATCH_WEIGHT
 from bundesliga_predict.model.params import split_vector
 from bundesliga_predict.model.prior import PriorConfig
 
@@ -62,8 +61,11 @@ class LikelihoodData:
         return len(self.teams)
 
 
-def prepare(matches: pd.DataFrame, weights: np.ndarray) -> LikelihoodData:
+def prepare(
+    matches: pd.DataFrame, weights: np.ndarray, prior: PriorConfig | None = None
+) -> LikelihoodData:
     """Baut aus gespielten Partien plus Gewichten die Arrays für den Fit."""
+    prior = prior or PriorConfig()
     teams = tuple(sorted(set(matches["home_team"]) | set(matches["away_team"])))
     index = {team: i for i, team in enumerate(teams)}
 
@@ -78,7 +80,7 @@ def prepare(matches: pd.DataFrame, weights: np.ndarray) -> LikelihoodData:
     team_weight = np.zeros(len(teams))
     np.add.at(team_weight, home_idx, weights)
     np.add.at(team_weight, away_idx, weights)
-    shrinkage = PRIOR_MATCH_WEIGHT / (PRIOR_MATCH_WEIGHT + team_weight)
+    shrinkage = prior.shrinkage(team_weight)
 
     return LikelihoodData(
         teams=teams,

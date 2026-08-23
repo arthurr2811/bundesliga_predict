@@ -63,7 +63,7 @@ def fit(
     weights = match_weights(
         played["date"], played["season"], reference_date, reference_season, weight_config
     )
-    data = likelihood.prepare(played, weights)
+    data = likelihood.prepare(played, weights, prior)
 
     goals_per_team = (played["home_goals"].sum() + played["away_goals"].sum()) / (
         2 * len(played)

@@ -98,6 +98,35 @@ def test_strong_prior_reaches_its_mean(matches):
         assert abs(value - mean) < abs(value), name  # naeher am Prior als an 0
 
 
+def test_match_weight_steuert_den_kontrast():
+    """`match_weight` verschiebt, ab wann ein Team als datenreich gilt.
+    """
+    spielmasse = np.array([2.0, 100.0])  # Aufsteiger, Dauergast
+
+    schnell = PriorConfig(match_weight=8.0).shrinkage(spielmasse)
+    langsam = PriorConfig(match_weight=34.0).shrinkage(spielmasse)
+
+    assert (langsam > schnell).all()
+    # Der Kontrast zwischen beiden nimmt dabei ab, nicht zu.
+    assert langsam[0] / langsam[1] < schnell[0] / schnell[1]
+
+    assert PriorConfig(match_weight=17.0).shrinkage(np.array([17.0]))[0] == 0.5
+
+
+def test_grosses_match_weight_stumpft_den_prior_ab(matches):
+    """Mehr Shrinkage fuer alle heisst weniger Wirkung fuer den Aufsteiger.
+    """
+    def abstand(match_weight: float) -> float:
+        params = _fit(
+            matches,
+            PriorConfig(attack_mean=-0.25, defense_mean=-0.14, match_weight=match_weight),
+        )
+        andere = np.mean([params.attack[team] for team in _TEAMS if team != NEWCOMER])
+        return params.attack[NEWCOMER] - andere
+
+    assert abstand(8.0) < abstand(34.0) < 0.0
+
+
 def test_unknown_teams_get_prior_mean():
     """Teams ohne jede Historie tauchen im Fit nicht auf und werden ergaenzt."""
     params = DixonColesParams(

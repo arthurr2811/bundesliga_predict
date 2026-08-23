@@ -20,7 +20,11 @@ from pathlib import Path
 
 import pandas as pd
 
-from bundesliga_predict.config import DEFAULT_PRIOR_ATTACK, DEFAULT_PRIOR_DEFENSE
+from bundesliga_predict.config import (
+    DEFAULT_PRIOR_ATTACK,
+    DEFAULT_PRIOR_DEFENSE,
+    PRIOR_MATCH_WEIGHT,
+)
 from bundesliga_predict.evaluation import metrics
 from bundesliga_predict.evaluation.backtest import (
     BacktestConfig,
@@ -47,6 +51,16 @@ GRID_STAGE_A: dict[str, tuple] = {
     "prior_scale": (0.0, 1.0, 2.0, 3.0),
 }
 
+# Stufe B: eng um den Sieger aus Stufe A, plus `prior_match_weight` als
+# fuenfte Achse.
+GRID_STAGE_B: dict[str, tuple] = {
+    "half_life_days": (240.0, 360.0, 480.0, 720.0),
+    "season_penalty": (0.5, 0.65, 0.8),
+    "prior_sd": (0.08, 0.15, 0.25),
+    "prior_scale": (2.0, 3.0, 4.0),
+    "prior_match_weight": (8.0, 17.0, 34.0),
+}
+
 
 @dataclass(frozen=True)
 class Combination:
@@ -56,6 +70,9 @@ class Combination:
     season_penalty: float
     prior_sd: float
     prior_scale: float
+    # Default = der bisherige Festwert, damit Grids ohne diese Achse (Stufe A)
+    # unveraendert funktionieren.
+    prior_match_weight: float = PRIOR_MATCH_WEIGHT
 
     def to_backtest_config(self, end_season: str | None) -> BacktestConfig:
         return BacktestConfig(
@@ -67,6 +84,7 @@ class Combination:
                 sd=self.prior_sd,
                 attack_mean=DEFAULT_PRIOR_ATTACK * self.prior_scale,
                 defense_mean=DEFAULT_PRIOR_DEFENSE * self.prior_scale,
+                match_weight=self.prior_match_weight,
             ),
         )
 

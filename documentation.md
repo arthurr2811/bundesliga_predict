@@ -194,19 +194,23 @@ den Rohdaten. Der Markt kennt Aufstellungen, Verletzungen und Transfers; er
 ist Vergleichsmassstab, keine Zielgroesse. Bewertet wird er wie das Modell
 gegen die tatsaechlichen Ergebnisse.
 
-Ergebnis ueber 2448 Spiele (2018/19 bis 2025/26):
+Ergebnis ueber 2448 Spiele (2018/19 bis 2025/26). Der erste Stand ist das
+Modell, bevor Aufsteiger-Prior und Hyperparameter-Tuning liefen:
 
 | | RPS | Log-Loss | Brier |
 |---|---|---|---|
 | Ligadurchschnitt | 0.2320 | 1.0736 | 0.6499 |
-| **Modell** | **0.2049** | **0.9983** | **0.5957** |
+| Modell, erster Stand | 0.2049 | 0.9983 | 0.5957 |
+| **Modell, aktuell** | **0.2031** | **0.9918** | **0.5914** |
 | Markt | 0.1978 | 0.9741 | 0.5788 |
 
 Das Modell liegt dort, wo es liegen soll: deutlich ueber der Untergrenze und
-nah, aber messbar unter dem Markt. Es holt rund 79 % des Abstands zwischen
-Baseline und Markt. In allen acht Saisons schlaegt es die Baseline; die
-Streuung zwischen den Saisons (RPS 0.193 bis 0.213) ist groesser als der
-Abstand zum Markt -- eine einzelne Saison beweist also nichts.
+nah, aber messbar unter dem Markt. Es holt rund 85 % des Abstands zwischen
+Baseline und Markt (erster Stand: 79 %). In allen acht Saisons schlaegt es die
+Baseline; die Streuung zwischen den Saisons (RPS 0.194 bis 0.209) ist groesser
+als der Abstand zum Markt -- eine einzelne Saison beweist also nichts.
+
+Wie es von 0.2049 auf 0.2031 kam, steht in den beiden folgenden Abschnitten.
 
 ### Was der Backtest sofort verraten hat
 
@@ -313,6 +317,144 @@ Optimum zu schieben, waere ein lokales Optimum auf Kosten des gemeinsamen. In
 `config.py` steht deshalb der *gemessene* Wert -- das trennt sauber, was aus
 den Daten kommt, von dem, was der Grid-Search einstellt.
 
+## Wie genau kann der Backtest ueberhaupt messen?
+
+Bevor der Grid-Search laeuft, lohnt eine Frage, die man leicht ueberspringt:
+ab welchem Unterschied ist eine Variante *wirklich* besser und nicht nur
+zufaellig vorn? Ohne diese Zahl waehlt man am Ende Rauschen aus.
+
+Der naheliegende Weg -- Standardfehler des RPS ueber 2448 Spiele -- gibt
+0.0027 und damit eine entmutigende Antwort: der ganze Aufsteiger-Prior hat
+0.0005 gebracht, also ein Fuenftel davon. Waere das der Massstab, koennten wir
+das Tuning bleiben lassen.
+
+Der Massstab ist aber falsch. Zwei Varianten werden auf *denselben* Spielen
+bewertet, der Vergleich ist gepaart. Bei den meisten Partien sind sich beide
+einig; unterscheiden tun sie sich nur dort, wo die Hyperparameter wirklich
+etwas aendern. Entscheidend ist also die Streuung der **Differenz** je Spiel:
+
+    Standardfehler des RPS selbst              0.0027
+    Standardfehler der gepaarten Differenz     0.00007 bis 0.00023
+
+Ein Faktor 12 bis 40. Der Prior-Effekt von 0.00051 hat damit ein
+95 %-Intervall von [0.00021, 0.00082] -- klein, aber sauber von null getrennt.
+
+**Und wie viel schoent die Auswahl selbst?** Laesst man K gleichwertige
+Kombinationen gegeneinander antreten, gewinnt die beste allein durch Zufall.
+Simuliert man das mit dem gemessenen Standardfehler:
+
+    K = 10    Kombinationen -> bestes scheint 0.00010 besser
+    K = 108   Kombinationen -> bestes scheint 0.00017 besser
+    K = 500   Kombinationen -> bestes scheint 0.00021 besser
+
+Das waechst mit Wurzel-Log-K, also praktisch gar nicht: von 108 auf 500
+Kombinationen kostet 0.00004. Damit ist eine verbreitete Sorge widerlegt --
+ein groesserer Grid ist nicht das Problem. Wichtig ist die begriffliche
+Trennung: die Modellkomplexitaet aendert sich durch mehr Grid-Punkte
+ueberhaupt nicht, es bleiben dieselben Parameter auf denselben Daten.
+Ueberangepasst werden kann nur die *Auswahl* der Hyperparameter.
+
+Praktische Folge fuer den Zuschnitt: der Grid wird **breit** statt fein.
+Feinere Aufloesung auf einer flachen Flaeche siebt nur Rauschen; ein Optimum,
+das am Rand des Grids liegt, ist dagegen ein echter Fehler -- man weiss dann
+schlicht nicht, ob dahinter noch etwas kommt. Genau das war beim
+Aufsteiger-Prior passiert.
+
+Ein Vorbehalt bleibt: die 0.00007 stammen aus Varianten, die sich nur im
+Prior unterscheiden. Bei sehr verschiedenen Konfigurationen war der Wert schon
+0.00023, die Plateau-Schwelle von 0.0002 ist also eher die untere Kante.
+
+## Der Grid-Search: 504 Laeufe, und das Ergebnis ist ein Plateau
+
+Halbwertszeit, Saison-Abschlag und die Prior-Groessen waren bis hierher
+geraten. Jetzt werden sie gemessen -- in zwei Stufen, getunt ausschliesslich
+auf 2018/19 bis 2023/24, damit die beiden juengsten Saisons als unangetasteter
+Holdout uebrig bleiben.
+
+**Stufe A** (180 Kombinationen) sucht breit und findet klare Struktur:
+
+    half_life_days   60 Tage 0.2073 -> 240 Tage 0.2034 -> 480 Tage 0.2033 -> gar kein Zerfall 0.2037
+    season_penalty   ohne Abschlag (1.0) durchgaengig ~0.0005 schlechter
+    prior_sd         0.40 zu weich
+    prior_scale      saettigt bei Faktor 2.0
+
+Zwei Dinge daran sind bemerkenswert. Erstens hat die Halbwertszeit ein
+sauberes Optimum im Inneren, und es liegt bei rund anderthalb Jahren -- viel
+laenger als die urspruenglich gesetzten 180 Tage. Zweitens verdient der
+Saison-Abschlag seinen Platz: ihn abzuschalten kostet messbar. Er war als
+Bauchentscheidung eingefuehrt worden ("Kaderumbruch wirkt sprunghaft") und
+haelt der Pruefung stand.
+
+**Stufe B** (324 Kombinationen) verfeinert und nimmt `prior_match_weight` als
+fuenfte Achse dazu -- und findet praktisch nichts mehr: 0.2032 statt 0.2033,
+ein Unterschied unterhalb der Messgenauigkeit. **49 von 324 Kombinationen
+liegen gleichauf**, und zwar hochgradig verschiedene: 720/0.50/0.15/2.0/8 und
+720/0.50/0.25/4.0/34 liefern dieselbe Zahl auf vier Nachkommastellen.
+
+Das ist das eigentliche Ergebnis: **die Flaeche ist flach.** Es gibt keinen
+scharfen Optimalpunkt, den man verfehlen koennte. Gewaehlt wurde deshalb nicht
+das Argmin -- das waere bei 49 gleichwertigen Kandidaten Rauschen --, sondern
+je Achse der Wert, der ueber die anderen Achsen hinweg am stabilsten vorn lag.
+Der kostet 0.0002 gegenueber dem Argmin und ist damit ununterscheidbar, dafuer
+aber nicht von einer gluecklichen Ecke abhaengig.
+
+**Ein Regler, der anders wirkt als sein Name.** `prior_match_weight` legt fest,
+ab welcher Datenmenge ein Team als datenreich gilt. Erhoeht man ihn, steigt die
+Zugkraft des Priors fuer *jedes* Team -- der Aufsteiger von 0.80 auf 0.97, der
+Dauergast aber von 0.07 auf 0.41. Und weil `sum(attack) = 0` gilt, faellt
+heraus, was alle gleich betrifft: eine Verschiebung der ganzen Liga kann es in
+diesem Modell gar nicht geben. Uebrig bleibt nur der *Unterschied* in der
+Zugkraft, und der schrumpft. Ein groesserer Wert macht den Prior also
+stumpfer, nicht schaerfer. Gemessen am Abstand des Aufsteigers zum
+Ligadurchschnitt: -0.139 bei 8, -0.084 bei 68. Aufgefallen ist das, weil ein
+Test mit der intuitiven Erwartung durchfiel.
+
+### Der Holdout
+
+612 Spiele aus 2024/25 und 2025/26, waehrend des gesamten Tunings nicht
+angefasst. Verglichen wird gegen den Stand vor dem Tuning, gepaart auf
+denselben Partien:
+
+| Teilmenge | n | vorher | nachher | Gewinn |
+|---|---|---|---|---|
+| Tuning 2018/19-2023/24 | 1836 | 0.2043 | 0.2034 | +0.0009 (SE 0.00054) |
+| **Holdout 2024/25-2025/26** | 612 | 0.2046 | **0.2022** | **+0.0023 (SE 0.00094)** |
+
+Der Gewinn im Holdout ist *groesser* als auf der Tuning-Menge -- also das
+Gegenteil der Ueberanpassung, gegen die die Aufteilung schuetzen sollte. Bei
+2.4 Standardfehlern ist das kein Zufallsbefund, auch wenn 612 Spiele fuer
+feinere Aussagen zu wenig waeren.
+
+(Der Standardfehler ist hier deutlich groesser als die frueher gemessenen
+0.00007 bis 0.00023. Das passt: die beiden verglichenen Konfigurationen
+unterscheiden sich in allen vier Achsen gleichzeitig, ihre Vorhersagen laufen
+also viel weiter auseinander als bei zwei benachbarten Grid-Punkten.)
+
+### Was aus dem Aufsteiger-Problem geworden ist
+
+Der Befund, der diese ganze Linie ausgeloest hat, war: bei Aufsteigern ist der
+Rueckstand auf den Markt doppelt so gross wie sonst. Ueber die drei Stufen:
+
+| | ohne Aufsteiger | mit Aufsteiger | davon Hinrunde | davon Rueckrunde |
+|---|---|---|---|---|
+| erster Stand | +0.0057 | +0.0118 | +0.0125 | +0.0112 |
+| mit Prior | +0.0057 | +0.0096 | +0.0079 | +0.0113 |
+| **nach Tuning** | **+0.0053** | **+0.0054** | **+0.0007** | **+0.0100** |
+
+Aufsteiger-Partien sind jetzt nicht mehr schlechter vorhergesagt als der Rest
+(+0.0054 gegen +0.0053), und in der Hinrunde ist der Abstand zum Markt
+praktisch verschwunden. Das Problem ist geschlossen.
+
+Dafuer steht ein neues da, das vorher unter dem alten lag: der gesamte
+verbleibende Aufsteiger-Rueckstand sitzt jetzt in der **Rueckrunde**
+(+0.0100), und dort hat sich ueber alle drei Stufen fast nichts bewegt. Das
+ist die Umkehrung der urspruenglichen Erklaerung -- am Saisonanfang, wo am
+wenigsten Daten vorliegen, ist das Modell inzwischen auf Markthoehe, und
+abgehaengt wird es, wenn es das Team eigentlich kennen sollte. Eine Vermutung
+waere die Winterpause: Trainerwechsel und Wintertransfers treffen
+Abstiegskandidaten haerter als andere, und der Markt weiss davon, das Modell
+nicht. Belegt ist das nicht.
+
 ## Log
 
 **Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
@@ -350,6 +492,15 @@ Rueckstand auf den Markt bei Aufsteigern in der Hinrunde faellt von +0.0125 auf
 Backtest verschwunden -- er ist jetzt derselbe Prior wie fuer alle anderen.
 Naechstes: Grid-Search ueber Halbwertszeit, Saison-Abschlag, Prior-Staerke und
 Prior-Mittelwert gemeinsam.
+
+**Grid-Search.** 504 Laeufe in zwei Stufen, getunt auf sechs Saisons, geprueft
+auf zwei zurueckgehaltenen. RPS ueber alle acht Saisons 0.2044 -> 0.2031, im
+Holdout 0.2046 -> 0.2022. Die Halbwertszeit war mit 180 Tagen deutlich zu kurz
+geraten (jetzt 480), der Prior-Mittelwert mit dem reinen Messwert zu schwach
+(jetzt das Doppelte). Wichtigster Nebenbefund: das Optimum ist ein breites
+Plateau, keine Spitze -- 49 sehr verschiedene Kombinationen liegen gleichauf.
+Damit sind die Defaults in `config.py` belegt statt geraten, und weiteres
+Feintuning an diesen vier Schrauben lohnt nicht. Naechstes: Simulation.
 
 ## Quellen / Inspiration
 

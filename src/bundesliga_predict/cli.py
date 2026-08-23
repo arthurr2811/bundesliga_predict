@@ -29,8 +29,12 @@ def _load_matches() -> pd.DataFrame:
     return pd.read_csv(MATCHES_PATH)
 
 
+_GRIDS = {"a": tuning.GRID_STAGE_A, "b": tuning.GRID_STAGE_B}
+
+
 def command_tune(args: argparse.Namespace) -> None:
-    grid = dict(tuning.GRID_STAGE_A)
+    grid = dict(_GRIDS[args.stage])
+    output = args.output or PROJECT_ROOT / "data" / "output" / f"tuning_stage_{args.stage}.csv"
     if args.smoke:
         # Nur die aktuellen Defaults, ein einziger Lauf: prueft, dass der
         # Grid-Search denselben Backtest faehrt wie `backtest`.
@@ -43,7 +47,7 @@ def command_tune(args: argparse.Namespace) -> None:
 
     results = tuning.run_grid(
         MATCHES_PATH,
-        Path(args.output),
+        Path(output),
         grid=grid,
         # Leerstring heisst "kein Schnitt"
         end_season=args.end_season or None,
@@ -124,9 +128,16 @@ def build_parser() -> argparse.ArgumentParser:
         "tune", help="Grid-Search der Hyperparameter ueber den Backtest"
     )
     tune.add_argument(
+        "--stage",
+        choices=sorted(_GRIDS),
+        default="a",
+        help="a = breite Suche, b = Verfeinerung um den Sieger plus match_weight",
+    )
+    tune.add_argument(
         "--output",
-        default=str(PROJECT_ROOT / "data" / "output" / "tuning_stage_a.csv"),
-        help="Ergebnis-CSV; vorhandene Kombinationen werden uebersprungen",
+        default=None,
+        help="Ergebnis-CSV (Standard: data/output/tuning_stage_<stage>.csv); "
+        "vorhandene Kombinationen werden uebersprungen",
     )
     tune.add_argument(
         "--end-season",
