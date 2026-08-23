@@ -49,7 +49,7 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 3. ~~Hyperparameter-Grid-Search.~~ erledigt (504 Laeufe, siehe Stand oben)
 4. Schritt 4 (Simulation): `simulation/table.py` und `simulation/season.py`,
    Monte-Carlo der offenen Spiele -> Platz-/Titel-/Abstiegs-Wahrscheinlich-
-   keiten. Dann Schritt 5 (Frontend).
+   keiten. Detailplan unter "4. Saison-Simulation". Dann Schritt 5 (Frontend).
 
 Modellseitig ist damit vorerst Schluss: der Grid-Search hat gezeigt, dass an
 diesen vier Schrauben nichts mehr zu holen ist (breites Plateau). Wer das
@@ -157,6 +157,80 @@ abgeflachten Torematrix, nicht aus zwei unabhaengigen Poissons — sonst geht
 die tau-Korrektur verloren. Vektorisiert ueber ~10.000 Laeufe. Auswertung zu
 Wahrscheinlichkeiten je Team fuer Meisterschaft, CL/EL/Conference, Relegation
 und Abstieg, plus erwartete Punkte und Platzverteilung.
+
+Ausgangslage (23.08.2026): 2026/27 liegt komplett als Fixture-Liste vor,
+306 offene Spiele, erster Spieltag 28.08. Simuliert wird also zunaechst die
+ganze Saison.
+
+### Leitgedanke: Neuberechnung statt Fortschreibung
+Es gibt kein Delta-Update nach einem Spieltag. Die Simulation ist eine reine
+Funktion von (gespielte Spiele, offene Spiele, Params, Config); nach Spieltag n
+laeuft derselbe Pfad wie vor Spieltag 1, nur mit mehr Historie:
+
+    build_dataset (OpenLigaDB) -> fit(reference_date=heute,
+    reference_season="2026/27") -> alle offenen Spiele vorhersagen ->
+    Monte-Carlo -> data/output/*.json
+
+Das entspricht genau dem, was der Backtest je Block schon tut, inklusive
+`with_unknown_teams` fuer Aufsteiger ohne BL-Historie (2026/27: Elversberg).
+Kein Cache, keine Zustandsdatei. `--as-of DATE` faellt gratis ab, weil ohnehin
+alles ueber das Datum schneidet -- damit laesst sich die Prognose-Historie
+(z. B. Meisterwahrscheinlichkeit ueber die Spieltage) nachtraeglich erzeugen,
+statt sie mitzuschreiben.
+
+### Festlegungen
+- **Feste Parameter je Lauf (v1).** Ein Fit, dieselben Params in allen 10.000
+  Laeufen; simuliert wird nur die Ergebnis-Unsicherheit, nicht die Unsicherheit
+  ueber die Teamstaerke. Die Verteilungen sind dadurch etwas zu eng, vor dem
+  1. Spieltag am staerksten. Ein Bootstrap ueber Refits bleibt als spaetere
+  Erweiterung moeglich, blockiert aber nicht die erste Zahl.
+- **Ausgabe: Endtabelle plus alle Einzelspiele.** Keine Spieltags-Verlaeufe im
+  Sim-Lauf; Zwischenstaende kommen bei Bedarf ueber `--as-of`.
+- **Teamstaerken bleiben innerhalb eines Laufs konstant** -- simulierte
+  Ergebnisse fliessen nicht ins Modell zurueck.
+- **Platz-Regeln in `config.py`** (Annahme: CL 1-4, EL 5, Conference 6,
+  Relegation 16, Abstieg 17-18; Pokalsieger-Startplatz bleibt aussen vor).
+
+### Module
+`simulation/table.py`
+- `table(matches, teams=None) -> DataFrame`: Spiele, S/U/N, Tore, Differenz,
+  Punkte, Platz. `teams` explizit, damit Teams ohne Spiel (Saisonstart) mit
+  Nullen auftauchen.
+- Sortierung Punkte, Tordifferenz, erzielte Tore. Der direkte Vergleich nur
+  hier, falls der Test gegen die echte Abschlusstabelle ihn braucht; in der
+  Simulation wird bei Gleichstand gelost (betrifft <1 % der Laeufe, spart
+  Faktor 10 Laufzeit).
+
+`simulation/season.py`
+- `sample_scores(params, fixtures, rng, n_sims)`: je Paarung einmal
+  `score_matrix`, flach kumuliert, dann `np.searchsorted(cdf_i, u[:, i])`
+  -> `(n_sims, n_fixtures)` Tore je Seite. Ein `searchsorted` pro Spiel,
+  306 x 10.000 Ziehungen, unter einer Sekunde.
+- Aggregation per `np.add.at` auf Team-Indizes -> Punkte/Tore/Differenz als
+  `(n_sims, 18)`; Platzierung per `np.lexsort(..., axis=-1)` mit Zufalls-Key
+  als Tiebreak, Platzverteilung per `bincount`.
+- Ergebnis `SeasonForecast`: Platzverteilung (18x18), erwartete Punkte plus
+  Quantile, Ereignis-Wahrscheinlichkeiten aus den Platz-Regeln.
+
+`config.py`: `N_SIMULATIONS = 10_000`, fester Seed, Punkteregel, `PlaceRules`.
+
+`pipeline.py` + `cli.py simulate [--as-of]`: Datei-I/O nur hier. Ausgabe nach
+`data/output/`: `fixtures.json` (jedes offene Spiel mit 1X2, erwarteten Toren,
+wahrscheinlichstem Ergebnis), `table.json` (aktuelle + erwartete
+Abschlusstabelle), `probabilities.json` (Platzverteilung und Ereignisse je
+Team), `meta.json` (Stand, Seed, Anzahl Laeufe).
+
+### Reihenfolge
+1. `table.py` + Test gegen die echte Abschlusstabelle 2025/26.
+2. `season.py` + Tests: Reproduzierbarkeit bei festem Seed, Platzverteilung
+   summiert zeilen- und spaltenweise auf 1, degenerierte Params (ein
+   uebermaechtiges Team wird immer Erster), Monte-Carlo-Fehler bei 10.000
+   Laeufen ~ +/-0,5 Prozentpunkte.
+3. Config, Pipeline, CLI mit `--as-of`.
+4. JSON-Ausgabe, dann `documentation.md`.
+5. Kalibrierungs-Check (nach dem Frontend): `--as-of` ueber jeden Spieltag
+   2024/25 und 2025/26, pruefen ob "30 % auf Top 4" in ~30 % der Faelle
+   eingetreten ist. Die einzige echte Pruefung der Simulationsschicht.
 
 ## 5. Frontend
 Statische Seite: die Pipeline schreibt JSON nach `data/output/`, eine einzelne
