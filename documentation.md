@@ -480,6 +480,50 @@ gerechnet wird. Alle zehn stimmen Zeile fuer Zeile ueberein -- Punktevergabe,
 Torzaehlung, Sortierung und nebenbei auch das Team-Mapping zwischen den beiden
 Quellen.
 
+## Der Monte-Carlo
+
+Aus Wahrscheinlichkeiten je Spiel werden Wahrscheinlichkeiten je Tabellenplatz,
+indem die Restsaison zehntausendmal durchgespielt wird. Gezogen wird aus der
+flachgelegten Torematrix -- ein `searchsorted` je Partie zieht alle Laeufe auf
+einmal. Zwei unabhaengige Poissons waeren einfacher, wuerden aber genau die
+Dixon-Coles-Korrektur wegwerfen, die 0:0 und 1:1 anhebt: also die Ergebnisse,
+in denen sich Punkte entscheiden. Der ganze Lauf ueber 306 offene Spiele
+dauert 0,2 Sekunden, der Fit davor 0,3.
+
+**Die Parameter bleiben in allen Laeufen dieselben.** Simuliert wird die
+Unsicherheit ueber die *Ergebnisse*, nicht die ueber die *Teamstaerken*. Das
+ist eine bewusste Vereinfachung, und man sieht ihr Vorzeichen an der ersten
+echten Zahl: vor dem ersten Spieltag 2026/27 gibt das Modell Bayern 93 % auf
+die Meisterschaft, deutlich mehr als der Wettmarkt. Ein Teil davon ist
+Modellmeinung, ein Teil fehlende Parameter-Unsicherheit -- wer die Staerken je
+Lauf aus ihrer Schaetzverteilung zoege (Bootstrap ueber Refits), bekaeme
+breitere Verteilungen. Nachgereicht werden kann das jederzeit; die Simulation
+selbst aendert sich dafuer nicht.
+
+## Die Pipeline: ein Stichtag, sonst nichts
+
+Nach jedem Spieltag laeuft dieselbe Kette noch einmal -- Daten holen, fitten,
+Spiele vorhersagen, Restsaison simulieren, JSON schreiben. Es gibt kein
+Fortschreiben und keine Zustandsdatei; der Stand steckt allein in den Daten
+und im Stichtag. `python -m bundesliga_predict.cli update` macht beides
+hintereinander, `simulate` nur den Rechenteil.
+
+Genau daraus faellt `--as-of` gratis ab: **alles nach dem Stichtag gilt als
+ungespielt, auch wenn im Datensatz laengst ein Ergebnis steht.** Ein Lauf mit
+einem vergangenen Datum rekonstruiert damit exakt die Prognose, die es an dem
+Tag gegeben haette -- die Grundlage fuer den spaeteren Kalibrierungs-Check und
+fuer Verlaufsdarstellungen ("wie stand Bayern nach dem 12. Spieltag da?").
+Der Stichtag waehlt auch die Saison: die fruehste, in der noch gespielt wird.
+Zwischen zwei Saisons ist das die kommende, was richtig ist -- die alte ist
+entschieden.
+
+Das Frontend bekommt vier Dateien in `data/output/` und keinerlei Modellcode:
+`meta.json` (Stand, Seed, Hyperparameter), `matches.json` (alle 306 Partien --
+gespielte mit Ergebnis, offene mit 1X2, erwarteten Toren und
+wahrscheinlichstem Ergebnis), `table.json` (aktuelle und erwartete
+Abschlusstabelle) und `probabilities.json` (Platzverteilung und die Ereignisse
+aus `PLACE_RULES`). Zusammen rund 120 KB.
+
 ## Log
 
 **Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
@@ -529,7 +573,18 @@ Feintuning an diesen vier Schrauben lohnt nicht. Naechstes: Simulation.
 
 **Tabellenberechnung.** `simulation/table.py` gebaut, gegen die zehn echten
 Abschlusstabellen geprueft. Der direkte Vergleich entfaellt (siehe oben).
-Naechstes: der Monte-Carlo selbst.
+
+**Monte-Carlo.** `simulation/season.py` gebaut: Ziehen aus der Torematrix,
+Punkte und Tore je Lauf, Platzverteilung. Geprueft unter anderem gegen die
+Torematrix selbst (gezogene Haeufigkeiten gegen Zellwahrscheinlichkeiten) und
+im degenerierten Fall ohne offene Spiele, wo die Abschlusstabelle herauskommen
+muss. Erste Prognose fuer 2026/27 steht.
+
+**Pipeline und Ausgabe.** `pipeline.py` plus `cli.py simulate|update` gebaut,
+Platz-Regeln in `config.py`. Die Prognose fuer 2026/27 vor dem 1. Spieltag
+steht in `data/output/`: Bayern 93 % Meister, Elversberg 94 % Abstieg,
+erwartete Punkte von 81.9 bis 19.7. Ein kompletter Lauf dauert eine halbe
+Sekunde. Naechstes: Frontend.
 
 ## Quellen / Inspiration
 

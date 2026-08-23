@@ -47,9 +47,10 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 1. ~~Backtest neu erheben, `documentation.md` aktualisieren.~~ erledigt
 2. ~~Aufsteiger-Prior gegen den Backtest testen.~~ erledigt
 3. ~~Hyperparameter-Grid-Search.~~ erledigt (504 Laeufe, siehe Stand oben)
-4. Schritt 4 (Simulation): `simulation/table.py` und `simulation/season.py`,
-   Monte-Carlo der offenen Spiele -> Platz-/Titel-/Abstiegs-Wahrscheinlich-
-   keiten. Detailplan unter "4. Saison-Simulation". Dann Schritt 5 (Frontend).
+4. ~~Schritt 4 (Simulation).~~ erledigt: `simulation/table.py`,
+   `simulation/season.py`, `pipeline.py`, `cli.py simulate|update`, JSON in
+   `data/output/`. Details unter "4. Saison-Simulation".
+5. Schritt 5 (Frontend), danach der Kalibrierungs-Check.
 
 Modellseitig ist damit vorerst Schluss: der Grid-Search hat gezeigt, dass an
 diesen vier Schrauben nichts mehr zu holen ist (breites Plateau). Wer das
@@ -182,8 +183,13 @@ statt sie mitzuschreiben.
 - **Feste Parameter je Lauf (v1).** Ein Fit, dieselben Params in allen 10.000
   Laeufen; simuliert wird nur die Ergebnis-Unsicherheit, nicht die Unsicherheit
   ueber die Teamstaerke. Die Verteilungen sind dadurch etwas zu eng, vor dem
-  1. Spieltag am staerksten. Ein Bootstrap ueber Refits bleibt als spaetere
-  Erweiterung moeglich, blockiert aber nicht die erste Zahl.
+  1. Spieltag am staerksten. **Entscheidung 23.08.2026: bleibt so.** Ein
+  Bootstrap (elegant per Exp(1)-Multiplikator auf die vorhandenen
+  Spielgewichte, plus Ziehen aus der gemessenen Aufsteiger-Streuung fuer Teams
+  ohne Historie) waere machbar, kostet aber ~30 s je Update und macht das
+  Modell komplizierter, ohne dass belegt ist, dass es noetig ist. Wieder
+  aufmachen erst, wenn der Kalibrierungs-Check (Schritt 5) Ueberkonfidenz
+  zeigt.
 - **Ausgabe: Endtabelle plus alle Einzelspiele.** Keine Spieltags-Verlaeufe im
   Sim-Lauf; Zwischenstaende kommen bei Bedarf ueber `--as-of`.
 - **Teamstaerken bleiben innerhalb eines Laufs konstant** -- simulierte
@@ -227,12 +233,18 @@ Team), `meta.json` (Stand, Seed, Anzahl Laeufe).
    2016/17-2025/26 (`tests/data/final_tables.csv`), alle exakt gleich. Der
    direkte Vergleich entfaellt -- er hat in zehn Saisons keine Platzierung
    entschieden.
-2. `season.py` + Tests: Reproduzierbarkeit bei festem Seed, Platzverteilung
-   summiert zeilen- und spaltenweise auf 1, degenerierte Params (ein
-   uebermaechtiges Team wird immer Erster), Monte-Carlo-Fehler bei 10.000
-   Laeufen ~ +/-0,5 Prozentpunkte.
-3. Config, Pipeline, CLI mit `--as-of`.
-4. JSON-Ausgabe, dann `documentation.md`.
+2. ~~`season.py` + Tests.~~ erledigt: `sample_scores` zieht aus der
+   flachgelegten Torematrix, `simulate_season` liefert ein `SeasonForecast`
+   (Punkte, Tore, Platz je Lauf) mit `summary`, `position_table` und
+   `probability_of_places`. 10.000 Laeufe ueber 306 offene Spiele in 0,2 s.
+3. ~~Config, Pipeline, CLI mit `--as-of`.~~ erledigt: `PLACE_RULES` in
+   `config.py`, `pipeline.py` (`run_forecast` -> `ForecastRun` -> `to_payload`
+   -> `write_payload`), `cli.py simulate|update`. `predict_matches` in
+   `predict/outcomes.py` ergaenzt.
+4. ~~JSON-Ausgabe.~~ erledigt: `meta`, `matches`, `table`, `probabilities` in
+   `data/output/`, zusammen ~120 KB. Abweichung vom Plan: `matches.json`
+   enthaelt alle 306 Partien statt nur der offenen (gespielte mit Ergebnis),
+   damit das Frontend keine zweite Quelle braucht.
 5. Kalibrierungs-Check (nach dem Frontend): `--as-of` ueber jeden Spieltag
    2024/25 und 2025/26, pruefen ob "30 % auf Top 4" in ~30 % der Faelle
    eingetreten ist. Die einzige echte Pruefung der Simulationsschicht.

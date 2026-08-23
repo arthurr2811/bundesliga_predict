@@ -35,6 +35,22 @@ PRIOR_MATCH_WEIGHT = 17.0
 POINTS_WIN = 3
 POINTS_DRAW = 1
 
+# Läufe der Saison-Simulation
+N_SIMULATIONS = 10_000
+
+# Fester Seed: dieselben Daten müssen dieselbe Prognose ergeben.
+SIMULATION_SEED = 20262027
+
+# Was welcher Tabellenplatz bedeutet, als Platzbereich (von, bis).
+PLACE_RULES = {
+    "champion": (1, 1),
+    "champions_league": (1, 4),
+    "europa_league": (5, 5),
+    "conference_league": (6, 6),
+    "relegation_playoff": (16, 16),
+    "relegated": (17, 18),
+}
+
 # Zulässiger Bereich für rho. Weiter aussen wird die tau-Korrektur für
 # realistische Torerwartungen negativ.
 RHO_BOUNDS = (-0.9, 0.9)

@@ -9,16 +9,19 @@ from pathlib import Path
 
 import pandas as pd
 
+from bundesliga_predict import pipeline
 from bundesliga_predict.evaluation import report, tuning
 from bundesliga_predict.evaluation.backtest import BacktestConfig, run_backtest
 from bundesliga_predict.evaluation.baselines import load_odds
 from bundesliga_predict.model.prior import PriorConfig
 from bundesliga_predict.model.weights import WeightConfig
+from bundesliga_predict.simulation.season import SimulationConfig
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MATCHES_PATH = PROJECT_ROOT / "data" / "processed" / "matches.csv"
 RAW_HISTORIC_DIR = PROJECT_ROOT / "data" / "raw" / "historic_data"
-BACKTEST_OUTPUT = PROJECT_ROOT / "data" / "output" / "backtest_predictions.csv"
+OUTPUT_DIR = PROJECT_ROOT / "data" / "output"
+BACKTEST_OUTPUT = OUTPUT_DIR / "backtest_predictions.csv"
 
 
 def _load_matches() -> pd.DataFrame:
@@ -84,6 +87,49 @@ def command_backtest(args: argparse.Namespace) -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         predictions.to_csv(destination, index=False)
         print(f"\nVorhersagen gespeichert: {destination}")
+
+
+def command_simulate(args: argparse.Namespace) -> None:
+    run = pipeline.run_forecast(
+        _load_matches(),
+        as_of=args.as_of,
+        simulation=SimulationConfig(
+            n_simulations=args.simulations, seed=args.seed
+        ),
+    )
+    geschrieben = pipeline.write_payload(pipeline.to_payload(run), Path(args.output))
+
+    offen = int((~run.matches["finished"]).sum())
+    print(
+        f"\nSaison {run.season}, Stand {run.as_of.date()}: "
+        f"{len(run.matches) - offen} gespielt, {offen} offen, "
+        f"{run.simulation.n_simulations} Simulationen\n"
+    )
+    tabelle = run.forecast.summary().merge(
+        pipeline.event_probabilities(run.forecast), on="team"
+    )
+    spalten = [
+        "team",
+        "expected_points",
+        "champion",
+        "champions_league",
+        "relegation_playoff",
+        "relegated",
+    ]
+    print(report.format_table(tabelle[spalten].round(3)))
+    print("\n" + "\n".join(f"geschrieben: {pfad}" for pfad in geschrieben))
+
+
+def command_update(args: argparse.Namespace) -> None:
+    """Datensatz neu bauen und danach simulieren -- der Lauf nach jedem Spieltag."""
+    from bundesliga_predict import build_dataset
+
+    dataset = build_dataset.build_dataset()
+    MATCHES_PATH.parent.mkdir(parents=True, exist_ok=True)
+    dataset.to_csv(MATCHES_PATH, index=False)
+    print(f"{len(dataset)} Spiele geschrieben nach {MATCHES_PATH}")
+
+    command_simulate(args)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -157,6 +203,25 @@ def build_parser() -> argparse.ArgumentParser:
         help="Nur die aktuellen Defaults rechnen (Kontrolllauf statt Grid)",
     )
     tune.set_defaults(func=command_tune)
+
+    for name, hilfe in (
+        ("simulate", "Restsaison simulieren und JSON schreiben"),
+        ("update", "Datensatz aktualisieren, dann simulieren"),
+    ):
+        befehl = subparsers.add_parser(name, help=hilfe)
+        befehl.add_argument(
+            "--as-of",
+            default=None,
+            metavar="DATUM",
+            help="Stichtag (Standard: heute); ein vergangener rekonstruiert "
+            "die Prognose von damals",
+        )
+        befehl.add_argument(
+            "--simulations", type=int, default=SimulationConfig().n_simulations
+        )
+        befehl.add_argument("--seed", type=int, default=SimulationConfig().seed)
+        befehl.add_argument("--output", default=str(OUTPUT_DIR), metavar="VERZEICHNIS")
+        befehl.set_defaults(func=command_simulate if name == "simulate" else command_update)
 
     return parser
 

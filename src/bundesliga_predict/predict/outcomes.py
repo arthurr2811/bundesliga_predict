@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+import pandas as pd
 
 from bundesliga_predict.model.params import DixonColesParams
 from bundesliga_predict.predict.matrix import score_matrix
@@ -78,4 +79,36 @@ def predict_match(
         away_win=away_win,
         expected_home_goals=lambda_home,
         expected_away_goals=lambda_away,
+    )
+
+
+def predict_matches(params: DixonColesParams, fixtures: pd.DataFrame) -> pd.DataFrame:
+    """Vorhersage je Zeile von `fixtures`, inklusive wahrscheinlichstem Ergebnis.
+
+    Behaelt alle Spalten der Eingabe (Spieltag, Datum), damit die Ausgabe ohne
+    zweiten Join weiterverwendet werden kann.
+    """
+    rows = []
+    for match in fixtures.itertuples():
+        matrix = score_matrix(params, match.home_team, match.away_team)
+        home_win, draw, away_win = outcome_probabilities(matrix)
+        home_goals, away_goals = most_likely_score(matrix)
+        expected_home, expected_away = params.expected_goals(
+            match.home_team, match.away_team
+        )
+        rows.append(
+            {
+                "p_home": home_win,
+                "p_draw": draw,
+                "p_away": away_win,
+                "expected_home_goals": expected_home,
+                "expected_away_goals": expected_away,
+                "likely_home_goals": home_goals,
+                "likely_away_goals": away_goals,
+            }
+        )
+
+    return pd.concat(
+        [fixtures.reset_index(drop=True), pd.DataFrame(rows, index=range(len(fixtures)))],
+        axis=1,
     )
