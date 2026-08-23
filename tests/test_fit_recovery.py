@@ -12,6 +12,7 @@ import pytest
 
 from bundesliga_predict.model.fit import fit
 from bundesliga_predict.model.params import DixonColesParams
+from bundesliga_predict.model.prior import PriorConfig
 from bundesliga_predict.model.weights import WeightConfig
 from bundesliga_predict.predict.matrix import score_matrix
 
@@ -81,7 +82,7 @@ def recovered() -> tuple[DixonColesParams, DixonColesParams]:
     estimate = fit(
         matches,
         weight_config=WeightConfig(half_life_days=np.inf, season_penalty=1.0),
-        prior_sd=np.inf,
+        prior=PriorConfig(sd=np.inf),
     )
     return truth, estimate
 

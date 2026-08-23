@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 
-from bundesliga_predict.config import DEFAULT_PRIOR_SD, RHO_BOUNDS
+from bundesliga_predict.config import RHO_BOUNDS
 from bundesliga_predict.model import likelihood
 from bundesliga_predict.model.params import DixonColesParams, n_free_params, to_params
+from bundesliga_predict.model.prior import PriorConfig
 from bundesliga_predict.model.weights import WeightConfig, match_weights
 
 # Startwerte: grob plausible Bundesliga-Grössen
@@ -26,7 +27,7 @@ def fit(
     matches: pd.DataFrame,
     reference_date: pd.Timestamp | None = None,
     weight_config: WeightConfig | None = None,
-    prior_sd: float = DEFAULT_PRIOR_SD,
+    prior: PriorConfig | None = None,
     reference_season: str | None = None,
 ) -> DixonColesParams:
     """Schätzt die Modellparameter auf allen Spielen bis `reference_date`.
@@ -40,7 +41,12 @@ def fit(
     gespielten Spiels. Vor dem ersten Spiel einer neuen Saison ist das die
     falsche -- dann muss der Aufrufer die Zielsaison mitgeben, sonst bleibt der
     Malus für den gerade erfolgten Saisonwechsel aus.
+
+    `prior` regularisiert datenarme Teams (siehe `model/prior.py`). Teams ohne
+    jede Historie kommen im Ergebnis nicht vor -- sie haben keine Partie, aus
+    der sich etwas schätzen liesse; dafür gibt es `prior.with_unknown_teams`.
     """
+    prior = prior or PriorConfig()
     played = finished_matches(matches).copy()
     played["date"] = pd.to_datetime(played["date"])
 
@@ -74,7 +80,7 @@ def fit(
     result = minimize(
         likelihood.negative_log_likelihood,
         initial,
-        args=(data, prior_sd),
+        args=(data, prior),
         method="L-BFGS-B",
         bounds=bounds,
     )

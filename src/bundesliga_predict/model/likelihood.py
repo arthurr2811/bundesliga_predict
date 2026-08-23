@@ -11,8 +11,9 @@ import numpy as np
 import pandas as pd
 from scipy.special import gammaln
 
-from bundesliga_predict.config import DEFAULT_PRIOR_SD, PRIOR_MATCH_WEIGHT
+from bundesliga_predict.config import PRIOR_MATCH_WEIGHT
 from bundesliga_predict.model.params import split_vector
+from bundesliga_predict.model.prior import PriorConfig
 
 # Untergrenze für tau. Für extreme rho kann die Korrektur rechnerisch
 # negativ werden; dann ist der Log undefiniert. Statt harter Nebenbedingung
@@ -92,7 +93,7 @@ def prepare(matches: pd.DataFrame, weights: np.ndarray) -> LikelihoodData:
 
 
 def negative_log_likelihood(
-    vector: np.ndarray, data: LikelihoodData, prior_sd: float = DEFAULT_PRIOR_SD
+    vector: np.ndarray, data: LikelihoodData, prior: PriorConfig | None = None
 ) -> float:
     """Zielfunktion des Fits: negative gewichtete Log-Likelihood plus Prior."""
     intercept, home_advantage, rho, attack, defense = split_vector(vector, data.n_teams)
@@ -115,10 +116,19 @@ def negative_log_likelihood(
         - data.log_factorials
     )
 
+    prior = prior or PriorConfig()
     penalty = 0.0
-    if np.isfinite(prior_sd) and prior_sd > 0:
+    if prior.active:
+        # Gezogen wird nicht auf 0, sondern auf den Prior-Mittelwert.
         penalty = float(
-            np.sum(data.shrinkage * (attack**2 + defense**2)) / (2.0 * prior_sd**2)
+            np.sum(
+                data.shrinkage
+                * (
+                    (attack - prior.attack_mean) ** 2
+                    + (defense - prior.defense_mean) ** 2
+                )
+            )
+            / (2.0 * prior.sd**2)
         )
 
     return -float(np.sum(data.weights * log_prob)) + penalty

@@ -242,6 +242,77 @@ den falschen Wert" -- und ein falscher Prior-Mittelwert wirkt tatsaechlich die
 ganze Saison ueber, weil ein Aufsteiger auch im Mai noch die mit Abstand
 duennste Datenbasis hat.
 
+## Der Aufsteiger-Prior: die erste Aenderung, die sich beweisen musste
+
+Die Shrinkage zog datenarme Teams bis hierher Richtung 0 -- wegen
+`sum(attack) = 0` also exakt auf den Ligadurchschnitt. Das ist ein neutraler
+Prior im Sinne von "wir wissen nichts ueber das Team". Wir wissen aber mehr:
+wer wenig Bundesliga-Historie hat, ist fast immer gerade aufgestiegen.
+
+**Erst messen, dann einstellen.** Fuer jede Saison ein eigener Fit, nur auf
+den Spielen dieser Saison, ohne Zeitgewichtung und ohne Shrinkage -- das ist
+die unverzerrte Staerke eines Teams relativ zu *seiner* Liga. Ueber 19
+Aufsteiger-Saisons (2017/18-2025/26):
+
+    Angriff:  Mittel -0.25   Median -0.26   sd 0.25   95 % unter Ligaschnitt
+    Abwehr:   Mittel -0.14   Median -0.15   sd 0.21   74 % unter Ligaschnitt
+
+Der neutrale Prior war also nicht neutral, sondern zu optimistisch. Die
+Korrektur ist ein Einzeiler in der Straffunktion: gezogen wird auf einen
+Mittelwert statt auf 0.
+
+**Wer Aufsteiger ist, muss nirgends stehen.** Das Shrinkage-Gewicht haengt an
+der gewichteten Spielmasse je Team und geht mit wachsender Datenmenge gegen 0
+-- fuer etablierte Teams verschwindet der Mittelwert also mit. Es braucht
+keine Liste, keine Fallunterscheidung, keinen Aufsteiger-Flag im Datensatz.
+Der Backtest bestaetigt das schaerfer, als ein Test es koennte: ueber alle
+Prior-Staerken hinweg bleiben die 1890 Partien *ohne* Aufsteiger bei RPS
+0.2054, Abstand zum Markt +0.0057 -- identisch bis zur vierten Nachkommastelle.
+
+Am haertesten traf der alte Prior Teams ganz ohne Erstliga-Historie
+(Elversberg, Heidenheim vor 2023): die tauchen im Fit ueberhaupt nicht auf,
+weil es keine Partie von ihnen gibt, und wurden vom Backtest als exaktes
+Durchschnittsteam ergaenzt -- das denkbar optimistischste Urteil ueber einen
+Aufsteiger. Sie bekommen jetzt den Prior-Mittelwert, also genau den Wert, den
+der Fit ihnen geben wuerde (ihre Shrinkage waere 1, der Prior damit allein
+bestimmend).
+
+**Was es bringt.** Skalierung 1.0 heisst: Prior-Mittelwert genau auf dem
+gemessenen Wert.
+
+| Prior-Staerke | RPS gesamt | Log-Loss | Brier | RPS Aufsteiger | Abstand Markt |
+|---|---|---|---|---|---|
+| 0.0 (Ligaschnitt, vorher) | 0.2049 | 0.9983 | 0.5957 | 0.2032 | +0.0118 |
+| 0.5 | 0.2046 | 0.9975 | 0.5951 | 0.2020 | +0.0106 |
+| 1.0 (gemessen) | 0.2044 | 0.9968 | 0.5947 | 0.2010 | +0.0096 |
+| 1.5 | 0.2042 | 0.9963 | 0.5943 | 0.2002 | +0.0089 |
+
+Alle drei Masse verbessern sich monoton und gleichzeitig. Gesamt ist der
+Effekt klein -- rund 2 % des Abstands zur Baseline, was bei 558 betroffenen
+von 2448 Partien zu erwarten war. Auf der Teilmenge, um die es geht, ist er
+deutlich: der Rueckstand auf den Markt sinkt um ein Viertel.
+
+Und der Gewinn sitzt genau da, wo die Erklaerung ihn vorhersagt:
+
+| Prior-Staerke | Abstand Hinrunde | Abstand Rueckrunde |
+|---|---|---|
+| 0.0 | +0.0125 | +0.0112 |
+| 1.0 | +0.0079 | +0.0113 |
+| 1.5 | +0.0063 | +0.0114 |
+
+Die Hinrunde halbiert sich, die Rueckrunde ruehrt sich um keinen Zaehlwert.
+Sobald ein Aufsteiger eigene Daten hat, verblasst der Prior -- er kann dann
+weder helfen noch schaden. Der verbleibende Rueckrunden-Rueckstand hat also
+eine andere Ursache und ist mit diesem Hebel nicht zu holen.
+
+**Warum der Default trotzdem auf 1.0 steht, obwohl 1.5 besser misst.** Der
+Prior-Mittelwert ist ein Hyperparameter wie Halbwertszeit und Saison-Abschlag,
+und die vier wirken aufeinander: ein staerkerer Prior verhaelt sich anders,
+wenn gleichzeitig weniger Vergangenheit zaehlt. Ihn jetzt einzeln auf sein
+Optimum zu schieben, waere ein lokales Optimum auf Kosten des gemeinsamen. In
+`config.py` steht deshalb der *gemessene* Wert -- das trennt sauber, was aus
+den Daten kommt, von dem, was der Grid-Search einstellt.
+
 ## Log
 
 **Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
@@ -269,8 +340,16 @@ oben stammen aus diesem Lauf (2448 Spiele, 2018/19-2025/26). Gegenueber der
 kalenderbasierten Blockbildung aendert sich das Gesamtbild kaum (RPS 0.2052 ->
 0.2049), die Aufteilung nach Aufsteigern dagegen deutlich: der
 Hinrunden-/Rueckrunden-Unterschied war groesstenteils ein Artefakt der alten
-Bloecke. Naechstes: Aufsteiger-Prior gegen den Backtest testen, danach
-Grid-Search.
+Bloecke.
+
+**Aufsteiger-Prior.** Shrinkage zieht nicht mehr auf den Ligadurchschnitt,
+sondern auf einen gemessenen Mittelwert. Erste Modellaenderung, die der
+Backtest genehmigt hat statt der Plausibilitaet: RPS 0.2049 -> 0.2044, und der
+Rueckstand auf den Markt bei Aufsteigern in der Hinrunde faellt von +0.0125 auf
++0.0079. Nebenbei ist der Sonderfall "Team ohne jede Historie" aus dem
+Backtest verschwunden -- er ist jetzt derselbe Prior wie fuer alle anderen.
+Naechstes: Grid-Search ueber Halbwertszeit, Saison-Abschlag, Prior-Staerke und
+Prior-Mittelwert gemeinsam.
 
 ## Quellen / Inspiration
 

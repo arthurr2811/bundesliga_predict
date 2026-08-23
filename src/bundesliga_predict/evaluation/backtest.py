@@ -16,15 +16,14 @@ Datenschnitt sehen wie das Modell, sonst ist der Vergleich unfair.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
 
-from bundesliga_predict.config import DEFAULT_PRIOR_SD
 from bundesliga_predict.evaluation.baselines import league_average_probabilities
 from bundesliga_predict.model.fit import finished_matches, fit
-from bundesliga_predict.model.params import DixonColesParams
+from bundesliga_predict.model.prior import PriorConfig, with_unknown_teams
 from bundesliga_predict.model.weights import WeightConfig
 from bundesliga_predict.predict.outcomes import predict_match
 
@@ -56,36 +55,16 @@ def assign_blocks(matches: pd.DataFrame) -> pd.Series:
     return run.map(renumbered).reindex(matches.index)
 
 
-def _with_neutral_teams(params: DixonColesParams, teams: set[str]) -> DixonColesParams:
-    """Ergänzt Teams ohne Historie als Durchschnittsteam (attack = defense = 0).
-
-    Betrifft Aufsteiger, die noch nie erstklassig gespielt haben. Sie als
-    Ligadurchschnitt zu behandeln ist zu optimistisch -- genau das soll der
-    Aufsteiger-Prior später korrigieren. Für den Backtest zählt zunächst nur,
-    dass diese Spiele nicht stillschweigend herausfallen und den Vergleich
-    verzerren.
-    """
-    missing = teams - set(params.teams)
-    if not missing:
-        return params
-    return replace(
-        params,
-        teams=params.teams + tuple(sorted(missing)),
-        attack={**params.attack, **{team: 0.0 for team in missing}},
-        defense={**params.defense, **{team: 0.0 for team in missing}},
-    )
-
-
 @dataclass(frozen=True)
 class BacktestConfig:
     """Backtest Hyperparameter
 
-    `weight_config` und `prior_sd`
+    `weight_config` und `prior`
     """
 
     start_season: str = "2018/19"
     weight_config: WeightConfig = field(default_factory=WeightConfig)
-    prior_sd: float = DEFAULT_PRIOR_SD
+    prior: PriorConfig = field(default_factory=PriorConfig)
     # Mindestanzahl gespielter Partien, bevor überhaupt gefittet wird.
     min_history: int = 200
 
@@ -128,11 +107,13 @@ def run_backtest(
             history,
             reference_date=block_start - pd.Timedelta(days=1),
             weight_config=config.weight_config,
-            prior_sd=config.prior_sd,
+            prior=config.prior,
             reference_season=target_season,
         )
-        params = _with_neutral_teams(
-            params, set(block["home_team"]) | set(block["away_team"])
+        # Aufsteiger ohne jede BL-Historie kommen im Fit nicht vor; sie
+        # bekommen den Prior-Mittelwert.
+        params = with_unknown_teams(
+            params, set(block["home_team"]) | set(block["away_team"]), config.prior
         )
         baseline = league_average_probabilities(history, len(block))
 

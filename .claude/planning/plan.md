@@ -19,63 +19,31 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
   Ergebnis, Over/Under).
 - Backtest steht: `evaluation/metrics`, `evaluation/baselines`,
   `evaluation/backtest`, `evaluation/report`, plus `cli.py backtest`.
-  Walk-forward ueber 2448 Spiele (2018/19-2025/26), ~5 min Laufzeit.
+  Walk-forward ueber 2448 Spiele (2018/19-2025/26), ~72 s Laufzeit
 - Blockbildung auf echte Spieltagsnummern umgestellt (`matchday_source`),
   `team_mapping` auf alle Vereine 2016/17-2026/27 vervollstaendigt.
   352 Bloecke, keiner mischt Spieltage, 12 abgetrennte Nachholpartien.
 - Backtest nach der Umstellung neu erhoben (23.08.2026), `documentation.md`
   aktualisiert. Referenzwerte: Modell RPS 0.2049 / Log-Loss 0.9983 /
   Brier 0.5957, Ligadurchschnitt 0.2320, Markt 0.1978.
+- Aufsteiger-Prior gebaut (`model/prior.py`, `PriorConfig`): Shrinkage zieht
+  auf einen gemessenen Mittelwert (Angriff -0.25, Abwehr -0.14) statt auf den
+  Ligadurchschnitt. Vom Backtest bestaetigt, RPS 0.2049 -> 0.2044; der
+  Sonderfall "Team ohne Historie" im Backtest ist damit weg. Details in
+  `documentation.md`.
 
 ### Naechster Schritt (Stand 23.08.2026)
 1. ~~Backtest neu laufen lassen und `documentation.md` aktualisieren.~~ erledigt
-2. Aufsteiger-Prior gegen den Backtest testen (siehe Befund unten). Der
-   Backtest hat den Befund bestaetigt und beziffert, also los damit.
-3. Danach Hyperparameter-Grid-Search (`evaluation/tuning.py`) ueber
-   Halbwertszeit, Saison-Abschlag und Prior-Staerke. Erst danach sind die
-   Defaults in `config.py` belegt statt geraten. Achtung Laufzeit: ein
-   Backtest-Lauf kostet ~5 min, ein Grid mit 50 Kombinationen also ~4 h --
-   Grid klein halten oder auf weniger Saisons einschraenken.
+2. ~~Aufsteiger-Prior gegen den Backtest testen.~~ erledigt
+3. Hyperparameter-Grid-Search (`evaluation/tuning.py`) ueber Halbwertszeit,
+   Saison-Abschlag, Prior-Staerke (`sd`) und Prior-Mittelwert. Die vier wirken
+   aufeinander und gehoeren deshalb in denselben Grid -- der Prior-Mittelwert
+   ist bewusst nicht einzeln nachoptimiert, obwohl der Backtest jenseits des
+   gemessenen Werts noch besser wird. Erst danach sind die Defaults in
+   `config.py` belegt statt geraten. Ein Backtest-Lauf kostet ~72 s, ein Grid
+   mit 50 Kombinationen also gut eine Stunde seriell, parallel deutlich
+   weniger.
 4. Dann Schritt 4 (Simulation) und Schritt 5 (Frontend).
-
-### Befund: der Aufsteiger-Prior sitzt an der falschen Stelle -- vom Backtest bestaetigt
-
-Der Backtest misst den Rueckstand auf den Markt getrennt nach Partien mit und
-ohne Aufsteiger (RPS, Abstand zum Markt): ohne Aufsteiger +0.0057 (n=1890),
-mit Aufsteiger +0.0118 (n=558), davon Hinrunde +0.0125 und Rueckrunde +0.0112
-(je n=279). Der Rueckstand ist bei Aufsteigern also gut doppelt so gross --
-die erwartete Signatur eines zu optimistischen Priors.
-
-Achtung, revidiert: mit den alten (kalenderbasierten) Bloecken sah der
-Hinrunden-/Rueckrunden-Unterschied viel groesser aus (+0.0141 gegen +0.0086).
-Mit echten Spieltagsnummern schrumpft er auf +0.0125 gegen +0.0112. Der
-Rueckstand haengt am Aufsteiger, nicht am Zeitpunkt in der Saison.
-
-Der Backtest behandelt Teams ganz ohne BL-Historie derzeit als exakten
-Ligadurchschnitt (`_with_neutral_teams` in `backtest.py`) -- diese Stelle
-verschwindet, sobald der Prior richtig sitzt.
-
-Die urspruengliche Herleitung:
-Die Shrinkage zieht datenarme Teams aktuell Richtung 0, und 0 ist wegen
-`sum(attack) = 0` exakt der Ligadurchschnitt. Das ist ein neutraler Prior
-("wir wissen nichts ueber das Team") -- wir wissen aber mehr: intuitiv und gemessen ueber
-19 Aufsteiger-Saisons in unseren Daten liegt ein Aufsteiger im Schnitt bei
-attack -0.31 und defense -0.13, und 95 % der Aufsteiger sind im Angriff unter
-Ligaschnitt. Die Shrinkage macht Aufsteiger also systematisch zu stark.
-
-Am haertesten trifft es Teams ganz ohne Bundesliga-Historie (z. B.
-Elversberg): die starten bei exakt 0, also als Durchschnittsteam. Teams wie
-Hamburg oder Nuernberg haben wenigstens alte, abgewertete BL-Spiele.
-
-Geplante Korrektur: Shrinkage nicht Richtung 0, sondern Richtung eines
-Prior-Mittelwerts, der fuer datenarme Teams negativ ist. Das Shrinkage-Gewicht
-dafuer existiert bereits (es haengt an der gewichteten Spielmasse je Team),
-greift also automatisch nur dort, wo ein Team neu ist. Wichtig: die Streuung
-ist gross (sigma ~ 0.25 im Angriff; Stuttgart 2020/21 kam mit +0.08 hoch,
-Nuernberg 2018/19 mit -0.73) -- der Prior darf die Erwartung verschieben, aber
-nicht so eng sein, dass ein starker Aufsteiger zu lange braucht, um im Modell
-anzukommen. Ob es die Vorhersage wirklich verbessert, entscheidet der
-Backtest, nicht die Plausibilitaet.
 
 ## Architektur
 
@@ -101,6 +69,7 @@ Backtest dieselben Funktionen mit abgeschnittenen Daten aufrufen kann.
       model/
         params.py     Dataclass DixonColesParams (attack, defense, home_adv, rho)
         weights.py    Zeitgewichtung (Tages-Decay + Saisonwechsel-Malus)
+        prior.py      PriorConfig (sd + Mittelwert), Teams ohne Historie
         likelihood.py vektorisierte neg. gewichtete Log-Likelihood + tau
         fit.py        scipy.optimize.minimize (L-BFGS-B), Regularisierung
       predict/
@@ -146,10 +115,11 @@ Zeitgewichtung: `w = exp(-xi * delta_t_Tage) * delta^(Saisonwechsel dazwischen)`
 Der Saisonwechsel-Malus ist bewusst ein eigener Parameter neben dem stetigen
 Decay, weil Kaderumbruch sprunghaft wirkt und nicht linear.
 
-Aufsteiger: keine 2.-Liga-Daten, stattdessen Regularisierung Richtung 0 mit
-Staerke proportional zu 1/effektive Spielzahl. Teams mit wenig gewichteten
-Daten werden zum Ligadurchschnitt gezogen, statt aus drei Spielen als Topteam
-geschaetzt zu werden. Ob das reicht, zeigt der Backtest.
+Aufsteiger: keine 2.-Liga-Daten, stattdessen Regularisierung mit Staerke
+proportional zu 1/effektive Spielzahl, gezogen auf einen gemessenen
+Aufsteiger-Mittelwert statt auf den Ligadurchschnitt. Weil das
+Shrinkage-Gewicht mit wachsender Datenmenge gegen 0 geht, braucht es keine
+Liste, wer Aufsteiger ist.
 
 ## 3. Training & Fitting
 Maximum-Likelihood per `scipy.optimize.minimize` (L-BFGS-B) auf der

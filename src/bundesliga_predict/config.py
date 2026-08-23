@@ -15,10 +15,15 @@ DEFAULT_HALF_LIFE_DAYS = 180.0
 # Stichtag. Kaderumbruch wirkt sprunghaft, nicht als stetiger Zerfall.
 DEFAULT_SEASON_PENALTY = 0.8
 
-# Regularisierung Richtung Ligadurchschnitt (Angriff/Abwehr = 0), formuliert
-# als Standardabweichung eines Normal-Priors auf die Team-Stärken. Kleiner
-# Wert = stärkeres Ziehen zum Durchschnitt.
+# Regularisierung der Team-Stärken, formuliert als Normal-Prior. Kleiner
+# Wert = stärkeres Ziehen zum Prior-Mittelwert.
 DEFAULT_PRIOR_SD = 0.35
+
+# Wohin datenarme Teams gezogen werden. Nicht auf den Ligadurchschnitt (0),
+# denn wer wenig Bundesliga-Historie hat, ist fast immer ein Aufsteiger -- und
+# Aufsteiger sind im Schnitt schwächer als die Liga.
+DEFAULT_PRIOR_ATTACK = -0.25
+DEFAULT_PRIOR_DEFENSE = -0.14
 
 # Referenz-Datenmenge für die Shrinkage: bei so viel gewichteter Spielmasse
 # wirkt die Regularisierung nur noch halb so stark. Grob eine halbe Saison.
