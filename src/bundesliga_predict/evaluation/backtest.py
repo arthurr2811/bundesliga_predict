@@ -63,6 +63,11 @@ class BacktestConfig:
     """
 
     start_season: str = "2018/19"
+    # Letzte *bewertete* Saison, einschliesslich. Schneidet nur die Auswertung
+    # ab, nie die Historie: ein Block wird weiterhin auf allem gefittet, was
+    # vor ihm liegt. Gedacht fuer den Grid-Search, damit die juengsten Saisons
+    # als unangetasteter Holdout uebrig bleiben.
+    end_season: str | None = None
     weight_config: WeightConfig = field(default_factory=WeightConfig)
     prior: PriorConfig = field(default_factory=PriorConfig)
     # Mindestanzahl gespielter Partien, bevor überhaupt gefittet wird.
@@ -88,9 +93,14 @@ def run_backtest(
     played["date"] = pd.to_datetime(played["date"])
     played = played.sort_values("date").reset_index(drop=True)
 
-    evaluated = played[played["season"] >= config.start_season].copy()
+    evaluated = played[played["season"] >= config.start_season]
+    if config.end_season is not None:
+        evaluated = evaluated[evaluated["season"] <= config.end_season]
+    evaluated = evaluated.copy()
     if evaluated.empty:
-        raise ValueError(f"Keine Spiele ab Saison {config.start_season}.")
+        raise ValueError(
+            f"Keine Spiele in {config.start_season}..{config.end_season or 'Ende'}."
+        )
     evaluated["block"] = assign_blocks(evaluated)
 
     rows = []

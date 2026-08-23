@@ -216,6 +216,32 @@ def test_team_ohne_historie_wird_als_durchschnitt_behandelt():
     assert aufsteiger[["p_home", "p_draw", "p_away"]].notna().all().all()
 
 
+def test_end_season_schneidet_nur_die_auswertung():
+    """Der Holdout-Schnitt darf die Historie nicht anfassen.
+
+    Sonst waeren die Tuning-Ergebnisse nicht mit dem Volllauf vergleichbar:
+    ein Block muss auf allem gefittet werden, was vor ihm liegt, auch wenn
+    spaetere Saisons von der Bewertung ausgenommen sind.
+    """
+    matches = _synthetic_matches(n_seasons=3)
+    saisons = sorted(matches["season"].unique())
+    voll = run_backtest(matches, BacktestConfig(start_season=saisons[0], min_history=30))
+    geschnitten = run_backtest(
+        matches,
+        BacktestConfig(start_season=saisons[0], end_season=saisons[-2], min_history=30),
+    )
+
+    assert (geschnitten["season"] <= saisons[-2]).all()
+    assert len(geschnitten) < len(voll)
+
+    # Die verbleibenden Vorhersagen muessen Zahl fuer Zahl dieselben sein.
+    spalten = ["p_home", "p_draw", "p_away"]
+    erwartet = voll[voll["season"] <= saisons[-2]].reset_index(drop=True)
+    pd.testing.assert_frame_equal(
+        geschnitten[spalten].reset_index(drop=True), erwartet[spalten]
+    )
+
+
 def test_saison_ohne_daten_faellt_auf():
     with pytest.raises(ValueError):
         run_backtest(_synthetic_matches(n_seasons=1), BacktestConfig(start_season="2030/31"))

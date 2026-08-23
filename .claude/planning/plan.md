@@ -35,15 +35,47 @@ warum getroffen wurden) als Basis für einen späteren Blogpost.
 ### Naechster Schritt (Stand 23.08.2026)
 1. ~~Backtest neu laufen lassen und `documentation.md` aktualisieren.~~ erledigt
 2. ~~Aufsteiger-Prior gegen den Backtest testen.~~ erledigt
-3. Hyperparameter-Grid-Search (`evaluation/tuning.py`) ueber Halbwertszeit,
-   Saison-Abschlag, Prior-Staerke (`sd`) und Prior-Mittelwert. Die vier wirken
-   aufeinander und gehoeren deshalb in denselben Grid -- der Prior-Mittelwert
-   ist bewusst nicht einzeln nachoptimiert, obwohl der Backtest jenseits des
-   gemessenen Werts noch besser wird. Erst danach sind die Defaults in
-   `config.py` belegt statt geraten. Ein Backtest-Lauf kostet ~72 s, ein Grid
-   mit 50 Kombinationen also gut eine Stunde seriell, parallel deutlich
-   weniger.
+3. Hyperparameter-Grid-Search (`evaluation/tuning.py`) -- Zuschnitt unten.
+   Erst danach sind die Defaults in `config.py` belegt statt geraten.
 4. Dann Schritt 4 (Simulation) und Schritt 5 (Frontend).
+
+### Zuschnitt Grid-Search (festgelegt 23.08.2026)
+
+**Tuning/Holdout.** Der Grid laeuft nur auf 2018/19-2023/24 (1836 Spiele).
+2024/25-2025/26 (612 Spiele) bleiben unangetastet und werden ganz am Ende
+einmal ausgewertet. Sonst waere die berichtete Modellguete geschoent -- bei
+~150 Kombinationen gewinnt sonst auch Rauschen mit. Dafuer braucht
+`BacktestConfig` ein `end_season`.
+
+**Zwei Stufen.** Stufe A grob (108 Laeufe, ~16 min bei 6 Workern):
+
+    half_life_days   90, 180, 365, 730
+    season_penalty   0.6, 0.8, 1.0
+    prior_sd         0.15, 0.25, 0.35
+    prior_scale      0.0, 1.0, 2.0      (Faktor auf die gemessenen -0.25/-0.14)
+
+`prior_scale` ist eine Achse statt zwei: das Verhaeltnis Angriff/Abwehr kommt
+aus der Messung, offen ist nur die Staerke. Stufe B verfeinert um den Sieger
+und nimmt `PRIOR_MATCH_WEIGHT` (jetzt fest 17.0) als fuenfte Achse dazu; der
+Wert wandert dafuer aus `config.py` in `PriorConfig`.
+
+**Regeln, vorher festgelegt:**
+- Zielgroesse ist RPS. Log-Loss und Brier laufen mit, sind aber Kontrolle und
+  kein Auswahlkriterium -- sonst sucht man sich hinterher das Mass aus.
+- Gewinnt ein Randwert, wird der Grid erweitert, nicht der Rand genommen.
+- Nicht das Argmin nehmen, sondern das Plateau: liegen viele Kombinationen
+  innerhalb von ~0.0005, ist das Argmin Rauschen. RPS je Saison wird
+  mitgeschrieben, um zu sehen, ob ein Sieger nur eine Saison traegt.
+
+**Betrieb:** Ergebnisse zeilenweise in eine CSV anhaengen, bekannte
+Kombinationen beim Neustart ueberspringen (fortsetzbar).
+
+**Stand:** `tuning.py` und `cli.py tune` gebaut, Smoke-Tests bestanden --
+Defaults ueber alle acht Saisons reproduzieren exakt RPS 0.2044, auf der
+Tuning-Teilmenge sind es 0.2043 (1836 Spiele), und die RPS je Saison sind in
+beiden Laeufen identisch (`end_season` schneidet also wirklich nur die
+Auswertung). 6 Laeufe mit 6 Workern brauchen 31 s, Stufe A also ~10 min.
+Stufe A ist noch nicht gestartet.
 
 ## Architektur
 
