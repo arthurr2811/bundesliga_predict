@@ -221,7 +221,12 @@ Abschlusstabelle), `probabilities.json` (Platzverteilung und Ereignisse je
 Team), `meta.json` (Stand, Seed, Anzahl Laeufe).
 
 ### Reihenfolge
-1. `table.py` + Test gegen die echte Abschlusstabelle 2025/26.
+1. ~~`table.py` + Test gegen die echte Abschlusstabelle.~~ erledigt:
+   `standings` (eine Tabelle) und `positions` (viele auf einmal) teilen sich
+   eine Sortierregel; geprueft gegen die zehn OpenLigaDB-Abschlusstabellen
+   2016/17-2025/26 (`tests/data/final_tables.csv`), alle exakt gleich. Der
+   direkte Vergleich entfaellt -- er hat in zehn Saisons keine Platzierung
+   entschieden.
 2. `season.py` + Tests: Reproduzierbarkeit bei festem Seed, Platzverteilung
    summiert zeilen- und spaltenweise auf 1, degenerierte Params (ein
    uebermaechtiges Team wird immer Erster), Monte-Carlo-Fehler bei 10.000

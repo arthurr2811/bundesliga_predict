@@ -31,6 +31,10 @@ DEFAULT_PRIOR_DEFENSE = -0.28
 # datenreiche.
 PRIOR_MATCH_WEIGHT = 17.0
 
+# Punkte je Ausgang
+POINTS_WIN = 3
+POINTS_DRAW = 1
+
 # Zulässiger Bereich für rho. Weiter aussen wird die tau-Korrektur für
 # realistische Torerwartungen negativ.
 RHO_BOUNDS = (-0.9, 0.9)

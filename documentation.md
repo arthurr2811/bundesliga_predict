@@ -455,6 +455,31 @@ waere die Winterpause: Trainerwechsel und Wintertransfers treffen
 Abstiegskandidaten haerter als andere, und der Markt weiss davon, das Modell
 nicht. Belegt ist das nicht.
 
+## Die Tabelle: eine Regel, zwei Ebenen
+
+Die Simulation braucht nicht *eine* Tabelle, sondern zehntausend gleichzeitig.
+Deshalb steckt die Sortierregel in einer Funktion, die auf der letzten Achse
+arbeitet: `(n_teams,)` fuer den aktuellen Stand, `(n_simulationen, n_teams)`
+fuer den Monte-Carlo. Zwei Implementierungen, die auseinanderlaufen koennen,
+gibt es damit gar nicht erst.
+
+**Der direkte Vergleich fehlt bewusst.** Die DFL-Regeln sehen nach Punkten,
+Tordifferenz und erzielten Toren den direkten Vergleich vor. Nachgesehen, wie
+oft er in zehn Saisons ueber eine Platzierung entschieden hat: **kein einziges
+Mal** -- die erzielten Tore haben immer schon getrennt. Er waere also
+ungetesteter Code fuer einen Fall, der praktisch nicht vorkommt, und in der
+Simulation teuer, weil er sich nicht vektorisieren laesst. Voellige
+Gleichstaende werden im Monte-Carlo per Zufall aufgeloest, was die DFL im
+Extremfall ebenfalls tut.
+
+**Getestet gegen eine unabhaengige Quelle.** Ein Test, der die Tabelle mit
+denselben Daten nachrechnet, aus denen sie stammt, prueft nichts. Also kommen
+die Abschlusstabellen 2016/17-2025/26 aus dem Tabellen-Endpunkt von
+OpenLigaDB, waehrend unsere Tabelle aus den Ergebnissen von football-data.co.uk
+gerechnet wird. Alle zehn stimmen Zeile fuer Zeile ueberein -- Punktevergabe,
+Torzaehlung, Sortierung und nebenbei auch das Team-Mapping zwischen den beiden
+Quellen.
+
 ## Log
 
 **Datenpipeline.** Historische Saisons und laufende Saison vereinheitlicht.
@@ -501,6 +526,10 @@ geraten (jetzt 480), der Prior-Mittelwert mit dem reinen Messwert zu schwach
 Plateau, keine Spitze -- 49 sehr verschiedene Kombinationen liegen gleichauf.
 Damit sind die Defaults in `config.py` belegt statt geraten, und weiteres
 Feintuning an diesen vier Schrauben lohnt nicht. Naechstes: Simulation.
+
+**Tabellenberechnung.** `simulation/table.py` gebaut, gegen die zehn echten
+Abschlusstabellen geprueft. Der direkte Vergleich entfaellt (siehe oben).
+Naechstes: der Monte-Carlo selbst.
 
 ## Quellen / Inspiration
 
