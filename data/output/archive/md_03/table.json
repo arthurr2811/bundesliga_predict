@@ -1,0 +1,366 @@
+{
+  "current": [
+    {
+      "position": 1,
+      "team": "Augsburg",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goals_for": 7,
+      "goals_against": 1,
+      "goal_difference": 6,
+      "points": 6
+    },
+    {
+      "position": 2,
+      "team": "Freiburg",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goals_for": 5,
+      "goals_against": 1,
+      "goal_difference": 4,
+      "points": 6
+    },
+    {
+      "position": 3,
+      "team": "Dortmund",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goals_for": 5,
+      "goals_against": 2,
+      "goal_difference": 3,
+      "points": 6
+    },
+    {
+      "position": 4,
+      "team": "Elversberg",
+      "played": 2,
+      "won": 2,
+      "drawn": 0,
+      "lost": 0,
+      "goals_for": 7,
+      "goals_against": 5,
+      "goal_difference": 2,
+      "points": 6
+    },
+    {
+      "position": 5,
+      "team": "Mainz",
+      "played": 2,
+      "won": 1,
+      "drawn": 1,
+      "lost": 0,
+      "goals_for": 5,
+      "goals_against": 0,
+      "goal_difference": 5,
+      "points": 4
+    },
+    {
+      "position": 6,
+      "team": "Bayern Munich",
+      "played": 2,
+      "won": 1,
+      "drawn": 1,
+      "lost": 0,
+      "goals_for": 5,
+      "goals_against": 1,
+      "goal_difference": 4,
+      "points": 4
+    },
+    {
+      "position": 7,
+      "team": "Leverkusen",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 6,
+      "goals_against": 3,
+      "goal_difference": 3,
+      "points": 3
+    },
+    {
+      "position": 8,
+      "team": "RB Leipzig",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 3,
+      "goal_difference": 1,
+      "points": 3
+    },
+    {
+      "position": 9,
+      "team": "Stuttgart",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 5,
+      "goals_against": 6,
+      "goal_difference": -1,
+      "points": 3
+    },
+    {
+      "position": 10,
+      "team": "Werder Bremen",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 5,
+      "goal_difference": -1,
+      "points": 3
+    },
+    {
+      "position": 11,
+      "team": "FC Koln",
+      "played": 2,
+      "won": 1,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 6,
+      "goal_difference": -2,
+      "points": 3
+    },
+    {
+      "position": 12,
+      "team": "Paderborn",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 0,
+      "goals_against": 1,
+      "goal_difference": -1,
+      "points": 1
+    },
+    {
+      "position": 13,
+      "team": "Ein Frankfurt",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 7,
+      "goal_difference": -3,
+      "points": 1
+    },
+    {
+      "position": 14,
+      "team": "Schalke 04",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 0,
+      "goals_against": 3,
+      "goal_difference": -3,
+      "points": 1
+    },
+    {
+      "position": 15,
+      "team": "Union Berlin",
+      "played": 2,
+      "won": 0,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 3,
+      "goals_against": 7,
+      "goal_difference": -4,
+      "points": 1
+    },
+    {
+      "position": 16,
+      "team": "Hoffenheim",
+      "played": 2,
+      "won": 0,
+      "drawn": 0,
+      "lost": 2,
+      "goals_for": 4,
+      "goals_against": 6,
+      "goal_difference": -2,
+      "points": 0
+    },
+    {
+      "position": 17,
+      "team": "M'gladbach",
+      "played": 2,
+      "won": 0,
+      "drawn": 0,
+      "lost": 2,
+      "goals_for": 3,
+      "goals_against": 7,
+      "goal_difference": -4,
+      "points": 0
+    },
+    {
+      "position": 18,
+      "team": "Hamburg",
+      "played": 2,
+      "won": 0,
+      "drawn": 0,
+      "lost": 2,
+      "goals_for": 0,
+      "goals_against": 7,
+      "goal_difference": -7,
+      "points": 0
+    }
+  ],
+  "expected": [
+    {
+      "team": "Bayern Munich",
+      "expected_points": 80.1,
+      "expected_position": 1.14,
+      "points_p05": 69.0,
+      "points_p95": 90.0,
+      "expected_goal_difference": 67.2
+    },
+    {
+      "team": "Dortmund",
+      "expected_points": 66.8,
+      "expected_position": 2.85,
+      "points_p05": 55.0,
+      "points_p95": 78.0,
+      "expected_goal_difference": 30.0
+    },
+    {
+      "team": "Leverkusen",
+      "expected_points": 61.2,
+      "expected_position": 4.08,
+      "points_p05": 48.0,
+      "points_p95": 74.0,
+      "expected_goal_difference": 25.8
+    },
+    {
+      "team": "Stuttgart",
+      "expected_points": 57.9,
+      "expected_position": 5.03,
+      "points_p05": 45.0,
+      "points_p95": 71.0,
+      "expected_goal_difference": 16.6
+    },
+    {
+      "team": "RB Leipzig",
+      "expected_points": 56.6,
+      "expected_position": 5.45,
+      "points_p05": 43.0,
+      "points_p95": 70.0,
+      "expected_goal_difference": 15.8
+    },
+    {
+      "team": "Freiburg",
+      "expected_points": 49.3,
+      "expected_position": 8.1,
+      "points_p05": 37.0,
+      "points_p95": 62.0,
+      "expected_goal_difference": 1.6
+    },
+    {
+      "team": "Mainz",
+      "expected_points": 49.3,
+      "expected_position": 8.03,
+      "points_p05": 36.0,
+      "points_p95": 62.0,
+      "expected_goal_difference": 6.3
+    },
+    {
+      "team": "Augsburg",
+      "expected_points": 46.7,
+      "expected_position": 9.2,
+      "points_p05": 34.0,
+      "points_p95": 60.0,
+      "expected_goal_difference": -0.7
+    },
+    {
+      "team": "Ein Frankfurt",
+      "expected_points": 45.5,
+      "expected_position": 9.66,
+      "points_p05": 33.0,
+      "points_p95": 58.0,
+      "expected_goal_difference": -4.3
+    },
+    {
+      "team": "Hoffenheim",
+      "expected_points": 45.2,
+      "expected_position": 9.76,
+      "points_p05": 32.0,
+      "points_p95": 58.0,
+      "expected_goal_difference": -2.0
+    },
+    {
+      "team": "Elversberg",
+      "expected_points": 40.6,
+      "expected_position": 11.92,
+      "points_p05": 28.0,
+      "points_p95": 54.0,
+      "expected_goal_difference": -16.7
+    },
+    {
+      "team": "Werder Bremen",
+      "expected_points": 40.5,
+      "expected_position": 11.92,
+      "points_p05": 28.0,
+      "points_p95": 53.0,
+      "expected_goal_difference": -13.3
+    },
+    {
+      "team": "FC Koln",
+      "expected_points": 40.3,
+      "expected_position": 12.01,
+      "points_p05": 28.0,
+      "points_p95": 53.0,
+      "expected_goal_difference": -15.2
+    },
+    {
+      "team": "M'gladbach",
+      "expected_points": 39.4,
+      "expected_position": 12.29,
+      "points_p05": 27.0,
+      "points_p95": 52.0,
+      "expected_goal_difference": -13.3
+    },
+    {
+      "team": "Union Berlin",
+      "expected_points": 38.0,
+      "expected_position": 12.98,
+      "points_p05": 26.0,
+      "points_p95": 51.0,
+      "expected_goal_difference": -16.8
+    },
+    {
+      "team": "Hamburg",
+      "expected_points": 33.7,
+      "expected_position": 14.55,
+      "points_p05": 21.0,
+      "points_p95": 48.0,
+      "expected_goal_difference": -25.1
+    },
+    {
+      "team": "Paderborn",
+      "expected_points": 29.6,
+      "expected_position": 16.01,
+      "points_p05": 19.0,
+      "points_p95": 41.0,
+      "expected_goal_difference": -26.4
+    },
+    {
+      "team": "Schalke 04",
+      "expected_points": 29.4,
+      "expected_position": 16.01,
+      "points_p05": 18.0,
+      "points_p95": 42.0,
+      "expected_goal_difference": -29.5
+    }
+  ]
+}

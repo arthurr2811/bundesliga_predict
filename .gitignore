@@ -222,3 +222,10 @@ __marimo__/
 /data/processed/*
 !/data/raw/.gitkeep
 !/data/processed/.gitkeep
+
+# IDE
+.idea/
+
+# Regenerable evaluation output (cli.py backtest --save / calibrate --save)
+/data/output/backtest_predictions.csv
+/data/output/calibration_checkpoints.csv

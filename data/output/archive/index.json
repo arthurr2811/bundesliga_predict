@@ -1,0 +1,22 @@
+[
+  {
+    "matchday": 1,
+    "as_of": "2026-08-27",
+    "path": "archive/md_01/"
+  },
+  {
+    "matchday": 2,
+    "as_of": "2026-09-03",
+    "path": "archive/md_02/"
+  },
+  {
+    "matchday": 3,
+    "as_of": "2026-09-10",
+    "path": "archive/md_03/"
+  },
+  {
+    "matchday": 4,
+    "as_of": "2026-09-17",
+    "path": "archive/md_04/"
+  }
+]
