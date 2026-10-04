@@ -260,3 +260,97 @@ def write_payload(payload: dict[str, object], directory: Path) -> list[Path]:
         )
         written.append(path)
     return written
+
+
+# --- Archiv: eingefrorene Prognosen vor jedem Spieltag ----------------------
+
+ARCHIVE_DIR = "archive"
+_PREDICTION_KEYS = (
+    "p_home",
+    "p_draw",
+    "p_away",
+    "expected_home_goals",
+    "expected_away_goals",
+    "likely_score",
+    "likely_scores",
+)
+
+
+def snapshot_dates(
+    matches: pd.DataFrame, season: str, as_of: pd.Timestamp
+) -> dict[int, pd.Timestamp]:
+    """Stichtag je bereits begonnenem Spieltag: der Tag vor dem ersten Anstoss.
+
+    Spieltag 1 ist damit die Originalprognose vor Saisonstart. Ein Spieltag, der
+    am `as_of` noch nicht begonnen hat, hat keinen Eintrag -- seine Prognose ist
+    die aktuelle.
+    """
+    frame = matches[matches["season"] == season]
+    first = pd.to_datetime(frame["date"]).groupby(frame["matchday"]).min()
+    return {
+        int(matchday): date - pd.Timedelta(days=1)
+        for matchday, date in first.items()
+        if date <= as_of
+    }
+
+
+def _snapshot_path(archive: Path, matchday: int) -> Path:
+    return archive / f"md_{matchday:02d}"
+
+
+def update_archive(
+    matches: pd.DataFrame,
+    run: ForecastRun,
+    directory: Path,
+    simulation: SimulationConfig | None = None,
+    bootstrap: BootstrapConfig | None = None,
+    rebuild: bool = False,
+    log=lambda text: None,
+) -> Path:
+    """Fehlende Spieltags-Snapshots rechnen und den Index schreiben.
+    """
+    archive = directory / ARCHIVE_DIR
+    index = []
+    for matchday, stichtag in snapshot_dates(matches, run.season, run.as_of).items():
+        target = _snapshot_path(archive, matchday)
+        if rebuild or not (target / "meta.json").exists():
+            log(f"Archiv: Spieltag {matchday}, Stichtag {stichtag.date()}")
+            snapshot = run_forecast(
+                matches, as_of=stichtag, simulation=simulation, bootstrap=bootstrap
+            )
+            write_payload(to_payload(snapshot), target)
+        index.append(
+            {
+                "matchday": matchday,
+                "as_of": stichtag.date().isoformat(),
+                "path": f"{ARCHIVE_DIR}/{target.name}/",
+            }
+        )
+    archive.mkdir(parents=True, exist_ok=True)
+    path = archive / "index.json"
+    path.write_text(json.dumps(index, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+def attach_pre_match_predictions(payload: dict[str, object], directory: Path) -> None:
+    """Gespielten Partien die Vorhersage von vor ihrem Spieltag mitgeben.
+    """
+    archive = directory / ARCHIVE_DIR
+    cache: dict[int, dict[tuple[str, str], dict]] = {}
+    for row in payload["matches"]:
+        if not row["finished"]:
+            continue
+        matchday = row["matchday"]
+        if matchday not in cache:
+            path = _snapshot_path(archive, matchday) / "matches.json"
+            cache[matchday] = (
+                {
+                    (m["home_team"], m["away_team"]): m
+                    for m in json.loads(path.read_text(encoding="utf-8"))
+                }
+                if path.exists()
+                else {}
+            )
+        before = cache[matchday].get((row["home_team"], row["away_team"]))
+        if before and "p_home" in before:
+            row |= {key: before[key] for key in _PREDICTION_KEYS}

@@ -91,6 +91,29 @@ tr.zone-rel td.pos::before { background: var(--rel); }
 
 td.hoverable { text-decoration: underline dotted var(--muted); }
 
+.snap-row { margin: 0.6rem 0 0; font-size: 0.9rem; }
+.snap-row select {
+  font: inherit;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.snap-row.archived select { border-color: #93a7ff; background: #eef2ff; }
+
+/* Tipp wie im Tippspiel: exakt / richtige Tendenz / daneben */
+:root { --hit: #7fcf7a; --tend: #d9f2d4; --miss: #fde0e0; }
+td.hit { background: var(--hit); }
+td.tend { background: var(--tend); }
+td.miss { background: var(--miss); }
+.legend-tip { margin: 0.5rem 0 0; color: var(--muted); }
+.legend-tip .key { margin-left: 0; }
+.key.hit { background: var(--hit); border: 1px solid #5fb85a; }
+.key.tend { background: var(--tend); border: 1px solid #a9d6a0; }
+.key.miss { background: var(--miss); border: 1px solid #eaa9a9; }
+td.played { font-weight: 600; }
+
 .bar {
   display: inline-block;
   height: 0.55rem;
@@ -117,3 +140,16 @@ td.hoverable { text-decoration: underline dotted var(--muted); }
 .tip .sub { color: var(--muted); margin: 0.5rem 0 0.2rem; }
 
 .err { color: #b00020; }
+
+.notice {
+  margin: 0.5rem 0;
+  padding: 0.7rem 0.9rem;
+  background: var(--row);
+  border-left: 4px solid #93a7ff;
+  border-radius: 4px;
+  color: var(--muted);
+}
+
+.tip th { text-align: left; padding: 0 0.6rem 0.2rem 0; }
+.tip td.hit, .tip td.tend, .tip td.miss { padding: 0.1rem 0.5rem; border-radius: 3px; }
+.tip td.num { text-align: right; }

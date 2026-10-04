@@ -9,7 +9,12 @@ const state = {
   probs: new Map(),
   matchdays: [],
   mdIndex: 0,
+  // Tatsaechliche Ergebnisse aus dem aktuellen Lauf, gueltig fuer jede Ansicht.
+  actual: new Map(),
+  snapshots: [],
 };
+
+const matchKey = (m) => m.home_team + "|" + m.away_team;
 
 /**
  * Weder 0 % noch 100 % anzeigen
@@ -160,24 +165,21 @@ function showTip(row, p, event) {
   moveTip(event);
 }
 
-/** Die drei wahrscheinlichsten Einzelergebnisse einer Partie. */
-function showScoreTip(match, event) {
-  const rank = ["1.", "2.", "3."];
+/**
+ * Die drei wahrscheinlichsten Einzelergebnisse einer Partie.
+ */
+function showScoreTip(match, result, event) {
   let html =
-    "<h3>" + match.home_team + " &ndash; " + match.away_team + "</h3><table>";
-  match.likely_scores.forEach(([home, away, probability], i) => {
+    "<h3>" + match.home_team + " &ndash; " + match.away_team + "</h3>" +
+    "<table><thead><tr><th>Ergebnis</th><th>Wahrscheinlichkeit</th></tr></thead><tbody>";
+  (match.likely_scores || []).forEach(([home, away, probability]) => {
+    const cls = result ? gradeOf([home, away], result) : "";
     html +=
-      "<tr><td>" +
-      (rank[i] || i + 1 + ".") +
-      "</td><td>" +
-      home +
-      ":" +
-      away +
-      "</td><td>" +
-      pct(probability) +
-      "</td></tr>";
+      "<tr><td class='" + cls + "'>" + home + ":" + away +
+      "</td><td class='num'>" + pct(probability) + "</td></tr>";
   });
-  html += "</table>";
+  html += "</tbody></table>";
+  if (result) html += LEGEND_HTML;
   tip.innerHTML = html;
   tip.hidden = false;
   moveTip(event);
@@ -205,8 +207,8 @@ function hideTip() {
 // --- Aktuelle Tabelle ------------------------------------------------------
 
 function renderCurrent() {
+  document.getElementById("current-section").hidden = !state.meta.matches_played;
   if (!state.meta.matches_played) return;
-  document.getElementById("current-section").hidden = false;
   const tbody = document.querySelector("#table-current tbody");
   tbody.innerHTML = "";
 
@@ -251,7 +253,28 @@ function renderMatches() {
   const tbody = document.querySelector("#table-matches tbody");
   tbody.innerHTML = "";
 
-  for (const m of state.matches.filter((m) => m.matchday === md)) {
+  // Eine Prognose rechnet nur nach vorn: liegt der Spieltag komplett vor dem
+  // ghewählten Stand, gibt es hier nichts zu zeigen
+  const games = state.matches.filter((m) => m.matchday === md);
+  const before = games.length > 0 && games.every((m) => m.finished);
+  const notice = document.getElementById("matches-notice");
+  notice.hidden = !before;
+  document.getElementById("table-matches").hidden = before;
+  if (before) {
+    notice.textContent =
+      "Du hast die Prognose vom Stand " +
+      dateLabel(state.meta.as_of) +
+      " ausgewählt. Der " +
+      md +
+      ". Spieltag liegt davor, deshalb gibt es hier keine Prognose für ihn. " +
+      "Wähle oben einen früheren Prognose-Stand, um die damalige Prognose " +
+      "mit den tatsächlichen Ergebnissen zu vergleichen.";
+    return;
+  }
+
+  for (const m of games) {
+    const hasPrediction = m.p_home !== undefined;
+    const result = state.actual.get(matchKey(m));
     const tr = document.createElement("tr");
     tr.appendChild(cell(dateLabel(m.date)));
     tr.appendChild(cell(m.home_team));
@@ -259,23 +282,64 @@ function renderMatches() {
     tr.appendChild(cell(pct(m.p_home, 0), "num"));
     tr.appendChild(cell(pct(m.p_draw, 0), "num"));
     tr.appendChild(cell(pct(m.p_away, 0), "num"));
+
     tr.appendChild(
       cell(
-        num(m.expected_home_goals) + " : " + num(m.expected_away_goals),
+        hasPrediction
+          ? num(m.expected_home_goals) + " : " + num(m.expected_away_goals)
+          : "-",
         "num"
       )
     );
-    const score = m.likely_score ? m.likely_score.join(":") : "-";
-    const tipCell = cell(m.finished ? score + " (gespielt)" : score, "num");
+
+    const tipCell = cell(m.likely_score ? m.likely_score.join(":") : "-", "num");
+    if (m.likely_score) grade(tipCell, m.likely_score, result);
     if (m.likely_scores && m.likely_scores.length > 1) {
-      tipCell.classList.add("hoverable");
-      tipCell.addEventListener("mouseenter", (e) => showScoreTip(m, e));
-      tipCell.addEventListener("mousemove", moveTip);
-      tipCell.addEventListener("mouseleave", hideTip);
+      hover(tipCell, (e) => showScoreTip(m, result, e));
     }
     tr.appendChild(tipCell);
+    tr.appendChild(resultCell(m));
     tbody.appendChild(tr);
   }
+}
+
+function hover(td, show) {
+  td.classList.add("hoverable");
+  td.addEventListener("mouseenter", show);
+  td.addEventListener("mousemove", moveTip);
+  td.addEventListener("mouseleave", hideTip);
+}
+
+/** 1, 0 oder 2: Ausgang (Heimsieg, Remis, Auswaertssieg) eines Ergebnisses. */
+const outcomeOf = (home, away) => (home > away ? 1 : home < away ? 2 : 0);
+
+/**
+ * Wertung wie im Tippspiel
+ */
+function gradeOf(predicted, result) {
+  if (predicted[0] === result.home_goals && predicted[1] === result.away_goals) {
+    return "hit";
+  }
+  return outcomeOf(predicted[0], predicted[1]) ===
+    outcomeOf(result.home_goals, result.away_goals)
+    ? "tend"
+    : "miss";
+}
+
+function grade(td, predicted, result) {
+  if (result) td.classList.add(gradeOf(predicted, result));
+}
+
+const LEGEND_HTML =
+  '<p class="legend-tip">' +
+  '<span class="key hit"></span> exakt &nbsp;' +
+  '<span class="key tend"></span> Tendenz (1/X/2) &nbsp;' +
+  '<span class="key miss"></span> daneben</p>';
+
+function resultCell(m) {
+  const result = state.actual.get(matchKey(m));
+  if (!result) return cell("-", "num");
+  return cell(result.home_goals + ":" + result.away_goals, "num played");
 }
 
 function setMatchday(index) {
@@ -309,46 +373,105 @@ function renderMeta() {
     " Simulationen";
 }
 
-async function loadJson(name) {
-  const res = await fetch(DATA + name);
-  if (!res.ok) throw new Error(name + ": HTTP " + res.status);
+/** `folder` ist "" für den aktuellen Stand, sonst ein Archivordner. */
+async function loadJson(folder, name) {
+  const res = await fetch(DATA + folder + name);
+  if (!res.ok) throw new Error(folder + name + ": HTTP " + res.status);
   return res.json();
+}
+
+async function loadSnapshot(folder) {
+  const [meta, matches, table, probs] = await Promise.all([
+    loadJson(folder, "meta.json"),
+    loadJson(folder, "matches.json"),
+    loadJson(folder, "table.json"),
+    loadJson(folder, "probabilities.json"),
+  ]);
+  return { meta, matches, table, probs };
+}
+
+function showSnapshot(snapshot, startMatchday) {
+  state.meta = snapshot.meta;
+  state.matches = snapshot.matches;
+  state.table = snapshot.table;
+  state.probs = new Map(snapshot.probs.map((p) => [p.team, p]));
+  state.matchdays = [...new Set(state.matches.map((m) => m.matchday))].sort(
+    (a, b) => a - b
+  );
+
+  // Aktuell: erster Spieltag mit offenen Spielen. Archiv: der Spieltag des Stands.
+  const target =
+    startMatchday ?? (state.matches.find((m) => !m.finished) || {}).matchday;
+  state.mdIndex = Math.max(state.matchdays.indexOf(target), 0);
+
+  renderMeta();
+  renderExpected();
+  renderCurrent();
+  setMatchday(state.mdIndex);
+}
+
+function snapshotLabel(s) {
+  const stand = dateLabel(s.as_of);
+  return s.matchday === 1
+    ? "Originalprognose (vor Saisonstart, " + stand + ")"
+    : "Vor dem " + s.matchday + ". Spieltag (" + stand + ")";
+}
+
+function setupSnapshotSelect(current) {
+  const select = document.getElementById("snap-select");
+  const row = document.getElementById("snap-row");
+  if (!state.snapshots.length) return;
+
+  select.innerHTML = "";
+  const now = document.createElement("option");
+  now.value = "";
+  now.textContent = "Aktuell (Stand " + dateLabel(current.meta.as_of) + ")";
+  select.appendChild(now);
+  // Neueste zuerst.
+  for (const s of state.snapshots.slice().reverse()) {
+    const opt = document.createElement("option");
+    opt.value = s.path;
+    opt.textContent = snapshotLabel(s);
+    select.appendChild(opt);
+  }
+  row.hidden = false;
+
+  select.addEventListener("change", async () => {
+    try {
+      const path = select.value;
+      row.classList.toggle("archived", path !== "");
+      if (!path) return showSnapshot(current);
+      const entry = state.snapshots.find((s) => s.path === path);
+      showSnapshot(await loadSnapshot(path), entry.matchday);
+    } catch (err) {
+      showError(err);
+    }
+  });
+}
+
+function showError(err) {
+  document.getElementById("meta").innerHTML =
+    '<span class="err">Daten konnten nicht geladen werden (' +
+    err.message +
+    "). Seite ueber einen HTTP-Server oeffnen, nicht per file://.</span>";
 }
 
 async function init() {
   try {
-    const [meta, matches, table, probs] = await Promise.all([
-      loadJson("meta.json"),
-      loadJson("matches.json"),
-      loadJson("table.json"),
-      loadJson("probabilities.json"),
-    ]);
-    state.meta = meta;
-    state.matches = matches;
-    state.table = table;
-    state.probs = new Map(probs.map((p) => [p.team, p]));
-    state.matchdays = [...new Set(matches.map((m) => m.matchday))].sort(
-      (a, b) => a - b
+    const current = await loadSnapshot("");
+    state.actual = new Map(
+      current.matches.filter((m) => m.finished).map((m) => [matchKey(m), m])
     );
-
-    // Auf den ersten Spieltag mit offenen Spielen springen.
-    const firstOpen = matches.find((m) => !m.finished);
-    if (firstOpen) {
-      state.mdIndex = Math.max(
-        state.matchdays.indexOf(firstOpen.matchday),
-        0
-      );
+    // Ohne Archiv (noch nie gerechnet) bleibt es bei der aktuellen Ansicht.
+    try {
+      state.snapshots = await loadJson("archive/", "index.json");
+    } catch (_) {
+      state.snapshots = [];
     }
-
-    renderMeta();
-    renderExpected();
-    renderCurrent();
-    setMatchday(state.mdIndex);
+    showSnapshot(current);
+    setupSnapshotSelect(current);
   } catch (err) {
-    document.getElementById("meta").innerHTML =
-      '<span class="err">Daten konnten nicht geladen werden (' +
-      err.message +
-      "). Seite ueber einen HTTP-Server oeffnen, nicht per file://.</span>";
+    showError(err);
   }
 }
 

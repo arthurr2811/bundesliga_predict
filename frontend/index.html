@@ -10,6 +10,10 @@
 <header>
   <h1>Bundesliga-Vorhersage</h1>
   <p id="meta" class="meta">lade ...</p>
+  <p id="snap-row" class="snap-row" hidden>
+    <label for="snap-select">Prognose von:</label>
+    <select id="snap-select"></select>
+  </p>
 </header>
 
 <main>
@@ -62,12 +66,13 @@
       <select id="md-select"></select>
       <button id="md-next" type="button">&raquo;</button>
     </div>
+    <p id="matches-notice" class="notice" hidden></p>
     <table id="table-matches">
       <thead>
         <tr>
           <th>Datum</th><th>Heim</th><th>Gast</th>
           <th class="num">1</th><th class="num">X</th><th class="num">2</th>
-          <th class="num">xG</th><th class="num">Tipp</th>
+          <th class="num">xG</th><th class="num">Tipp</th><th class="num">Ergebnis</th>
         </tr>
       </thead>
       <tbody></tbody>

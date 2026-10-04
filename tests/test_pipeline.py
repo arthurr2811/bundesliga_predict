@@ -132,3 +132,53 @@ def test_write_payload_schreibt_lesbares_json(matches, tmp_path):
     }
     for pfad in geschrieben:
         assert json.loads(pfad.read_text(encoding="utf-8"))
+
+
+def test_snapshot_stichtag_ist_der_tag_vor_dem_ersten_anstoss(matches):
+    saison = sorted(matches["season"].unique())[-1]
+    frame = matches[matches["season"] == saison]
+    termine = pd.to_datetime(frame["date"])
+    spieltag = int(frame["matchday"].iloc[0])
+    erster = termine[frame["matchday"] == spieltag].min()
+
+    # Am ersten Anstosstag selbst ist genau dieser Spieltag begonnen.
+    stichtage = pipeline.snapshot_dates(matches, saison, erster)
+    assert stichtage == {spieltag: erster - pd.Timedelta(days=1)}
+
+    # Spaetere Spieltage haben vor ihrem Beginn keinen Snapshot.
+    ende = termine.max()
+    alle = pipeline.snapshot_dates(matches, saison, ende)
+    assert set(alle) == set(frame["matchday"].astype(int))
+
+
+def test_gespielte_partien_bekommen_die_vorhersage_von_vor_dem_spieltag(tmp_path):
+    spiel = {"matchday": 1, "home_team": "A", "away_team": "B"}
+    vorher = {
+        **spiel,
+        "finished": False,
+        "p_home": 0.5,
+        "p_draw": 0.3,
+        "p_away": 0.2,
+        "expected_home_goals": 1.6,
+        "expected_away_goals": 1.1,
+        "likely_score": [1, 1],
+        "likely_scores": [[1, 1, 0.12]],
+    }
+    ordner = tmp_path / pipeline.ARCHIVE_DIR / "md_01"
+    ordner.mkdir(parents=True)
+    (ordner / "matches.json").write_text(json.dumps([vorher]), encoding="utf-8")
+
+    payload = {
+        "matches": [
+            {**spiel, "finished": True, "home_goals": 2, "away_goals": 0},
+            # Offene Partie und Spieltag ohne Snapshot bleiben unberuehrt.
+            {**spiel, "home_team": "C", "finished": False},
+            {"matchday": 2, "home_team": "A", "away_team": "B", "finished": True},
+        ]
+    }
+    pipeline.attach_pre_match_predictions(payload, tmp_path)
+
+    gespielt, offen, ohne_snapshot = payload["matches"]
+    assert gespielt["p_home"] == 0.5 and gespielt["home_goals"] == 2
+    assert "p_home" not in offen
+    assert "p_home" not in ohne_snapshot

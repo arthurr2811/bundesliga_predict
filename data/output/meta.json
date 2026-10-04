@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-23T20:39:44+02:00",
-  "as_of": "2026-08-23",
+  "generated_at": "2026-10-04T13:25:43+02:00",
+  "as_of": "2026-10-04",
   "season": "2026/27",
-  "matches_played": 0,
-  "matches_open": 306,
+  "matches_played": 36,
+  "matches_open": 270,
   "n_simulations": 10000,
   "n_bootstrap": 100,
   "seed": 20262027,
   "model": {
-    "home_advantage": 0.1811,
-    "intercept": 0.2784,
-    "rho": -0.0656,
-    "fitted_through": "2026-08-23"
+    "home_advantage": 0.2331,
+    "intercept": 0.2479,
+    "rho": -0.0839,
+    "fitted_through": "2026-10-04"
   },
   "place_rules": {
     "champion": [

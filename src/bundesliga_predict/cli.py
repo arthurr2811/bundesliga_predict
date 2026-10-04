@@ -144,15 +144,28 @@ def command_calibrate(args: argparse.Namespace) -> None:
 
 
 def command_simulate(args: argparse.Namespace) -> None:
+    matches = _load_matches()
+    simulation = SimulationConfig(n_simulations=args.simulations, seed=args.seed)
     run = pipeline.run_forecast(
-        _load_matches(),
+        matches,
         as_of=args.as_of,
-        simulation=SimulationConfig(
-            n_simulations=args.simulations, seed=args.seed
-        ),
+        simulation=simulation,
         bootstrap=_bootstrap(args),
     )
-    geschrieben = pipeline.write_payload(pipeline.to_payload(run), Path(args.output))
+    directory = Path(args.output)
+    payload = pipeline.to_payload(run)
+    if not args.no_archive:
+        pipeline.update_archive(
+            matches,
+            run,
+            directory,
+            simulation=simulation,
+            bootstrap=_bootstrap(args),
+            rebuild=args.rebuild_archive,
+            log=print,
+        )
+        pipeline.attach_pre_match_predictions(payload, directory)
+    geschrieben = pipeline.write_payload(payload, directory)
 
     offen = int((~run.matches["finished"]).sum())
     print(
@@ -325,6 +338,16 @@ def build_parser() -> argparse.ArgumentParser:
             metavar="N",
             help="Parameter-Ziehungen fuer die Simulation "
             "(0 = ohne; kostet je Ziehung einen Fit)",
+        )
+        befehl.add_argument(
+            "--no-archive",
+            action="store_true",
+            help="Keine Spieltags-Snapshots rechnen (Frontend zeigt dann nur den aktuellen Stand)",
+        )
+        befehl.add_argument(
+            "--rebuild-archive",
+            action="store_true",
+            help="Vorhandene Snapshots neu rechnen (nach Aenderung an Modell oder Parametern)",
         )
         befehl.add_argument("--output", default=str(OUTPUT_DIR), metavar="VERZEICHNIS")
         befehl.set_defaults(func=command_simulate if name == "simulate" else command_update)
