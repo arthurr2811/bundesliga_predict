@@ -163,7 +163,8 @@ wahrscheinlichste Ergebnisse), `table.json`, `probabilities.json`.
 ## Frontend
 
 `frontend/`: statische Vanilla-JS-Seite, liest nur die vier JSON-Dateien
-(kein Server/Build, deploybar via GitHub Pages). Erwartete Tabelle oben,
+(kein Server/Build). Öffentlich auf GitHub Pages, täglich per GitHub Action
+aktualisiert (siehe `deploymentplan.md`). Erwartete Tabelle oben,
 Spiele mit Spieltag-Navigation darunter. Zwei Detailentscheidungen: nie 0%/
 100% anzeigen (Simulation hat nur 10.000 Läufe); "wahrscheinlichstes Ergebnis"
 ≠ "wahrscheinlichster Ausgang" (bei 202/306 Partien ist 1:1 das Modus-Ergebnis,
@@ -229,6 +230,9 @@ sich sichtbar (Bayern Meister 93%→90%, Elversberg Abstieg 94%→76%).
     statt 90% (75%→94% über die Saison).
 11. Parameter-Unsicherheit (Bootstrap): Abdeckung vor Saisonstart 75.0%→84.0%,
     gesamt 84.9%→87.7%.
+12. Deployment: GitHub Pages + tägliche GitHub Action. Historie ohne Quoten
+    als `historic.csv` committet, damit CI ohne Roh-CSVs rechnet; nur das
+    Spieltags-Archiv wird versioniert.
 
 ## Quellen / Inspiration
 

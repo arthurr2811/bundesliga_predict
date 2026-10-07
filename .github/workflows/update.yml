@@ -1,0 +1,69 @@
+name: Prognose aktualisieren
+
+on:
+  schedule:
+    # Taeglich 06:00 UTC: Ergebnisse vom Vorabend sind dann in OpenLigaDB.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write # neue Archiv-Snapshots zurueckpushen
+  pages: write
+  id-token: write
+
+# Nie zwei Laeufe gleichzeitig: beide wuerden dieselben Snapshots pushen.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Abhaengigkeiten installieren
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Daten holen, Prognose rechnen, Archiv ergaenzen
+        run: python -m bundesliga_predict.cli update
+
+      - name: Neue Archiv-Snapshots committen
+        run: |
+          git add data/output/archive
+          if git diff --cached --quiet; then
+            echo "Kein neuer Spieltag, nichts zu committen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Archiv: Snapshot $(date -u +%Y-%m-%d)"
+          git pull --rebase
+          git push
+
+      - name: Seite zusammenbauen
+        run: python -m bundesliga_predict.build_site _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

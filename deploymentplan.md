@@ -1,67 +1,61 @@
-# Deployment-Plan
+# Deployment
 
 Ziel: Frontend öffentlich auf GitHub Pages, Ergebnisse und Prognose werden
-täglich automatisch aktualisiert. **Status: geplant, noch nichts umgesetzt.**
+täglich automatisch aktualisiert. **Status: umgesetzt** (Oktober 2026).
+
+URL: https://arthurr2811.github.io/bundesliga_predict/ (von arthurraffel.dev
+verlinkt, dieses Repo bleibt eigenständig).
 
 ## Ansatz
 
 GitHub Actions statt lokalem Cron: läuft kostenlos und unabhängig vom eigenen
-Rechner. Ein Lauf (`cli.py update`) dauert unter zwei Minuten (Fit + Bootstrap
-~30 s, bei neuem Spieltag zusätzlich ein Snapshot ~30 s).
+Rechner. Ein Lauf (`cli.py update`) dauert lokal ~40 s (Fit + Bootstrap), bei
+neuem Spieltag zusätzlich ~30 s je Snapshot.
 
-## Ablauf des täglichen Workflows
+## Ablauf (`.github/workflows/update.yml`)
 
-1. Auslöser: `schedule` (täglich, ca. 06:00 UTC) plus `workflow_dispatch`
-   zum manuellen Starten.
-2. Repo auschecken, Python einrichten, `pip install -r requirements.txt` und
-   `pip install -e .`.
-3. `python -m bundesliga_predict.cli update`: Ergebnisse von OpenLigaDB holen,
-   Prognose neu rechnen, bei neu begonnenem Spieltag den Snapshot unter
-   `data/output/archive/md_XX/` anlegen.
-4. Site zusammenbauen: `frontend/` und `data/output/` in ein gemeinsames
-   Verzeichnis kopieren (das Frontend liest `../data/output/`, Pages liefert
-   nur einen Ordner aus). Alternativ den Pfad `DATA` in `app.js` anpassen.
-5. Auf GitHub Pages deployen (`actions/deploy-pages`).
-6. Nur wenn ein neuer Snapshot entstanden ist: `data/output/archive/` als Commit
-   zurück ins Repo pushen. Das passiert höchstens einmal pro Spieltag.
+1. Auslöser: `schedule` (täglich 06:00 UTC) plus `workflow_dispatch`.
+2. Checkout, Python 3.13, `pip install -r requirements.txt` und `pip install -e .`.
+3. `pytest -q`: Ein kaputter Stand wird nicht deployt.
+4. `python -m bundesliga_predict.cli update`.
+5. Geänderte Dateien unter `data/output/archive/` committet und pusht der Bot
+   (`pull --rebase` davor). Ohne neuen Spieltag ist der Diff leer und es
+   entsteht kein Commit.
+6. `python -m bundesliga_predict.build_site _site`: Frontend und Daten in einen
+   Ordner, `DATA` in `app.js` wird von `../data/output/` auf `data/` umgeschrieben.
+7. `actions/upload-pages-artifact` und `actions/deploy-pages`.
+
+`concurrency: pages` verhindert parallele Läufe. Die Schreibrechte setzt der
+Workflow selbst (`permissions:`), in den Repo-Settings ist dafür nichts nötig.
 
 ## Was persistiert wird
 
-- **Im Repo (committet):** `data/output/archive/` – die eingefrorenen
-  Prognosen sind nicht reproduzierbar, falls sich Modell oder Daten ändern.
-- **Nicht mehr im Repo:** `meta.json`, `matches.json`, `table.json`,
-  `probabilities.json` in `data/output/`. Sie werden im Workflow gebaut und nur
-  deployt, sonst entsteht täglich ein Diff mit tausenden Zeilen. Dafür in
-  `.gitignore` aufnehmen und aus dem Index entfernen.
-  (Alternative, falls einfacher gewünscht: der Bot committet täglich alles.)
+- **Im Repo:** `data/output/archive/` (eingefrorene Prognosen, nicht
+  reproduzierbar, falls sich Modell oder Daten ändern) und
+  `data/processed/historic.csv` (abgeschlossene Saisons ohne Quoten).
+- **Nicht im Repo:** `meta.json`, `matches.json`, `table.json`,
+  `probabilities.json` in `data/output/` (per `.gitignore`). Werden im Workflow
+  gebaut und nur deployt.
 
-## Nötige Codeänderungen
+## Daten in CI
 
-- **Rohdaten fehlen in CI.** `build_dataset` liest `data/raw/historic_data/`
-  (per `.gitignore` draußen und das soll so bleiben). Lösung: einmal lokal
-  `data/processed/historic.csv` erzeugen (nur Datum, Teams, Tore, Spieltag,
-  keine Quoten) und committieren; `build_dataset` nutzt sie, wenn die Roh-CSVs
-  fehlen. Das gilt auch für den Spieltags-Cache `data/raw/matchdays.csv`, dessen
-  Inhalt dann in `historic.csv` steckt.
-- **`CURRENT_SEASON = 2026`** in `build_dataset.py` ist fest eincodiert und
-  muss zum Saisonwechsel manuell erhöht werden (oder aus dem Datum abgeleitet
-  werden).
-- **`.github/workflows/update.yml`** neu anlegen (Ablauf oben).
-- **`README.md`** neu anlegen: Projektidee, Setup, Befehle, Hinweis, woher die
-  Rohdaten für Backtest/Tuning kommen (football-data.co.uk, Dateinamen
-  `D1_<saison>.csv`).
+`build_dataset` nimmt die Roh-CSVs aus `data/raw/historic_data/`, wenn sie da
+sind, sonst `historic.csv`. Die laufende Saison ergibt sich aus dem Datum (ab
+Juli die neue). Alle Saisons zwischen der letzten historischen und der
+laufenden kommen von OpenLigaDB, damit entsteht nach einem Saisonwechsel keine
+Lücke, auch wenn `historic.csv` noch nicht nachgezogen ist.
 
-## Einmalig in GitHub einzustellen
+## Einmalig in GitHub eingestellt
 
 - Settings → Pages → Source: **GitHub Actions**.
-- Settings → Actions → General → Workflow permissions: **Read and write**
-  (nötig, damit der Bot `archive/` zurückpushen darf).
 
-## Offene Punkte
+## Offen
 
-- Entscheidung bestätigen: `historic.csv` (nur Spieldaten, keine Quoten) ins
-  öffentliche Repo, Roh-CSVs bleiben draußen.
-- Entscheidung bestätigen: JSONs nicht mehr tracken, nur das Archiv.
-- Optional: Lauf abbrechen, wenn sich seit gestern nichts geändert hat.
-- Zum Saisonende / Saisonwechsel prüfen, wie sich Archiv und Spieltagsauswahl
-  verhalten (Archiv gilt bisher nur für die laufende Saison).
+- Optional: Lauf abbrechen, wenn sich seit gestern nichts geändert hat
+  (spart nur Rechenzeit, Deploy ist idempotent).
+- Zum Saisonwechsel prüfen, wie sich Archiv und Spieltagsauswahl verhalten:
+  Das Archiv gilt nur für die laufende Saison, `md_XX` der Vorsaison würden mit
+  der neuen kollidieren. Spätestens im Juli 2027 lösen (z. B. Archiv je Saison
+  in Unterordner).
+- Geplante Workflows werden nach 60 Tagen ohne Commit deaktiviert
+  (Sommerpause). Dann in Actions wieder einschalten.

@@ -222,6 +222,8 @@ __marimo__/
 /data/processed/*
 !/data/raw/.gitkeep
 !/data/processed/.gitkeep
+# Historie ohne Quoten: Datengrundlage fuer GitHub Actions
+!/data/processed/historic.csv
 
 # IDE
 .idea/
@@ -229,3 +231,12 @@ __marimo__/
 # Regenerable evaluation output (cli.py backtest --save / calibrate --save)
 /data/output/backtest_predictions.csv
 /data/output/calibration_checkpoints.csv
+
+# Aktuelle Prognose: wird im Workflow gebaut und nur deployt (Archiv bleibt im Repo)
+/data/output/meta.json
+/data/output/matches.json
+/data/output/table.json
+/data/output/probabilities.json
+
+# Lokal zusammengebaute Pages-Site
+/_site/
