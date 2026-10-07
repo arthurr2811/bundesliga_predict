@@ -38,3 +38,15 @@ def test_unbekannter_name_faellt_auf():
 def test_normalisierung_trifft_die_kanonische_form():
     assert normalize_openligadb_team("VfL Wolfsburg") == "Wolfsburg"
     assert normalize_openligadb_team("Borussia Mönchengladbach") == "M'gladbach"
+
+
+def test_frontend_hat_fuer_jedes_team_einen_anzeigenamen():
+    import re
+    from pathlib import Path
+
+    app = (Path(__file__).resolve().parents[1] / "frontend" / "app.js").read_text(
+        encoding="utf-8"
+    )
+    block = re.search(r"const TEAM_NAMES = \{(.*?)\};", app, re.S).group(1)
+    anzeige = set(re.findall(r'^\s*"([^"]+)":', block, re.M))
+    assert CANONICAL_TEAMS <= anzeige, f"fehlt in app.js: {sorted(CANONICAL_TEAMS - anzeige)}"

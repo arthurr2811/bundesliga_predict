@@ -17,6 +17,48 @@ const state = {
 const matchKey = (m) => m.home_team + "|" + m.away_team;
 
 /**
+ * Anzeigenamen. Die Daten nutzen die kanonischen Namen von
+ * football-data.co.uk (team_mapping.py); uebersetzt wird nur fuer die Anzeige,
+ * damit Abgleich und Archiv unberuehrt bleiben. tests/test_team_mapping.py
+ * prueft, dass jedes kanonische Team hier steht.
+ */
+const TEAM_NAMES = {
+  "Augsburg": "FC Augsburg",
+  "Bayern Munich": "Bayern München",
+  "Bielefeld": "Arminia Bielefeld",
+  "Bochum": "VfL Bochum",
+  "Darmstadt": "Darmstadt 98",
+  "Dortmund": "Borussia Dortmund",
+  "Ein Frankfurt": "Eintracht Frankfurt",
+  "Elversberg": "SV Elversberg",
+  "FC Koln": "1. FC Köln",
+  "Fortuna Dusseldorf": "Fortuna Düsseldorf",
+  "Freiburg": "SC Freiburg",
+  "Greuther Furth": "Greuther Fürth",
+  "Hamburg": "Hamburger SV",
+  "Hannover": "Hannover 96",
+  "Heidenheim": "1. FC Heidenheim",
+  "Hertha": "Hertha BSC",
+  "Hoffenheim": "TSG Hoffenheim",
+  "Holstein Kiel": "Holstein Kiel",
+  "Ingolstadt": "FC Ingolstadt",
+  "Leverkusen": "Bayer Leverkusen",
+  "M'gladbach": "Bor. Mönchengladbach",
+  "Mainz": "Mainz 05",
+  "Nurnberg": "1. FC Nürnberg",
+  "Paderborn": "SC Paderborn",
+  "RB Leipzig": "RB Leipzig",
+  "Schalke 04": "FC Schalke 04",
+  "St Pauli": "FC St. Pauli",
+  "Stuttgart": "VfB Stuttgart",
+  "Union Berlin": "Union Berlin",
+  "Werder Bremen": "Werder Bremen",
+  "Wolfsburg": "VfL Wolfsburg",
+};
+
+const teamName = (team) => TEAM_NAMES[team] || team;
+
+/**
  * Weder 0 % noch 100 % anzeigen
  */
 function pct(x, digits = 1) {
@@ -84,7 +126,7 @@ function renderExpected() {
     if (zone) tr.className = "zone-" + zone;
 
     tr.appendChild(cell(String(position), "num pos"));
-    tr.appendChild(cell(row.team));
+    tr.appendChild(cell(teamName(row.team)));
     tr.appendChild(cell(num(row.expected_points), "num"));
     tr.appendChild(cell(String(row.points_p05), "num"));
     tr.appendChild(cell(String(row.points_p95), "num"));
@@ -114,7 +156,7 @@ function showTip(row, p, event) {
     ["Abstieg", p.relegated],
   ];
 
-  let html = "<h3>" + row.team + "</h3><table>";
+  let html = "<h3>" + teamName(row.team) + "</h3><table>";
   html +=
     "<tr><td>Punkte (&#216;)</td><td>" +
     num(row.expected_points) +
@@ -170,7 +212,7 @@ function showTip(row, p, event) {
  */
 function showScoreTip(match, result, event) {
   let html =
-    "<h3>" + match.home_team + " &ndash; " + match.away_team + "</h3>" +
+    "<h3>" + teamName(match.home_team) + " &ndash; " + teamName(match.away_team) + "</h3>" +
     "<table><thead><tr><th>Ergebnis</th><th>Wahrscheinlichkeit</th></tr></thead><tbody>";
   (match.likely_scores || []).forEach(([home, away, probability]) => {
     const cls = result ? gradeOf([home, away], result) : "";
@@ -217,7 +259,7 @@ function renderCurrent() {
     const zone = zoneFor(row.position);
     if (zone) tr.className = "zone-" + zone;
     tr.appendChild(cell(String(row.position), "num pos"));
-    tr.appendChild(cell(row.team));
+    tr.appendChild(cell(teamName(row.team)));
     tr.appendChild(cell(String(row.played), "num"));
     tr.appendChild(cell(String(row.won), "num"));
     tr.appendChild(cell(String(row.drawn), "num"));
@@ -277,8 +319,8 @@ function renderMatches() {
     const result = state.actual.get(matchKey(m));
     const tr = document.createElement("tr");
     tr.appendChild(cell(dateLabel(m.date)));
-    tr.appendChild(cell(m.home_team));
-    tr.appendChild(cell(m.away_team));
+    tr.appendChild(cell(teamName(m.home_team)));
+    tr.appendChild(cell(teamName(m.away_team)));
     tr.appendChild(cell(pct(m.p_home, 0), "num"));
     tr.appendChild(cell(pct(m.p_draw, 0), "num"));
     tr.appendChild(cell(pct(m.p_away, 0), "num"));
