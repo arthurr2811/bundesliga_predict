@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-10-16T10:55:00+00:00",
+  "as_of": "2026-10-15",
+  "season": "2026/27",
+  "matches_played": 45,
+  "matches_open": 261,
+  "n_simulations": 10000,
+  "n_bootstrap": 100,
+  "seed": 20262027,
+  "model": {
+    "home_advantage": 0.2379,
+    "intercept": 0.2439,
+    "rho": -0.0733,
+    "fitted_through": "2026-10-15"
+  },
+  "place_rules": {
+    "champion": [
+      1,
+      1
+    ],
+    "champions_league": [
+      1,
+      4
+    ],
+    "europa_league": [
+      5,
+      5
+    ],
+    "conference_league": [
+      6,
+      6
+    ],
+    "relegation_playoff": [
+      16,
+      16
+    ],
+    "relegated": [
+      17,
+      18
+    ]
+  }
+}
