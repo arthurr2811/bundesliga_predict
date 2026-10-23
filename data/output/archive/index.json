@@ -28,5 +28,10 @@
     "matchday": 6,
     "as_of": "2026-10-15",
     "path": "archive/md_06/"
+  },
+  {
+    "matchday": 7,
+    "as_of": "2026-10-22",
+    "path": "archive/md_07/"
   }
 ]

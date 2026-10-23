@@ -1,0 +1,8804 @@
+[
+  {
+    "matchday": 1,
+    "date": "2026-08-28",
+    "home_team": "Bayern Munich",
+    "away_team": "Stuttgart",
+    "finished": true,
+    "home_goals": 5,
+    "away_goals": 1
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "Dortmund",
+    "away_team": "Hamburg",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "Elversberg",
+    "away_team": "Leverkusen",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 2
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "FC Koln",
+    "away_team": "Hoffenheim",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 2
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "Mainz",
+    "away_team": "Paderborn",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "RB Leipzig",
+    "away_team": "M'gladbach",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 0
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-29",
+    "home_team": "Union Berlin",
+    "away_team": "Ein Frankfurt",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 3
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-30",
+    "home_team": "Augsburg",
+    "away_team": "Schalke 04",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 0
+  },
+  {
+    "matchday": 1,
+    "date": "2026-08-30",
+    "home_team": "Freiburg",
+    "away_team": "Werder Bremen",
+    "finished": true,
+    "home_goals": 4,
+    "away_goals": 1
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-04",
+    "home_team": "Stuttgart",
+    "away_team": "FC Koln",
+    "finished": true,
+    "home_goals": 4,
+    "away_goals": 1
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "Hoffenheim",
+    "away_team": "Dortmund",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 3
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "Leverkusen",
+    "away_team": "Union Berlin",
+    "finished": true,
+    "home_goals": 4,
+    "away_goals": 0
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "M'gladbach",
+    "away_team": "Elversberg",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 4
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "Paderborn",
+    "away_team": "Freiburg",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "Schalke 04",
+    "away_team": "Bayern Munich",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-05",
+    "home_team": "Werder Bremen",
+    "away_team": "RB Leipzig",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 1
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-06",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Augsburg",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 4
+  },
+  {
+    "matchday": 2,
+    "date": "2026-09-06",
+    "home_team": "Hamburg",
+    "away_team": "Mainz",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 5
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-11",
+    "home_team": "Union Berlin",
+    "away_team": "Schalke 04",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 3
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "Augsburg",
+    "away_team": "Leverkusen",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "Dortmund",
+    "away_team": "Paderborn",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 0
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "FC Koln",
+    "away_team": "Werder Bremen",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 1
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "Freiburg",
+    "away_team": "M'gladbach",
+    "finished": true,
+    "home_goals": 5,
+    "away_goals": 0
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "Hoffenheim",
+    "away_team": "Stuttgart",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-12",
+    "home_team": "Mainz",
+    "away_team": "Ein Frankfurt",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 3
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-13",
+    "home_team": "Elversberg",
+    "away_team": "Bayern Munich",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "matchday": 3,
+    "date": "2026-09-13",
+    "home_team": "RB Leipzig",
+    "away_team": "Hamburg",
+    "finished": true,
+    "home_goals": 5,
+    "away_goals": 0
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-18",
+    "home_team": "Bayern Munich",
+    "away_team": "Union Berlin",
+    "finished": true,
+    "home_goals": 7,
+    "away_goals": 0
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-19",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Freiburg",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-19",
+    "home_team": "Hamburg",
+    "away_team": "FC Koln",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-19",
+    "home_team": "M'gladbach",
+    "away_team": "Mainz",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 4
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-19",
+    "home_team": "Stuttgart",
+    "away_team": "Dortmund",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-19",
+    "home_team": "Werder Bremen",
+    "away_team": "Augsburg",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 2
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-20",
+    "home_team": "Leverkusen",
+    "away_team": "RB Leipzig",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 0
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-20",
+    "home_team": "Paderborn",
+    "away_team": "Hoffenheim",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 1
+  },
+  {
+    "matchday": 4,
+    "date": "2026-09-20",
+    "home_team": "Schalke 04",
+    "away_team": "Elversberg",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-09",
+    "home_team": "Dortmund",
+    "away_team": "Werder Bremen",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "Augsburg",
+    "away_team": "Bayern Munich",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "Hoffenheim",
+    "away_team": "Hamburg",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 3
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "Mainz",
+    "away_team": "Leverkusen",
+    "finished": true,
+    "home_goals": 3,
+    "away_goals": 4
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "Paderborn",
+    "away_team": "Stuttgart",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 2
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "RB Leipzig",
+    "away_team": "Ein Frankfurt",
+    "finished": true,
+    "home_goals": 6,
+    "away_goals": 0
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-10",
+    "home_team": "Union Berlin",
+    "away_team": "Elversberg",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-11",
+    "home_team": "FC Koln",
+    "away_team": "M'gladbach",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "matchday": 5,
+    "date": "2026-10-11",
+    "home_team": "Freiburg",
+    "away_team": "Schalke 04",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-16",
+    "home_team": "Ein Frankfurt",
+    "away_team": "FC Koln",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Bayern Munich",
+    "away_team": "RB Leipzig",
+    "finished": true,
+    "home_goals": 6,
+    "away_goals": 1
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Elversberg",
+    "away_team": "Augsburg",
+    "finished": true,
+    "home_goals": 4,
+    "away_goals": 3
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Hamburg",
+    "away_team": "Stuttgart",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 0
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Schalke 04",
+    "away_team": "Mainz",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 1
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Union Berlin",
+    "away_team": "Dortmund",
+    "finished": true,
+    "home_goals": 0,
+    "away_goals": 0
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-17",
+    "home_team": "Werder Bremen",
+    "away_team": "Paderborn",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 2
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-18",
+    "home_team": "Leverkusen",
+    "away_team": "Freiburg",
+    "finished": true,
+    "home_goals": 2,
+    "away_goals": 1
+  },
+  {
+    "matchday": 6,
+    "date": "2026-10-18",
+    "home_team": "M'gladbach",
+    "away_team": "Hoffenheim",
+    "finished": true,
+    "home_goals": 1,
+    "away_goals": 2
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-23",
+    "home_team": "Stuttgart",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.6631,
+    "p_draw": 0.1858,
+    "p_away": 0.1511,
+    "expected_home_goals": 2.45,
+    "expected_away_goals": 1.11,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0948
+      ],
+      [
+        2,
+        0,
+        0.0853
+      ],
+      [
+        1,
+        1,
+        0.0816
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "Augsburg",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5461,
+    "p_draw": 0.2365,
+    "p_away": 0.2174,
+    "expected_home_goals": 1.87,
+    "expected_away_goals": 1.11,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.111
+      ],
+      [
+        2,
+        1,
+        0.0986
+      ],
+      [
+        1,
+        0,
+        0.0891
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "Dortmund",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.6816,
+    "p_draw": 0.1791,
+    "p_away": 0.1393,
+    "expected_home_goals": 2.51,
+    "expected_away_goals": 1.08,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0939
+      ],
+      [
+        2,
+        0,
+        0.0871
+      ],
+      [
+        1,
+        1,
+        0.0788
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "FC Koln",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.4763,
+    "p_draw": 0.2781,
+    "p_away": 0.2456,
+    "expected_home_goals": 1.46,
+    "expected_away_goals": 0.97,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1315
+      ],
+      [
+        1,
+        0,
+        0.1213
+      ],
+      [
+        0,
+        0,
+        0.0946
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "Mainz",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.5278,
+    "p_draw": 0.2375,
+    "p_away": 0.2347,
+    "expected_home_goals": 1.87,
+    "expected_away_goals": 1.18,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1104
+      ],
+      [
+        2,
+        1,
+        0.0976
+      ],
+      [
+        1,
+        0,
+        0.0829
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "Paderborn",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.3961,
+    "p_draw": 0.289,
+    "p_away": 0.3149,
+    "expected_home_goals": 1.29,
+    "expected_away_goals": 1.12,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1369
+      ],
+      [
+        1,
+        0,
+        0.1089
+      ],
+      [
+        0,
+        0,
+        0.0971
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-24",
+    "home_team": "RB Leipzig",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.6644,
+    "p_draw": 0.1819,
+    "p_away": 0.1537,
+    "expected_home_goals": 2.52,
+    "expected_away_goals": 1.17,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0928
+      ],
+      [
+        2,
+        0,
+        0.0795
+      ],
+      [
+        3,
+        1,
+        0.078
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-25",
+    "home_team": "Freiburg",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.1709,
+    "p_draw": 0.18,
+    "p_away": 0.6491,
+    "expected_home_goals": 1.32,
+    "expected_away_goals": 2.62,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.088
+      ],
+      [
+        1,
+        3,
+        0.0769
+      ],
+      [
+        1,
+        1,
+        0.0707
+      ]
+    ]
+  },
+  {
+    "matchday": 7,
+    "date": "2026-10-25",
+    "home_team": "Hoffenheim",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.3107,
+    "p_draw": 0.2198,
+    "p_away": 0.4695,
+    "expected_home_goals": 1.67,
+    "expected_away_goals": 2.07,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0866
+      ],
+      [
+        1,
+        2,
+        0.0851
+      ],
+      [
+        2,
+        2,
+        0.0709
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-30",
+    "home_team": "Elversberg",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.3868,
+    "p_draw": 0.2475,
+    "p_away": 0.3657,
+    "expected_home_goals": 1.6,
+    "expected_away_goals": 1.55,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1118
+      ],
+      [
+        2,
+        1,
+        0.085
+      ],
+      [
+        1,
+        2,
+        0.0824
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "Augsburg",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.4056,
+    "p_draw": 0.2473,
+    "p_away": 0.3471,
+    "expected_home_goals": 1.64,
+    "expected_away_goals": 1.51,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1119
+      ],
+      [
+        2,
+        1,
+        0.0872
+      ],
+      [
+        1,
+        2,
+        0.0799
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "Bayern Munich",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.6526,
+    "p_draw": 0.184,
+    "p_away": 0.1634,
+    "expected_home_goals": 2.52,
+    "expected_away_goals": 1.22,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.092
+      ],
+      [
+        3,
+        1,
+        0.0773
+      ],
+      [
+        1,
+        1,
+        0.0769
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "Leverkusen",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.5405,
+    "p_draw": 0.2172,
+    "p_away": 0.2423,
+    "expected_home_goals": 2.13,
+    "expected_away_goals": 1.39,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0933
+      ],
+      [
+        1,
+        1,
+        0.0923
+      ],
+      [
+        2,
+        0,
+        0.0672
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "M'gladbach",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.5009,
+    "p_draw": 0.2571,
+    "p_away": 0.242,
+    "expected_home_goals": 1.65,
+    "expected_away_goals": 1.08,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1224
+      ],
+      [
+        1,
+        0,
+        0.1013
+      ],
+      [
+        2,
+        1,
+        0.0959
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "Schalke 04",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2227,
+    "p_draw": 0.2568,
+    "p_away": 0.5205,
+    "expected_home_goals": 1.01,
+    "expected_away_goals": 1.66,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1224
+      ],
+      [
+        0,
+        1,
+        0.1093
+      ],
+      [
+        1,
+        2,
+        0.0964
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-10-31",
+    "home_team": "Werder Bremen",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.4152,
+    "p_draw": 0.2349,
+    "p_away": 0.3499,
+    "expected_home_goals": 1.79,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1002
+      ],
+      [
+        2,
+        1,
+        0.0852
+      ],
+      [
+        1,
+        2,
+        0.0777
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-11-01",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5707,
+    "p_draw": 0.2174,
+    "p_away": 0.2119,
+    "expected_home_goals": 2.11,
+    "expected_away_goals": 1.23,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0971
+      ],
+      [
+        1,
+        1,
+        0.097
+      ],
+      [
+        2,
+        0,
+        0.079
+      ]
+    ]
+  },
+  {
+    "matchday": 8,
+    "date": "2026-11-01",
+    "home_team": "Union Berlin",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.4209,
+    "p_draw": 0.2649,
+    "p_away": 0.3142,
+    "expected_home_goals": 1.51,
+    "expected_away_goals": 1.27,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1255
+      ],
+      [
+        2,
+        1,
+        0.0897
+      ],
+      [
+        1,
+        0,
+        0.0872
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-06",
+    "home_team": "Hamburg",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.4316,
+    "p_draw": 0.2563,
+    "p_away": 0.3121,
+    "expected_home_goals": 1.6,
+    "expected_away_goals": 1.33,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1199
+      ],
+      [
+        2,
+        1,
+        0.0909
+      ],
+      [
+        1,
+        0,
+        0.0794
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-07",
+    "home_team": "Dortmund",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.7114,
+    "p_draw": 0.1729,
+    "p_away": 0.1157,
+    "expected_home_goals": 2.5,
+    "expected_away_goals": 0.93,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1013
+      ],
+      [
+        2,
+        1,
+        0.0942
+      ],
+      [
+        3,
+        0,
+        0.0843
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-07",
+    "home_team": "Mainz",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.1574,
+    "p_draw": 0.1764,
+    "p_away": 0.6663,
+    "expected_home_goals": 1.25,
+    "expected_away_goals": 2.64,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0891
+      ],
+      [
+        1,
+        3,
+        0.0783
+      ],
+      [
+        1,
+        1,
+        0.0712
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-07",
+    "home_team": "Paderborn",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.3231,
+    "p_draw": 0.2555,
+    "p_away": 0.4214,
+    "expected_home_goals": 1.37,
+    "expected_away_goals": 1.59,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.119
+      ],
+      [
+        1,
+        2,
+        0.0898
+      ],
+      [
+        2,
+        1,
+        0.0772
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-07",
+    "home_team": "RB Leipzig",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.6184,
+    "p_draw": 0.1998,
+    "p_away": 0.1818,
+    "expected_home_goals": 2.32,
+    "expected_away_goals": 1.2,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0956
+      ],
+      [
+        1,
+        1,
+        0.087
+      ],
+      [
+        2,
+        0,
+        0.0795
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-07",
+    "home_team": "Stuttgart",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.6228,
+    "p_draw": 0.2033,
+    "p_away": 0.1739,
+    "expected_home_goals": 2.25,
+    "expected_away_goals": 1.12,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0975
+      ],
+      [
+        1,
+        1,
+        0.0915
+      ],
+      [
+        2,
+        0,
+        0.0869
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-08",
+    "home_team": "FC Koln",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.2328,
+    "p_draw": 0.2238,
+    "p_away": 0.5433,
+    "expected_home_goals": 1.28,
+    "expected_away_goals": 2.04,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0997
+      ],
+      [
+        1,
+        2,
+        0.0963
+      ],
+      [
+        0,
+        2,
+        0.0751
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-08",
+    "home_team": "Freiburg",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5978,
+    "p_draw": 0.2234,
+    "p_away": 0.1787,
+    "expected_home_goals": 1.99,
+    "expected_away_goals": 1.0,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1054
+      ],
+      [
+        2,
+        1,
+        0.0996
+      ],
+      [
+        2,
+        0,
+        0.0993
+      ]
+    ]
+  },
+  {
+    "matchday": 9,
+    "date": "2026-11-08",
+    "home_team": "Hoffenheim",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.58,
+    "p_draw": 0.2325,
+    "p_away": 0.1875,
+    "expected_home_goals": 1.9,
+    "expected_away_goals": 0.99,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1103
+      ],
+      [
+        2,
+        0,
+        0.1002
+      ],
+      [
+        1,
+        0,
+        0.1
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-20",
+    "home_team": "Bayern Munich",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.8907,
+    "p_draw": 0.073,
+    "p_away": 0.0362,
+    "expected_home_goals": 3.94,
+    "expected_away_goals": 0.84,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.0854
+      ],
+      [
+        4,
+        0,
+        0.0842
+      ],
+      [
+        3,
+        1,
+        0.0721
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.4782,
+    "p_draw": 0.2119,
+    "p_away": 0.3099,
+    "expected_home_goals": 2.2,
+    "expected_away_goals": 1.76,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0812
+      ],
+      [
+        1,
+        1,
+        0.0779
+      ],
+      [
+        2,
+        2,
+        0.0715
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "Elversberg",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3679,
+    "p_draw": 0.244,
+    "p_away": 0.3881,
+    "expected_home_goals": 1.59,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1086
+      ],
+      [
+        1,
+        2,
+        0.0845
+      ],
+      [
+        2,
+        1,
+        0.082
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "Leverkusen",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.7386,
+    "p_draw": 0.1667,
+    "p_away": 0.0947,
+    "expected_home_goals": 2.47,
+    "expected_away_goals": 0.79,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1176
+      ],
+      [
+        3,
+        0,
+        0.0968
+      ],
+      [
+        2,
+        1,
+        0.0924
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "M'gladbach",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2049,
+    "p_draw": 0.2266,
+    "p_away": 0.5685,
+    "expected_home_goals": 1.12,
+    "expected_away_goals": 1.98,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1052
+      ],
+      [
+        1,
+        2,
+        0.0989
+      ],
+      [
+        0,
+        2,
+        0.0884
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "Schalke 04",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.2383,
+    "p_draw": 0.2647,
+    "p_away": 0.4969,
+    "expected_home_goals": 1.02,
+    "expected_away_goals": 1.58,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1262
+      ],
+      [
+        0,
+        1,
+        0.1108
+      ],
+      [
+        1,
+        2,
+        0.0946
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-21",
+    "home_team": "Union Berlin",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2422,
+    "p_draw": 0.2382,
+    "p_away": 0.5196,
+    "expected_home_goals": 1.21,
+    "expected_away_goals": 1.86,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1103
+      ],
+      [
+        1,
+        2,
+        0.0971
+      ],
+      [
+        0,
+        1,
+        0.0808
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-22",
+    "home_team": "Augsburg",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.4242,
+    "p_draw": 0.2496,
+    "p_away": 0.3263,
+    "expected_home_goals": 1.65,
+    "expected_away_goals": 1.43,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1143
+      ],
+      [
+        2,
+        1,
+        0.0896
+      ],
+      [
+        1,
+        2,
+        0.0774
+      ]
+    ]
+  },
+  {
+    "matchday": 10,
+    "date": "2026-11-22",
+    "home_team": "Werder Bremen",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5035,
+    "p_draw": 0.2501,
+    "p_away": 0.2464,
+    "expected_home_goals": 1.72,
+    "expected_away_goals": 1.14,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1182
+      ],
+      [
+        2,
+        1,
+        0.0966
+      ],
+      [
+        1,
+        0,
+        0.0921
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-27",
+    "home_team": "Werder Bremen",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.4961,
+    "p_draw": 0.2379,
+    "p_away": 0.266,
+    "expected_home_goals": 1.85,
+    "expected_away_goals": 1.31,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1081
+      ],
+      [
+        2,
+        1,
+        0.0951
+      ],
+      [
+        1,
+        0,
+        0.0726
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-28",
+    "home_team": "FC Koln",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.4366,
+    "p_draw": 0.2441,
+    "p_away": 0.3192,
+    "expected_home_goals": 1.73,
+    "expected_away_goals": 1.45,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.11
+      ],
+      [
+        2,
+        1,
+        0.0901
+      ],
+      [
+        1,
+        2,
+        0.0758
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-28",
+    "home_team": "Hamburg",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.0892,
+    "p_draw": 0.1366,
+    "p_away": 0.7742,
+    "expected_home_goals": 0.98,
+    "expected_away_goals": 3.0,
+    "likely_score": [
+      0,
+      2
+    ],
+    "likely_scores": [
+      [
+        0,
+        2,
+        0.0838
+      ],
+      [
+        0,
+        3,
+        0.0837
+      ],
+      [
+        1,
+        2,
+        0.0826
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-28",
+    "home_team": "Mainz",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5731,
+    "p_draw": 0.234,
+    "p_away": 0.1929,
+    "expected_home_goals": 1.89,
+    "expected_away_goals": 1.01,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.111
+      ],
+      [
+        2,
+        1,
+        0.0992
+      ],
+      [
+        1,
+        0,
+        0.0987
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-28",
+    "home_team": "Paderborn",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.4016,
+    "p_draw": 0.3141,
+    "p_away": 0.2843,
+    "expected_home_goals": 1.15,
+    "expected_away_goals": 0.92,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1408
+      ],
+      [
+        1,
+        0,
+        0.1378
+      ],
+      [
+        0,
+        0,
+        0.1336
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-28",
+    "home_team": "Stuttgart",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.6009,
+    "p_draw": 0.1963,
+    "p_away": 0.2028,
+    "expected_home_goals": 2.42,
+    "expected_away_goals": 1.37,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0906
+      ],
+      [
+        1,
+        1,
+        0.0791
+      ],
+      [
+        3,
+        1,
+        0.073
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-29",
+    "home_team": "Dortmund",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.4981,
+    "p_draw": 0.238,
+    "p_away": 0.264,
+    "expected_home_goals": 1.85,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1083
+      ],
+      [
+        2,
+        1,
+        0.0953
+      ],
+      [
+        1,
+        0,
+        0.0733
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-29",
+    "home_team": "Freiburg",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.3815,
+    "p_draw": 0.2424,
+    "p_away": 0.3761,
+    "expected_home_goals": 1.64,
+    "expected_away_goals": 1.63,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1071
+      ],
+      [
+        2,
+        1,
+        0.0834
+      ],
+      [
+        1,
+        2,
+        0.0827
+      ]
+    ]
+  },
+  {
+    "matchday": 11,
+    "date": "2026-11-29",
+    "home_team": "Hoffenheim",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.4979,
+    "p_draw": 0.2217,
+    "p_away": 0.2803,
+    "expected_home_goals": 2.06,
+    "expected_away_goals": 1.52,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0918
+      ],
+      [
+        2,
+        1,
+        0.0898
+      ],
+      [
+        2,
+        2,
+        0.0684
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Augsburg",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.5288,
+    "p_draw": 0.2328,
+    "p_away": 0.2385,
+    "expected_home_goals": 1.92,
+    "expected_away_goals": 1.24,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1064
+      ],
+      [
+        2,
+        1,
+        0.0971
+      ],
+      [
+        2,
+        0,
+        0.0786
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Bayern Munich",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.8989,
+    "p_draw": 0.0718,
+    "p_away": 0.0292,
+    "expected_home_goals": 3.72,
+    "expected_away_goals": 0.66,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.1071
+      ],
+      [
+        4,
+        0,
+        0.0996
+      ],
+      [
+        2,
+        0,
+        0.0863
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.5224,
+    "p_draw": 0.2208,
+    "p_away": 0.2569,
+    "expected_home_goals": 2.08,
+    "expected_away_goals": 1.43,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0937
+      ],
+      [
+        2,
+        1,
+        0.0926
+      ],
+      [
+        2,
+        2,
+        0.066
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Elversberg",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.3105,
+    "p_draw": 0.2337,
+    "p_away": 0.4558,
+    "expected_home_goals": 1.52,
+    "expected_away_goals": 1.87,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1009
+      ],
+      [
+        1,
+        2,
+        0.0896
+      ],
+      [
+        2,
+        1,
+        0.0728
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Freiburg",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.5157,
+    "p_draw": 0.2212,
+    "p_away": 0.2632,
+    "expected_home_goals": 2.08,
+    "expected_away_goals": 1.45,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0933
+      ],
+      [
+        2,
+        1,
+        0.0919
+      ],
+      [
+        2,
+        2,
+        0.0667
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Leverkusen",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.7273,
+    "p_draw": 0.1585,
+    "p_away": 0.1142,
+    "expected_home_goals": 2.75,
+    "expected_away_goals": 1.04,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.089
+      ],
+      [
+        2,
+        0,
+        0.0854
+      ],
+      [
+        3,
+        1,
+        0.0814
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "RB Leipzig",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.5736,
+    "p_draw": 0.2176,
+    "p_away": 0.2088,
+    "expected_home_goals": 2.1,
+    "expected_away_goals": 1.21,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0976
+      ],
+      [
+        2,
+        1,
+        0.0974
+      ],
+      [
+        2,
+        0,
+        0.0804
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Schalke 04",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.1752,
+    "p_draw": 0.2571,
+    "p_away": 0.5678,
+    "expected_home_goals": 0.8,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      0,
+      1
+    ],
+    "likely_scores": [
+      [
+        0,
+        1,
+        0.1365
+      ],
+      [
+        1,
+        1,
+        0.1205
+      ],
+      [
+        0,
+        2,
+        0.1172
+      ]
+    ]
+  },
+  {
+    "matchday": 12,
+    "date": "2026-12-05",
+    "home_team": "Union Berlin",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.4372,
+    "p_draw": 0.2719,
+    "p_away": 0.2908,
+    "expected_home_goals": 1.47,
+    "expected_away_goals": 1.15,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1297
+      ],
+      [
+        1,
+        0,
+        0.0999
+      ],
+      [
+        2,
+        1,
+        0.0904
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Dortmund",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.6689,
+    "p_draw": 0.1928,
+    "p_away": 0.1383,
+    "expected_home_goals": 2.29,
+    "expected_away_goals": 0.96,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1018
+      ],
+      [
+        2,
+        1,
+        0.0975
+      ],
+      [
+        1,
+        1,
+        0.0896
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "FC Koln",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2656,
+    "p_draw": 0.2337,
+    "p_away": 0.5007,
+    "expected_home_goals": 1.35,
+    "expected_away_goals": 1.91,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1046
+      ],
+      [
+        1,
+        2,
+        0.0946
+      ],
+      [
+        0,
+        2,
+        0.0703
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Hamburg",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.4455,
+    "p_draw": 0.2931,
+    "p_away": 0.2614,
+    "expected_home_goals": 1.32,
+    "expected_away_goals": 0.95,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1364
+      ],
+      [
+        1,
+        0,
+        0.1291
+      ],
+      [
+        0,
+        0,
+        0.1097
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Hoffenheim",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.1392,
+    "p_draw": 0.1495,
+    "p_away": 0.7112,
+    "expected_home_goals": 1.41,
+    "expected_away_goals": 3.12,
+    "likely_score": [
+      1,
+      3
+    ],
+    "likely_scores": [
+      [
+        1,
+        3,
+        0.077
+      ],
+      [
+        1,
+        2,
+        0.074
+      ],
+      [
+        1,
+        4,
+        0.06
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "M'gladbach",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.3942,
+    "p_draw": 0.2296,
+    "p_away": 0.3762,
+    "expected_home_goals": 1.81,
+    "expected_away_goals": 1.77,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0941
+      ],
+      [
+        2,
+        1,
+        0.0809
+      ],
+      [
+        1,
+        2,
+        0.0789
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Mainz",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.4368,
+    "p_draw": 0.2513,
+    "p_away": 0.312,
+    "expected_home_goals": 1.65,
+    "expected_away_goals": 1.37,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1162
+      ],
+      [
+        2,
+        1,
+        0.0911
+      ],
+      [
+        1,
+        2,
+        0.0754
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Paderborn",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.3625,
+    "p_draw": 0.2696,
+    "p_away": 0.3679,
+    "expected_home_goals": 1.36,
+    "expected_away_goals": 1.37,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.128
+      ],
+      [
+        1,
+        2,
+        0.0833
+      ],
+      [
+        0,
+        1,
+        0.0827
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Stuttgart",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.665,
+    "p_draw": 0.1949,
+    "p_away": 0.1401,
+    "expected_home_goals": 2.27,
+    "expected_away_goals": 0.96,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1022
+      ],
+      [
+        2,
+        1,
+        0.0978
+      ],
+      [
+        1,
+        1,
+        0.0908
+      ]
+    ]
+  },
+  {
+    "matchday": 13,
+    "date": "2026-12-12",
+    "home_team": "Werder Bremen",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.2584,
+    "p_draw": 0.2296,
+    "p_away": 0.5121,
+    "expected_home_goals": 1.35,
+    "expected_away_goals": 1.96,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1017
+      ],
+      [
+        1,
+        2,
+        0.0947
+      ],
+      [
+        0,
+        2,
+        0.0701
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Augsburg",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.5659,
+    "p_draw": 0.2404,
+    "p_away": 0.1937,
+    "expected_home_goals": 1.82,
+    "expected_away_goals": 0.97,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1145
+      ],
+      [
+        1,
+        0,
+        0.1058
+      ],
+      [
+        2,
+        0,
+        0.1014
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Bayern Munich",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.8739,
+    "p_draw": 0.0824,
+    "p_away": 0.0437,
+    "expected_home_goals": 3.8,
+    "expected_away_goals": 0.89,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.0842
+      ],
+      [
+        4,
+        0,
+        0.08
+      ],
+      [
+        3,
+        1,
+        0.0749
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Elversberg",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5082,
+    "p_draw": 0.2413,
+    "p_away": 0.2505,
+    "expected_home_goals": 1.82,
+    "expected_away_goals": 1.22,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1119
+      ],
+      [
+        2,
+        1,
+        0.0966
+      ],
+      [
+        1,
+        0,
+        0.0812
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Freiburg",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.4025,
+    "p_draw": 0.2443,
+    "p_away": 0.3532,
+    "expected_home_goals": 1.67,
+    "expected_away_goals": 1.55,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1091
+      ],
+      [
+        2,
+        1,
+        0.0863
+      ],
+      [
+        1,
+        2,
+        0.0803
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Leverkusen",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.6711,
+    "p_draw": 0.1724,
+    "p_away": 0.1565,
+    "expected_home_goals": 2.71,
+    "expected_away_goals": 1.29,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0868
+      ],
+      [
+        3,
+        1,
+        0.0784
+      ],
+      [
+        1,
+        1,
+        0.0675
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Mainz",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.5576,
+    "p_draw": 0.2309,
+    "p_away": 0.2115,
+    "expected_home_goals": 1.94,
+    "expected_away_goals": 1.12,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1076
+      ],
+      [
+        2,
+        1,
+        0.0988
+      ],
+      [
+        2,
+        0,
+        0.0881
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "RB Leipzig",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.3856,
+    "p_draw": 0.251,
+    "p_away": 0.3635,
+    "expected_home_goals": 1.57,
+    "expected_away_goals": 1.52,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1147
+      ],
+      [
+        2,
+        1,
+        0.0853
+      ],
+      [
+        1,
+        2,
+        0.0825
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Schalke 04",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.3892,
+    "p_draw": 0.2832,
+    "p_away": 0.3276,
+    "expected_home_goals": 1.31,
+    "expected_away_goals": 1.19,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1349
+      ],
+      [
+        1,
+        0,
+        0.101
+      ],
+      [
+        0,
+        1,
+        0.0904
+      ]
+    ]
+  },
+  {
+    "matchday": 14,
+    "date": "2026-12-19",
+    "home_team": "Union Berlin",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.3507,
+    "p_draw": 0.2458,
+    "p_away": 0.4035,
+    "expected_home_goals": 1.53,
+    "expected_away_goals": 1.65,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1105
+      ],
+      [
+        1,
+        2,
+        0.0867
+      ],
+      [
+        2,
+        1,
+        0.0802
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Dortmund",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.6261,
+    "p_draw": 0.2133,
+    "p_away": 0.1606,
+    "expected_home_goals": 2.08,
+    "expected_away_goals": 0.96,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.103
+      ],
+      [
+        1,
+        1,
+        0.1006
+      ],
+      [
+        2,
+        1,
+        0.0993
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.5716,
+    "p_draw": 0.2345,
+    "p_away": 0.1939,
+    "expected_home_goals": 1.88,
+    "expected_away_goals": 1.01,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1112
+      ],
+      [
+        2,
+        1,
+        0.0992
+      ],
+      [
+        1,
+        0,
+        0.0987
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "FC Koln",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3384,
+    "p_draw": 0.2531,
+    "p_away": 0.4085,
+    "expected_home_goals": 1.43,
+    "expected_away_goals": 1.59,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1168
+      ],
+      [
+        1,
+        2,
+        0.0882
+      ],
+      [
+        2,
+        1,
+        0.0793
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Hamburg",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.2141,
+    "p_draw": 0.2269,
+    "p_away": 0.559,
+    "expected_home_goals": 1.16,
+    "expected_away_goals": 1.99,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1044
+      ],
+      [
+        1,
+        2,
+        0.0984
+      ],
+      [
+        0,
+        2,
+        0.0845
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Hoffenheim",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.5459,
+    "p_draw": 0.2097,
+    "p_away": 0.2444,
+    "expected_home_goals": 2.25,
+    "expected_away_goals": 1.48,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.09
+      ],
+      [
+        1,
+        1,
+        0.0845
+      ],
+      [
+        3,
+        1,
+        0.0674
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "M'gladbach",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.094,
+    "p_draw": 0.1294,
+    "p_away": 0.7766,
+    "expected_home_goals": 1.13,
+    "expected_away_goals": 3.22,
+    "likely_score": [
+      1,
+      3
+    ],
+    "likely_scores": [
+      [
+        1,
+        3,
+        0.0812
+      ],
+      [
+        1,
+        2,
+        0.0755
+      ],
+      [
+        0,
+        3,
+        0.0717
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Paderborn",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2158,
+    "p_draw": 0.2429,
+    "p_away": 0.5414,
+    "expected_home_goals": 1.06,
+    "expected_away_goals": 1.8,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1151
+      ],
+      [
+        1,
+        2,
+        0.0984
+      ],
+      [
+        0,
+        1,
+        0.0971
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Stuttgart",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.5925,
+    "p_draw": 0.2093,
+    "p_away": 0.1982,
+    "expected_home_goals": 2.21,
+    "expected_away_goals": 1.22,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0965
+      ],
+      [
+        1,
+        1,
+        0.0922
+      ],
+      [
+        2,
+        0,
+        0.079
+      ]
+    ]
+  },
+  {
+    "matchday": 15,
+    "date": "2027-01-09",
+    "home_team": "Werder Bremen",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5055,
+    "p_draw": 0.2504,
+    "p_away": 0.244,
+    "expected_home_goals": 1.72,
+    "expected_away_goals": 1.13,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1185
+      ],
+      [
+        2,
+        1,
+        0.0967
+      ],
+      [
+        1,
+        0,
+        0.0933
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Augsburg",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.5381,
+    "p_draw": 0.2252,
+    "p_away": 0.2367,
+    "expected_home_goals": 2.02,
+    "expected_away_goals": 1.29,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1004
+      ],
+      [
+        2,
+        1,
+        0.0961
+      ],
+      [
+        2,
+        0,
+        0.0746
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Bayern Munich",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.7135,
+    "p_draw": 0.1524,
+    "p_away": 0.1342,
+    "expected_home_goals": 3.02,
+    "expected_away_goals": 1.32,
+    "likely_score": [
+      3,
+      1
+    ],
+    "likely_scores": [
+      [
+        3,
+        1,
+        0.0791
+      ],
+      [
+        2,
+        1,
+        0.0787
+      ],
+      [
+        3,
+        0,
+        0.06
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Elversberg",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.4269,
+    "p_draw": 0.2254,
+    "p_away": 0.3477,
+    "expected_home_goals": 1.93,
+    "expected_away_goals": 1.74,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0902
+      ],
+      [
+        2,
+        1,
+        0.0827
+      ],
+      [
+        1,
+        2,
+        0.0743
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "FC Koln",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2069,
+    "p_draw": 0.2347,
+    "p_away": 0.5583,
+    "expected_home_goals": 1.07,
+    "expected_away_goals": 1.89,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1106
+      ],
+      [
+        1,
+        2,
+        0.099
+      ],
+      [
+        0,
+        2,
+        0.0923
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Freiburg",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5961,
+    "p_draw": 0.2234,
+    "p_away": 0.1806,
+    "expected_home_goals": 1.99,
+    "expected_away_goals": 1.01,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1052
+      ],
+      [
+        2,
+        1,
+        0.0996
+      ],
+      [
+        2,
+        0,
+        0.0983
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Mainz",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.4899,
+    "p_draw": 0.2285,
+    "p_away": 0.2816,
+    "expected_home_goals": 1.97,
+    "expected_away_goals": 1.46,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0984
+      ],
+      [
+        2,
+        1,
+        0.0918
+      ],
+      [
+        1,
+        2,
+        0.0681
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "RB Leipzig",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.4966,
+    "p_draw": 0.2266,
+    "p_away": 0.2768,
+    "expected_home_goals": 2.0,
+    "expected_away_goals": 1.46,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0969
+      ],
+      [
+        2,
+        1,
+        0.0918
+      ],
+      [
+        1,
+        2,
+        0.0671
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Schalke 04",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.357,
+    "p_draw": 0.2906,
+    "p_away": 0.3524,
+    "expected_home_goals": 1.21,
+    "expected_away_goals": 1.2,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1376
+      ],
+      [
+        1,
+        0,
+        0.1021
+      ],
+      [
+        0,
+        1,
+        0.1012
+      ]
+    ]
+  },
+  {
+    "matchday": 16,
+    "date": "2027-01-12",
+    "home_team": "Union Berlin",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.4605,
+    "p_draw": 0.2811,
+    "p_away": 0.2584,
+    "expected_home_goals": 1.42,
+    "expected_away_goals": 1.0,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.133
+      ],
+      [
+        1,
+        0,
+        0.1192
+      ],
+      [
+        0,
+        0,
+        0.0954
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Dortmund",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.6108,
+    "p_draw": 0.2162,
+    "p_away": 0.173,
+    "expected_home_goals": 2.07,
+    "expected_away_goals": 1.02,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1012
+      ],
+      [
+        2,
+        1,
+        0.0994
+      ],
+      [
+        2,
+        0,
+        0.0976
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.1325,
+    "p_draw": 0.1451,
+    "p_away": 0.7224,
+    "expected_home_goals": 1.4,
+    "expected_away_goals": 3.18,
+    "likely_score": [
+      1,
+      3
+    ],
+    "likely_scores": [
+      [
+        1,
+        3,
+        0.077
+      ],
+      [
+        1,
+        2,
+        0.0726
+      ],
+      [
+        1,
+        4,
+        0.0613
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Hamburg",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3653,
+    "p_draw": 0.2602,
+    "p_away": 0.3745,
+    "expected_home_goals": 1.44,
+    "expected_away_goals": 1.46,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1219
+      ],
+      [
+        1,
+        2,
+        0.0845
+      ],
+      [
+        2,
+        1,
+        0.0833
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Hoffenheim",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.3504,
+    "p_draw": 0.2247,
+    "p_away": 0.4249,
+    "expected_home_goals": 1.75,
+    "expected_away_goals": 1.94,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0894
+      ],
+      [
+        1,
+        2,
+        0.0822
+      ],
+      [
+        2,
+        1,
+        0.0743
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Leverkusen",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.7151,
+    "p_draw": 0.1829,
+    "p_away": 0.1019,
+    "expected_home_goals": 2.27,
+    "expected_away_goals": 0.75,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1262
+      ],
+      [
+        1,
+        0,
+        0.1065
+      ],
+      [
+        3,
+        0,
+        0.0957
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "M'gladbach",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.4784,
+    "p_draw": 0.2507,
+    "p_away": 0.2709,
+    "expected_home_goals": 1.7,
+    "expected_away_goals": 1.23,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1175
+      ],
+      [
+        2,
+        1,
+        0.0949
+      ],
+      [
+        1,
+        0,
+        0.0844
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Paderborn",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.3804,
+    "p_draw": 0.2802,
+    "p_away": 0.3394,
+    "expected_home_goals": 1.32,
+    "expected_away_goals": 1.23,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1336
+      ],
+      [
+        1,
+        0,
+        0.0959
+      ],
+      [
+        0,
+        1,
+        0.0892
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Stuttgart",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.548,
+    "p_draw": 0.2261,
+    "p_away": 0.2259,
+    "expected_home_goals": 2.0,
+    "expected_away_goals": 1.23,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1024
+      ],
+      [
+        2,
+        1,
+        0.0973
+      ],
+      [
+        2,
+        0,
+        0.0792
+      ]
+    ]
+  },
+  {
+    "matchday": 17,
+    "date": "2027-01-16",
+    "home_team": "Werder Bremen",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.4693,
+    "p_draw": 0.2393,
+    "p_away": 0.2914,
+    "expected_home_goals": 1.82,
+    "expected_away_goals": 1.4,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1073
+      ],
+      [
+        2,
+        1,
+        0.0927
+      ],
+      [
+        1,
+        2,
+        0.0713
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5728,
+    "p_draw": 0.2175,
+    "p_away": 0.2097,
+    "expected_home_goals": 2.11,
+    "expected_away_goals": 1.22,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0974
+      ],
+      [
+        2,
+        1,
+        0.0973
+      ],
+      [
+        2,
+        0,
+        0.08
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Hamburg",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.1907,
+    "p_draw": 0.2378,
+    "p_away": 0.5715,
+    "expected_home_goals": 0.97,
+    "expected_away_goals": 1.84,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1132
+      ],
+      [
+        0,
+        1,
+        0.1044
+      ],
+      [
+        0,
+        2,
+        0.1015
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Hoffenheim",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.564,
+    "p_draw": 0.2131,
+    "p_away": 0.2229,
+    "expected_home_goals": 2.18,
+    "expected_away_goals": 1.33,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0946
+      ],
+      [
+        1,
+        1,
+        0.0914
+      ],
+      [
+        2,
+        0,
+        0.0713
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Leverkusen",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.705,
+    "p_draw": 0.166,
+    "p_away": 0.129,
+    "expected_home_goals": 2.69,
+    "expected_away_goals": 1.11,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0897
+      ],
+      [
+        2,
+        0,
+        0.0808
+      ],
+      [
+        3,
+        1,
+        0.0806
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "M'gladbach",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2642,
+    "p_draw": 0.2265,
+    "p_away": 0.5093,
+    "expected_home_goals": 1.4,
+    "expected_away_goals": 2.0,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0982
+      ],
+      [
+        1,
+        2,
+        0.0933
+      ],
+      [
+        0,
+        2,
+        0.0664
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Paderborn",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.2936,
+    "p_draw": 0.2766,
+    "p_away": 0.4298,
+    "expected_home_goals": 1.13,
+    "expected_away_goals": 1.42,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1319
+      ],
+      [
+        0,
+        1,
+        0.1035
+      ],
+      [
+        1,
+        2,
+        0.0891
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Schalke 04",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3296,
+    "p_draw": 0.2842,
+    "p_away": 0.3862,
+    "expected_home_goals": 1.18,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1352
+      ],
+      [
+        0,
+        1,
+        0.1014
+      ],
+      [
+        1,
+        0,
+        0.0915
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Stuttgart",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.2178,
+    "p_draw": 0.1929,
+    "p_away": 0.5892,
+    "expected_home_goals": 1.51,
+    "expected_away_goals": 2.5,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0856
+      ],
+      [
+        1,
+        1,
+        0.0721
+      ],
+      [
+        1,
+        3,
+        0.0714
+      ]
+    ]
+  },
+  {
+    "matchday": 18,
+    "date": "2027-01-23",
+    "home_team": "Werder Bremen",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3679,
+    "p_draw": 0.253,
+    "p_away": 0.3791,
+    "expected_home_goals": 1.51,
+    "expected_away_goals": 1.53,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1164
+      ],
+      [
+        1,
+        2,
+        0.0847
+      ],
+      [
+        2,
+        1,
+        0.0833
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Augsburg",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.468,
+    "p_draw": 0.2252,
+    "p_away": 0.3068,
+    "expected_home_goals": 1.99,
+    "expected_away_goals": 1.59,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0927
+      ],
+      [
+        2,
+        1,
+        0.0876
+      ],
+      [
+        1,
+        2,
+        0.0701
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Bayern Munich",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.8818,
+    "p_draw": 0.0844,
+    "p_away": 0.0338,
+    "expected_home_goals": 3.43,
+    "expected_away_goals": 0.63,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.1161
+      ],
+      [
+        2,
+        0,
+        0.1015
+      ],
+      [
+        4,
+        0,
+        0.0995
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Dortmund",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.6709,
+    "p_draw": 0.1836,
+    "p_away": 0.1455,
+    "expected_home_goals": 2.46,
+    "expected_away_goals": 1.09,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0947
+      ],
+      [
+        2,
+        0,
+        0.0871
+      ],
+      [
+        1,
+        1,
+        0.0811
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Elversberg",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.4998,
+    "p_draw": 0.2296,
+    "p_away": 0.2706,
+    "expected_home_goals": 1.96,
+    "expected_away_goals": 1.4,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1004
+      ],
+      [
+        2,
+        1,
+        0.0933
+      ],
+      [
+        1,
+        2,
+        0.0669
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "FC Koln",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.2845,
+    "p_draw": 0.2401,
+    "p_away": 0.4754,
+    "expected_home_goals": 1.37,
+    "expected_away_goals": 1.82,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1085
+      ],
+      [
+        1,
+        2,
+        0.0935
+      ],
+      [
+        2,
+        1,
+        0.0703
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Freiburg",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.615,
+    "p_draw": 0.2259,
+    "p_away": 0.1591,
+    "expected_home_goals": 1.93,
+    "expected_away_goals": 0.88,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1123
+      ],
+      [
+        1,
+        0,
+        0.1108
+      ],
+      [
+        1,
+        1,
+        0.1077
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Mainz",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5713,
+    "p_draw": 0.2338,
+    "p_away": 0.1948,
+    "expected_home_goals": 1.89,
+    "expected_away_goals": 1.02,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1108
+      ],
+      [
+        2,
+        1,
+        0.0992
+      ],
+      [
+        1,
+        0,
+        0.0974
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "RB Leipzig",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.6481,
+    "p_draw": 0.1931,
+    "p_away": 0.1588,
+    "expected_home_goals": 2.36,
+    "expected_away_goals": 1.1,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0963
+      ],
+      [
+        2,
+        0,
+        0.0871
+      ],
+      [
+        1,
+        1,
+        0.086
+      ]
+    ]
+  },
+  {
+    "matchday": 19,
+    "date": "2027-01-30",
+    "home_team": "Union Berlin",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.2119,
+    "p_draw": 0.227,
+    "p_away": 0.561,
+    "expected_home_goals": 1.15,
+    "expected_away_goals": 1.98,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1047
+      ],
+      [
+        1,
+        2,
+        0.0985
+      ],
+      [
+        0,
+        2,
+        0.0855
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Bayern Munich",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.8871,
+    "p_draw": 0.0732,
+    "p_away": 0.0396,
+    "expected_home_goals": 4.06,
+    "expected_away_goals": 0.94,
+    "likely_score": [
+      4,
+      0
+    ],
+    "likely_scores": [
+      [
+        4,
+        0,
+        0.0766
+      ],
+      [
+        3,
+        0,
+        0.0754
+      ],
+      [
+        4,
+        1,
+        0.0719
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.4442,
+    "p_draw": 0.2336,
+    "p_away": 0.3222,
+    "expected_home_goals": 1.86,
+    "expected_away_goals": 1.56,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1001
+      ],
+      [
+        2,
+        1,
+        0.0882
+      ],
+      [
+        1,
+        2,
+        0.0742
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Hamburg",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2446,
+    "p_draw": 0.2379,
+    "p_away": 0.5175,
+    "expected_home_goals": 1.22,
+    "expected_away_goals": 1.86,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1099
+      ],
+      [
+        1,
+        2,
+        0.0969
+      ],
+      [
+        0,
+        1,
+        0.0796
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Leverkusen",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.6602,
+    "p_draw": 0.185,
+    "p_away": 0.1547,
+    "expected_home_goals": 2.47,
+    "expected_away_goals": 1.15,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0939
+      ],
+      [
+        2,
+        0,
+        0.082
+      ],
+      [
+        1,
+        1,
+        0.08
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "M'gladbach",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3388,
+    "p_draw": 0.2461,
+    "p_away": 0.4151,
+    "expected_home_goals": 1.49,
+    "expected_away_goals": 1.67,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.111
+      ],
+      [
+        1,
+        2,
+        0.0881
+      ],
+      [
+        2,
+        1,
+        0.0787
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Paderborn",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.1685,
+    "p_draw": 0.2414,
+    "p_away": 0.5902,
+    "expected_home_goals": 0.84,
+    "expected_away_goals": 1.78,
+    "likely_score": [
+      0,
+      1
+    ],
+    "likely_scores": [
+      [
+        0,
+        1,
+        0.1229
+      ],
+      [
+        0,
+        2,
+        0.1148
+      ],
+      [
+        1,
+        1,
+        0.1147
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Schalke 04",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.3991,
+    "p_draw": 0.3007,
+    "p_away": 0.3002,
+    "expected_home_goals": 1.22,
+    "expected_away_goals": 1.02,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1397
+      ],
+      [
+        1,
+        0,
+        0.1226
+      ],
+      [
+        0,
+        0,
+        0.1137
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Stuttgart",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.5893,
+    "p_draw": 0.2,
+    "p_away": 0.2107,
+    "expected_home_goals": 2.37,
+    "expected_away_goals": 1.39,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.091
+      ],
+      [
+        1,
+        1,
+        0.081
+      ],
+      [
+        3,
+        1,
+        0.0719
+      ]
+    ]
+  },
+  {
+    "matchday": 20,
+    "date": "2027-02-06",
+    "home_team": "Werder Bremen",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.4875,
+    "p_draw": 0.2453,
+    "p_away": 0.2671,
+    "expected_home_goals": 1.77,
+    "expected_away_goals": 1.26,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1139
+      ],
+      [
+        2,
+        1,
+        0.0954
+      ],
+      [
+        1,
+        0,
+        0.08
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Augsburg",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.4982,
+    "p_draw": 0.2381,
+    "p_away": 0.2637,
+    "expected_home_goals": 1.85,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1084
+      ],
+      [
+        2,
+        1,
+        0.0953
+      ],
+      [
+        1,
+        0,
+        0.0735
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Dortmund",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.5573,
+    "p_draw": 0.2277,
+    "p_away": 0.215,
+    "expected_home_goals": 1.98,
+    "expected_away_goals": 1.16,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1049
+      ],
+      [
+        2,
+        1,
+        0.0984
+      ],
+      [
+        2,
+        0,
+        0.0846
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Elversberg",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.5115,
+    "p_draw": 0.2605,
+    "p_away": 0.2279,
+    "expected_home_goals": 1.62,
+    "expected_away_goals": 1.0,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1242
+      ],
+      [
+        1,
+        0,
+        0.1109
+      ],
+      [
+        2,
+        1,
+        0.0956
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "FC Koln",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.4722,
+    "p_draw": 0.2571,
+    "p_away": 0.2706,
+    "expected_home_goals": 1.64,
+    "expected_away_goals": 1.19,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1217
+      ],
+      [
+        2,
+        1,
+        0.0944
+      ],
+      [
+        1,
+        0,
+        0.0911
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Freiburg",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.5271,
+    "p_draw": 0.2183,
+    "p_away": 0.2546,
+    "expected_home_goals": 2.12,
+    "expected_away_goals": 1.44,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0921
+      ],
+      [
+        1,
+        1,
+        0.0916
+      ],
+      [
+        2,
+        2,
+        0.0662
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Hoffenheim",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.6024,
+    "p_draw": 0.218,
+    "p_away": 0.1796,
+    "expected_home_goals": 2.06,
+    "expected_away_goals": 1.04,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1018
+      ],
+      [
+        2,
+        1,
+        0.0994
+      ],
+      [
+        2,
+        0,
+        0.0952
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Mainz",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.5676,
+    "p_draw": 0.223,
+    "p_away": 0.2094,
+    "expected_home_goals": 2.03,
+    "expected_away_goals": 1.17,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1019
+      ],
+      [
+        2,
+        1,
+        0.0983
+      ],
+      [
+        2,
+        0,
+        0.0839
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "RB Leipzig",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.4331,
+    "p_draw": 0.2309,
+    "p_away": 0.336,
+    "expected_home_goals": 1.87,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0967
+      ],
+      [
+        2,
+        1,
+        0.0859
+      ],
+      [
+        1,
+        2,
+        0.075
+      ]
+    ]
+  },
+  {
+    "matchday": 21,
+    "date": "2027-02-13",
+    "home_team": "Union Berlin",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.0882,
+    "p_draw": 0.1363,
+    "p_away": 0.7755,
+    "expected_home_goals": 0.97,
+    "expected_away_goals": 2.99,
+    "likely_score": [
+      0,
+      2
+    ],
+    "likely_scores": [
+      [
+        0,
+        2,
+        0.0849
+      ],
+      [
+        0,
+        3,
+        0.0846
+      ],
+      [
+        1,
+        2,
+        0.0827
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Bayern Munich",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.857,
+    "p_draw": 0.0905,
+    "p_away": 0.0525,
+    "expected_home_goals": 3.73,
+    "expected_away_goals": 0.97,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.0789
+      ],
+      [
+        3,
+        1,
+        0.0764
+      ],
+      [
+        4,
+        0,
+        0.0736
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Ein Frankfurt",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.3405,
+    "p_draw": 0.2233,
+    "p_away": 0.4362,
+    "expected_home_goals": 1.74,
+    "expected_away_goals": 1.98,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0883
+      ],
+      [
+        1,
+        2,
+        0.0828
+      ],
+      [
+        2,
+        1,
+        0.0727
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Elversberg",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.5103,
+    "p_draw": 0.2416,
+    "p_away": 0.248,
+    "expected_home_goals": 1.82,
+    "expected_away_goals": 1.21,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1124
+      ],
+      [
+        2,
+        1,
+        0.0968
+      ],
+      [
+        1,
+        0,
+        0.0824
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Hamburg",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.354,
+    "p_draw": 0.245,
+    "p_away": 0.401,
+    "expected_home_goals": 1.55,
+    "expected_away_goals": 1.66,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1097
+      ],
+      [
+        1,
+        2,
+        0.0862
+      ],
+      [
+        2,
+        1,
+        0.0805
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Leverkusen",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.6157,
+    "p_draw": 0.2042,
+    "p_away": 0.1801,
+    "expected_home_goals": 2.25,
+    "expected_away_goals": 1.15,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0971
+      ],
+      [
+        1,
+        1,
+        0.0911
+      ],
+      [
+        2,
+        0,
+        0.0842
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "M'gladbach",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.4589,
+    "p_draw": 0.2447,
+    "p_away": 0.2964,
+    "expected_home_goals": 1.75,
+    "expected_away_goals": 1.37,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1116
+      ],
+      [
+        2,
+        1,
+        0.0926
+      ],
+      [
+        1,
+        2,
+        0.0726
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Schalke 04",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.2832,
+    "p_draw": 0.2826,
+    "p_away": 0.4343,
+    "expected_home_goals": 1.07,
+    "expected_away_goals": 1.39,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1341
+      ],
+      [
+        0,
+        1,
+        0.1121
+      ],
+      [
+        0,
+        0,
+        0.0928
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Stuttgart",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.6798,
+    "p_draw": 0.1958,
+    "p_away": 0.1244,
+    "expected_home_goals": 2.2,
+    "expected_away_goals": 0.84,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1159
+      ],
+      [
+        1,
+        0,
+        0.1005
+      ],
+      [
+        2,
+        1,
+        0.0972
+      ]
+    ]
+  },
+  {
+    "matchday": 22,
+    "date": "2027-02-20",
+    "home_team": "Werder Bremen",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2294,
+    "p_draw": 0.2415,
+    "p_away": 0.5291,
+    "expected_home_goals": 1.13,
+    "expected_away_goals": 1.82,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1135
+      ],
+      [
+        1,
+        2,
+        0.0979
+      ],
+      [
+        0,
+        1,
+        0.0894
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Augsburg",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.5112,
+    "p_draw": 0.2281,
+    "p_away": 0.2607,
+    "expected_home_goals": 1.98,
+    "expected_away_goals": 1.37,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1001
+      ],
+      [
+        2,
+        1,
+        0.0941
+      ],
+      [
+        2,
+        0,
+        0.0685
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Dortmund",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.7287,
+    "p_draw": 0.1747,
+    "p_away": 0.0966,
+    "expected_home_goals": 2.36,
+    "expected_away_goals": 0.75,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1241
+      ],
+      [
+        1,
+        0,
+        0.1008
+      ],
+      [
+        3,
+        0,
+        0.0976
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "FC Koln",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.3931,
+    "p_draw": 0.2359,
+    "p_away": 0.371,
+    "expected_home_goals": 1.74,
+    "expected_away_goals": 1.68,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1008
+      ],
+      [
+        2,
+        1,
+        0.083
+      ],
+      [
+        1,
+        2,
+        0.0805
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Freiburg",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.343,
+    "p_draw": 0.24,
+    "p_away": 0.417,
+    "expected_home_goals": 1.56,
+    "expected_away_goals": 1.74,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1054
+      ],
+      [
+        1,
+        2,
+        0.087
+      ],
+      [
+        2,
+        1,
+        0.0782
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Hoffenheim",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.5738,
+    "p_draw": 0.2057,
+    "p_away": 0.2204,
+    "expected_home_goals": 2.29,
+    "expected_away_goals": 1.38,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0921
+      ],
+      [
+        1,
+        1,
+        0.0848
+      ],
+      [
+        3,
+        1,
+        0.0703
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Mainz",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.5685,
+    "p_draw": 0.2527,
+    "p_away": 0.1788,
+    "expected_home_goals": 1.68,
+    "expected_away_goals": 0.84,
+    "likely_score": [
+      1,
+      0
+    ],
+    "likely_scores": [
+      [
+        1,
+        0,
+        0.1291
+      ],
+      [
+        1,
+        1,
+        0.1194
+      ],
+      [
+        2,
+        0,
+        0.1139
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Paderborn",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.3539,
+    "p_draw": 0.2793,
+    "p_away": 0.3667,
+    "expected_home_goals": 1.27,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1332
+      ],
+      [
+        0,
+        1,
+        0.0925
+      ],
+      [
+        1,
+        0,
+        0.0904
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "RB Leipzig",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.2368,
+    "p_draw": 0.1965,
+    "p_away": 0.5667,
+    "expected_home_goals": 1.58,
+    "expected_away_goals": 2.47,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0839
+      ],
+      [
+        1,
+        1,
+        0.0718
+      ],
+      [
+        1,
+        3,
+        0.069
+      ]
+    ]
+  },
+  {
+    "matchday": 23,
+    "date": "2027-02-27",
+    "home_team": "Stuttgart",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.6634,
+    "p_draw": 0.195,
+    "p_away": 0.1416,
+    "expected_home_goals": 2.28,
+    "expected_away_goals": 0.97,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1012
+      ],
+      [
+        2,
+        1,
+        0.0978
+      ],
+      [
+        1,
+        1,
+        0.0906
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Bayern Munich",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.8113,
+    "p_draw": 0.1146,
+    "p_away": 0.0741,
+    "expected_home_goals": 3.37,
+    "expected_away_goals": 1.03,
+    "likely_score": [
+      3,
+      1
+    ],
+    "likely_scores": [
+      [
+        3,
+        1,
+        0.0807
+      ],
+      [
+        3,
+        0,
+        0.0784
+      ],
+      [
+        2,
+        1,
+        0.0719
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2665,
+    "p_draw": 0.2299,
+    "p_away": 0.5037,
+    "expected_home_goals": 1.38,
+    "expected_away_goals": 1.96,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1011
+      ],
+      [
+        1,
+        2,
+        0.0938
+      ],
+      [
+        0,
+        2,
+        0.0678
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Elversberg",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.2903,
+    "p_draw": 0.2282,
+    "p_away": 0.4815,
+    "expected_home_goals": 1.5,
+    "expected_away_goals": 1.97,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0972
+      ],
+      [
+        1,
+        2,
+        0.0906
+      ],
+      [
+        2,
+        1,
+        0.0691
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Hamburg",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.4641,
+    "p_draw": 0.2795,
+    "p_away": 0.2564,
+    "expected_home_goals": 1.44,
+    "expected_away_goals": 1.0,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1324
+      ],
+      [
+        1,
+        0,
+        0.1184
+      ],
+      [
+        0,
+        0,
+        0.0939
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Leverkusen",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.6599,
+    "p_draw": 0.1767,
+    "p_away": 0.1635,
+    "expected_home_goals": 2.66,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0878
+      ],
+      [
+        3,
+        1,
+        0.0777
+      ],
+      [
+        1,
+        1,
+        0.0696
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "M'gladbach",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.2835,
+    "p_draw": 0.2329,
+    "p_away": 0.4835,
+    "expected_home_goals": 1.43,
+    "expected_away_goals": 1.91,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1023
+      ],
+      [
+        1,
+        2,
+        0.0925
+      ],
+      [
+        2,
+        1,
+        0.0692
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Schalke 04",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.3826,
+    "p_draw": 0.2911,
+    "p_away": 0.3263,
+    "expected_home_goals": 1.25,
+    "expected_away_goals": 1.14,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1377
+      ],
+      [
+        1,
+        0,
+        0.1079
+      ],
+      [
+        0,
+        0,
+        0.099
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Union Berlin",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3621,
+    "p_draw": 0.2611,
+    "p_away": 0.3769,
+    "expected_home_goals": 1.43,
+    "expected_away_goals": 1.46,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1225
+      ],
+      [
+        1,
+        2,
+        0.0848
+      ],
+      [
+        2,
+        1,
+        0.0829
+      ]
+    ]
+  },
+  {
+    "matchday": 24,
+    "date": "2027-03-02",
+    "home_team": "Werder Bremen",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.386,
+    "p_draw": 0.2565,
+    "p_away": 0.3575,
+    "expected_home_goals": 1.52,
+    "expected_away_goals": 1.45,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1192
+      ],
+      [
+        2,
+        1,
+        0.0858
+      ],
+      [
+        1,
+        2,
+        0.0821
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Dortmund",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.3058,
+    "p_draw": 0.2273,
+    "p_away": 0.4669,
+    "expected_home_goals": 1.57,
+    "expected_away_goals": 1.96,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0949
+      ],
+      [
+        1,
+        2,
+        0.0884
+      ],
+      [
+        2,
+        1,
+        0.0706
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "FC Koln",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.4743,
+    "p_draw": 0.2576,
+    "p_away": 0.2681,
+    "expected_home_goals": 1.63,
+    "expected_away_goals": 1.17,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1221
+      ],
+      [
+        2,
+        1,
+        0.0945
+      ],
+      [
+        1,
+        0,
+        0.0925
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Freiburg",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.5216,
+    "p_draw": 0.2318,
+    "p_away": 0.2466,
+    "expected_home_goals": 1.93,
+    "expected_away_goals": 1.28,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1049
+      ],
+      [
+        2,
+        1,
+        0.0962
+      ],
+      [
+        2,
+        0,
+        0.0752
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Hamburg",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.3639,
+    "p_draw": 0.2445,
+    "p_away": 0.3916,
+    "expected_home_goals": 1.58,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1091
+      ],
+      [
+        1,
+        2,
+        0.085
+      ],
+      [
+        2,
+        1,
+        0.0817
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Hoffenheim",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.5321,
+    "p_draw": 0.2195,
+    "p_away": 0.2484,
+    "expected_home_goals": 2.1,
+    "expected_away_goals": 1.4,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0936
+      ],
+      [
+        2,
+        1,
+        0.0933
+      ],
+      [
+        2,
+        0,
+        0.0667
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Mainz",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.5419,
+    "p_draw": 0.2269,
+    "p_away": 0.2312,
+    "expected_home_goals": 1.99,
+    "expected_away_goals": 1.25,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1025
+      ],
+      [
+        2,
+        1,
+        0.097
+      ],
+      [
+        2,
+        0,
+        0.0777
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Paderborn",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.3867,
+    "p_draw": 0.2727,
+    "p_away": 0.3406,
+    "expected_home_goals": 1.39,
+    "expected_away_goals": 1.29,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1298
+      ],
+      [
+        1,
+        0,
+        0.0891
+      ],
+      [
+        2,
+        1,
+        0.0854
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "RB Leipzig",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.6794,
+    "p_draw": 0.2002,
+    "p_away": 0.1203,
+    "expected_home_goals": 2.13,
+    "expected_away_goals": 0.78,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1232
+      ],
+      [
+        1,
+        0,
+        0.1108
+      ],
+      [
+        2,
+        1,
+        0.0965
+      ]
+    ]
+  },
+  {
+    "matchday": 25,
+    "date": "2027-03-06",
+    "home_team": "Stuttgart",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.4081,
+    "p_draw": 0.2346,
+    "p_away": 0.3573,
+    "expected_home_goals": 1.78,
+    "expected_away_goals": 1.66,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0997
+      ],
+      [
+        2,
+        1,
+        0.0843
+      ],
+      [
+        1,
+        2,
+        0.0785
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Augsburg",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.3272,
+    "p_draw": 0.237,
+    "p_away": 0.4358,
+    "expected_home_goals": 1.54,
+    "expected_away_goals": 1.8,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1032
+      ],
+      [
+        1,
+        2,
+        0.0883
+      ],
+      [
+        2,
+        1,
+        0.0756
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Bayern Munich",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.8226,
+    "p_draw": 0.1101,
+    "p_away": 0.0673,
+    "expected_home_goals": 3.39,
+    "expected_away_goals": 0.98,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.0826
+      ],
+      [
+        3,
+        1,
+        0.0806
+      ],
+      [
+        2,
+        0,
+        0.0732
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.5938,
+    "p_draw": 0.2202,
+    "p_away": 0.186,
+    "expected_home_goals": 2.04,
+    "expected_away_goals": 1.07,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1026
+      ],
+      [
+        2,
+        1,
+        0.0993
+      ],
+      [
+        2,
+        0,
+        0.0932
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Elversberg",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.226,
+    "p_draw": 0.2307,
+    "p_away": 0.5433,
+    "expected_home_goals": 1.19,
+    "expected_away_goals": 1.95,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.106
+      ],
+      [
+        1,
+        2,
+        0.0979
+      ],
+      [
+        0,
+        2,
+        0.082
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Leverkusen",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.7157,
+    "p_draw": 0.1667,
+    "p_away": 0.1176,
+    "expected_home_goals": 2.61,
+    "expected_away_goals": 1.0,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.0922
+      ],
+      [
+        2,
+        1,
+        0.0921
+      ],
+      [
+        3,
+        0,
+        0.0803
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "M'gladbach",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.4762,
+    "p_draw": 0.2502,
+    "p_away": 0.2736,
+    "expected_home_goals": 1.71,
+    "expected_away_goals": 1.25,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.117
+      ],
+      [
+        2,
+        1,
+        0.0947
+      ],
+      [
+        1,
+        0,
+        0.0832
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Schalke 04",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.3196,
+    "p_draw": 0.2669,
+    "p_away": 0.4135,
+    "expected_home_goals": 1.27,
+    "expected_away_goals": 1.48,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1267
+      ],
+      [
+        1,
+        2,
+        0.0888
+      ],
+      [
+        0,
+        1,
+        0.088
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Union Berlin",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3102,
+    "p_draw": 0.2611,
+    "p_away": 0.4287,
+    "expected_home_goals": 1.29,
+    "expected_away_goals": 1.55,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1232
+      ],
+      [
+        1,
+        2,
+        0.0906
+      ],
+      [
+        0,
+        1,
+        0.0845
+      ]
+    ]
+  },
+  {
+    "matchday": 26,
+    "date": "2027-03-13",
+    "home_team": "Werder Bremen",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.3124,
+    "p_draw": 0.243,
+    "p_away": 0.4446,
+    "expected_home_goals": 1.44,
+    "expected_away_goals": 1.75,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1094
+      ],
+      [
+        1,
+        2,
+        0.0908
+      ],
+      [
+        2,
+        1,
+        0.0747
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Dortmund",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.7319,
+    "p_draw": 0.1653,
+    "p_away": 0.1028,
+    "expected_home_goals": 2.55,
+    "expected_away_goals": 0.87,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1063
+      ],
+      [
+        2,
+        1,
+        0.0927
+      ],
+      [
+        3,
+        0,
+        0.0902
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "FC Koln",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.0976,
+    "p_draw": 0.1371,
+    "p_away": 0.7653,
+    "expected_home_goals": 1.08,
+    "expected_away_goals": 3.07,
+    "likely_score": [
+      1,
+      3
+    ],
+    "likely_scores": [
+      [
+        1,
+        3,
+        0.0821
+      ],
+      [
+        1,
+        2,
+        0.0803
+      ],
+      [
+        0,
+        3,
+        0.0757
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Freiburg",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.5675,
+    "p_draw": 0.2178,
+    "p_away": 0.2147,
+    "expected_home_goals": 2.11,
+    "expected_away_goals": 1.24,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0969
+      ],
+      [
+        2,
+        1,
+        0.0968
+      ],
+      [
+        2,
+        0,
+        0.078
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Hamburg",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.396,
+    "p_draw": 0.2646,
+    "p_away": 0.3394,
+    "expected_home_goals": 1.47,
+    "expected_away_goals": 1.34,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1251
+      ],
+      [
+        2,
+        1,
+        0.087
+      ],
+      [
+        1,
+        0,
+        0.082
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Hoffenheim",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.5007,
+    "p_draw": 0.209,
+    "p_away": 0.2903,
+    "expected_home_goals": 2.26,
+    "expected_away_goals": 1.71,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0824
+      ],
+      [
+        1,
+        1,
+        0.0768
+      ],
+      [
+        2,
+        2,
+        0.0705
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Mainz",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.4965,
+    "p_draw": 0.2398,
+    "p_away": 0.2636,
+    "expected_home_goals": 1.83,
+    "expected_away_goals": 1.29,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1099
+      ],
+      [
+        2,
+        1,
+        0.0955
+      ],
+      [
+        1,
+        0,
+        0.0753
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Paderborn",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.1885,
+    "p_draw": 0.2303,
+    "p_away": 0.5813,
+    "expected_home_goals": 1.01,
+    "expected_away_goals": 1.92,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.109
+      ],
+      [
+        1,
+        2,
+        0.0994
+      ],
+      [
+        0,
+        2,
+        0.0985
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "RB Leipzig",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.6891,
+    "p_draw": 0.1837,
+    "p_away": 0.1272,
+    "expected_home_goals": 2.38,
+    "expected_away_goals": 0.94,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1021
+      ],
+      [
+        2,
+        1,
+        0.0962
+      ],
+      [
+        1,
+        1,
+        0.085
+      ]
+    ]
+  },
+  {
+    "matchday": 27,
+    "date": "2027-03-20",
+    "home_team": "Stuttgart",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.6563,
+    "p_draw": 0.2118,
+    "p_away": 0.1319,
+    "expected_home_goals": 2.03,
+    "expected_away_goals": 0.79,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1222
+      ],
+      [
+        1,
+        0,
+        0.1153
+      ],
+      [
+        1,
+        1,
+        0.101
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Augsburg",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.4567,
+    "p_draw": 0.2272,
+    "p_away": 0.3161,
+    "expected_home_goals": 1.95,
+    "expected_away_goals": 1.61,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.094
+      ],
+      [
+        2,
+        1,
+        0.0871
+      ],
+      [
+        1,
+        2,
+        0.0717
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Bayern Munich",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.894,
+    "p_draw": 0.0727,
+    "p_away": 0.0333,
+    "expected_home_goals": 3.85,
+    "expected_away_goals": 0.77,
+    "likely_score": [
+      3,
+      0
+    ],
+    "likely_scores": [
+      [
+        3,
+        0,
+        0.0943
+      ],
+      [
+        4,
+        0,
+        0.0906
+      ],
+      [
+        2,
+        0,
+        0.0736
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.3626,
+    "p_draw": 0.2269,
+    "p_away": 0.4105,
+    "expected_home_goals": 1.76,
+    "expected_away_goals": 1.88,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0913
+      ],
+      [
+        1,
+        2,
+        0.0816
+      ],
+      [
+        2,
+        1,
+        0.0764
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Elversberg",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.4913,
+    "p_draw": 0.2368,
+    "p_away": 0.2719,
+    "expected_home_goals": 1.86,
+    "expected_away_goals": 1.35,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1067
+      ],
+      [
+        2,
+        1,
+        0.0944
+      ],
+      [
+        2,
+        0,
+        0.0702
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Leverkusen",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.4256,
+    "p_draw": 0.2477,
+    "p_away": 0.3267,
+    "expected_home_goals": 1.67,
+    "expected_away_goals": 1.44,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1128
+      ],
+      [
+        2,
+        1,
+        0.0895
+      ],
+      [
+        1,
+        2,
+        0.0772
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "M'gladbach",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.4284,
+    "p_draw": 0.247,
+    "p_away": 0.3246,
+    "expected_home_goals": 1.69,
+    "expected_away_goals": 1.44,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1122
+      ],
+      [
+        2,
+        1,
+        0.0897
+      ],
+      [
+        1,
+        2,
+        0.0769
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "RB Leipzig",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.5559,
+    "p_draw": 0.2194,
+    "p_away": 0.2246,
+    "expected_home_goals": 2.09,
+    "expected_away_goals": 1.28,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0969
+      ],
+      [
+        2,
+        1,
+        0.0962
+      ],
+      [
+        2,
+        0,
+        0.0752
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Schalke 04",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.418,
+    "p_draw": 0.3117,
+    "p_away": 0.2702,
+    "expected_home_goals": 1.18,
+    "expected_away_goals": 0.89,
+    "likely_score": [
+      1,
+      0
+    ],
+    "likely_scores": [
+      [
+        1,
+        0,
+        0.141
+      ],
+      [
+        1,
+        1,
+        0.1397
+      ],
+      [
+        0,
+        0,
+        0.1326
+      ]
+    ]
+  },
+  {
+    "matchday": 28,
+    "date": "2027-04-03",
+    "home_team": "Union Berlin",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.3271,
+    "p_draw": 0.2667,
+    "p_away": 0.4063,
+    "expected_home_goals": 1.29,
+    "expected_away_goals": 1.47,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1265
+      ],
+      [
+        1,
+        2,
+        0.0881
+      ],
+      [
+        0,
+        1,
+        0.0862
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Dortmund",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.7149,
+    "p_draw": 0.1925,
+    "p_away": 0.0926,
+    "expected_home_goals": 2.11,
+    "expected_away_goals": 0.62,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1446
+      ],
+      [
+        1,
+        0,
+        0.1325
+      ],
+      [
+        3,
+        0,
+        0.1017
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "FC Koln",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3938,
+    "p_draw": 0.2508,
+    "p_away": 0.3554,
+    "expected_home_goals": 1.59,
+    "expected_away_goals": 1.5,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1147
+      ],
+      [
+        2,
+        1,
+        0.0863
+      ],
+      [
+        1,
+        2,
+        0.0814
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Hamburg",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.4429,
+    "p_draw": 0.2712,
+    "p_away": 0.286,
+    "expected_home_goals": 1.48,
+    "expected_away_goals": 1.14,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1293
+      ],
+      [
+        1,
+        0,
+        0.1005
+      ],
+      [
+        2,
+        1,
+        0.0909
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Hoffenheim",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.4343,
+    "p_draw": 0.2319,
+    "p_away": 0.3338,
+    "expected_home_goals": 1.86,
+    "expected_away_goals": 1.62,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0978
+      ],
+      [
+        2,
+        1,
+        0.0864
+      ],
+      [
+        1,
+        2,
+        0.075
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "M'gladbach",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.2308,
+    "p_draw": 0.2164,
+    "p_away": 0.5528,
+    "expected_home_goals": 1.34,
+    "expected_away_goals": 2.14,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0946
+      ],
+      [
+        1,
+        1,
+        0.0932
+      ],
+      [
+        0,
+        2,
+        0.0707
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Mainz",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.3592,
+    "p_draw": 0.2457,
+    "p_away": 0.3951,
+    "expected_home_goals": 1.55,
+    "expected_away_goals": 1.64,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1102
+      ],
+      [
+        1,
+        2,
+        0.0857
+      ],
+      [
+        2,
+        1,
+        0.0813
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Paderborn",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.0778,
+    "p_draw": 0.1353,
+    "p_away": 0.7869,
+    "expected_home_goals": 0.85,
+    "expected_away_goals": 2.9,
+    "likely_score": [
+      0,
+      2
+    ],
+    "likely_scores": [
+      [
+        0,
+        2,
+        0.0986
+      ],
+      [
+        0,
+        3,
+        0.0953
+      ],
+      [
+        1,
+        2,
+        0.0842
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Stuttgart",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.6387,
+    "p_draw": 0.1923,
+    "p_away": 0.169,
+    "expected_home_goals": 2.4,
+    "expected_away_goals": 1.18,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0946
+      ],
+      [
+        1,
+        1,
+        0.083
+      ],
+      [
+        2,
+        0,
+        0.0799
+      ]
+    ]
+  },
+  {
+    "matchday": 29,
+    "date": "2027-04-10",
+    "home_team": "Werder Bremen",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.426,
+    "p_draw": 0.2335,
+    "p_away": 0.3405,
+    "expected_home_goals": 1.83,
+    "expected_away_goals": 1.62,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0991
+      ],
+      [
+        2,
+        1,
+        0.086
+      ],
+      [
+        1,
+        2,
+        0.0763
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Augsburg",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2575,
+    "p_draw": 0.2439,
+    "p_away": 0.4985,
+    "expected_home_goals": 1.23,
+    "expected_away_goals": 1.79,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1134
+      ],
+      [
+        1,
+        2,
+        0.0961
+      ],
+      [
+        0,
+        1,
+        0.0816
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Bayern Munich",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.862,
+    "p_draw": 0.0845,
+    "p_away": 0.0535,
+    "expected_home_goals": 4.01,
+    "expected_away_goals": 1.1,
+    "likely_score": [
+      4,
+      1
+    ],
+    "likely_scores": [
+      [
+        4,
+        1,
+        0.0717
+      ],
+      [
+        3,
+        1,
+        0.0717
+      ],
+      [
+        4,
+        0,
+        0.0653
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Ein Frankfurt",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.5641,
+    "p_draw": 0.2075,
+    "p_away": 0.2284,
+    "expected_home_goals": 2.27,
+    "expected_away_goals": 1.41,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0916
+      ],
+      [
+        1,
+        1,
+        0.085
+      ],
+      [
+        3,
+        1,
+        0.0693
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Elversberg",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.5322,
+    "p_draw": 0.2467,
+    "p_away": 0.2211,
+    "expected_home_goals": 1.76,
+    "expected_away_goals": 1.06,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1172
+      ],
+      [
+        1,
+        0,
+        0.0989
+      ],
+      [
+        2,
+        1,
+        0.0979
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Freiburg",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.4787,
+    "p_draw": 0.2456,
+    "p_away": 0.2757,
+    "expected_home_goals": 1.76,
+    "expected_away_goals": 1.29,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1136
+      ],
+      [
+        2,
+        1,
+        0.0946
+      ],
+      [
+        1,
+        0,
+        0.0778
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Leverkusen",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.6884,
+    "p_draw": 0.1773,
+    "p_away": 0.1343,
+    "expected_home_goals": 2.52,
+    "expected_away_goals": 1.05,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0939
+      ],
+      [
+        2,
+        0,
+        0.0892
+      ],
+      [
+        3,
+        1,
+        0.0788
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "RB Leipzig",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.6767,
+    "p_draw": 0.1832,
+    "p_away": 0.1401,
+    "expected_home_goals": 2.45,
+    "expected_away_goals": 1.05,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0952
+      ],
+      [
+        2,
+        0,
+        0.0908
+      ],
+      [
+        1,
+        1,
+        0.082
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Schalke 04",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.3972,
+    "p_draw": 0.2999,
+    "p_away": 0.3029,
+    "expected_home_goals": 1.22,
+    "expected_away_goals": 1.03,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1396
+      ],
+      [
+        1,
+        0,
+        0.1212
+      ],
+      [
+        0,
+        0,
+        0.1123
+      ]
+    ]
+  },
+  {
+    "matchday": 30,
+    "date": "2027-04-17",
+    "home_team": "Union Berlin",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.2598,
+    "p_draw": 0.2454,
+    "p_away": 0.4948,
+    "expected_home_goals": 1.23,
+    "expected_away_goals": 1.77,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1144
+      ],
+      [
+        1,
+        2,
+        0.0959
+      ],
+      [
+        0,
+        1,
+        0.0824
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Dortmund",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.5375,
+    "p_draw": 0.2307,
+    "p_away": 0.2318,
+    "expected_home_goals": 1.95,
+    "expected_away_goals": 1.22,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1055
+      ],
+      [
+        2,
+        1,
+        0.0974
+      ],
+      [
+        2,
+        0,
+        0.0798
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.3012,
+    "p_draw": 0.2177,
+    "p_away": 0.4811,
+    "expected_home_goals": 1.65,
+    "expected_away_goals": 2.11,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0854
+      ],
+      [
+        1,
+        1,
+        0.0853
+      ],
+      [
+        2,
+        2,
+        0.0706
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "FC Koln",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.3563,
+    "p_draw": 0.2576,
+    "p_away": 0.3861,
+    "expected_home_goals": 1.44,
+    "expected_away_goals": 1.51,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1201
+      ],
+      [
+        1,
+        2,
+        0.0859
+      ],
+      [
+        2,
+        1,
+        0.082
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Hamburg",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.4059,
+    "p_draw": 0.255,
+    "p_away": 0.3391,
+    "expected_home_goals": 1.57,
+    "expected_away_goals": 1.42,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1183
+      ],
+      [
+        2,
+        1,
+        0.0881
+      ],
+      [
+        1,
+        2,
+        0.0795
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Hoffenheim",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.582,
+    "p_draw": 0.2156,
+    "p_away": 0.2025,
+    "expected_home_goals": 2.12,
+    "expected_away_goals": 1.19,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0976
+      ],
+      [
+        1,
+        1,
+        0.0969
+      ],
+      [
+        2,
+        0,
+        0.0819
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "M'gladbach",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.4812,
+    "p_draw": 0.2706,
+    "p_away": 0.2482,
+    "expected_home_goals": 1.52,
+    "expected_away_goals": 1.02,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1288
+      ],
+      [
+        1,
+        0,
+        0.1128
+      ],
+      [
+        2,
+        1,
+        0.093
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Paderborn",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3254,
+    "p_draw": 0.2725,
+    "p_away": 0.402,
+    "expected_home_goals": 1.25,
+    "expected_away_goals": 1.41,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1298
+      ],
+      [
+        0,
+        1,
+        0.0919
+      ],
+      [
+        1,
+        2,
+        0.0871
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Stuttgart",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.5301,
+    "p_draw": 0.2274,
+    "p_away": 0.2425,
+    "expected_home_goals": 1.99,
+    "expected_away_goals": 1.3,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1015
+      ],
+      [
+        2,
+        1,
+        0.0959
+      ],
+      [
+        2,
+        0,
+        0.0739
+      ]
+    ]
+  },
+  {
+    "matchday": 31,
+    "date": "2027-04-24",
+    "home_team": "Werder Bremen",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.1132,
+    "p_draw": 0.148,
+    "p_away": 0.7388,
+    "expected_home_goals": 1.14,
+    "expected_away_goals": 2.96,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0828
+      ],
+      [
+        1,
+        3,
+        0.0817
+      ],
+      [
+        0,
+        2,
+        0.0725
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Augsburg",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.3478,
+    "p_draw": 0.241,
+    "p_away": 0.4112,
+    "expected_home_goals": 1.57,
+    "expected_away_goals": 1.72,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1062
+      ],
+      [
+        1,
+        2,
+        0.0866
+      ],
+      [
+        2,
+        1,
+        0.079
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Bayern Munich",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.8995,
+    "p_draw": 0.0668,
+    "p_away": 0.0337,
+    "expected_home_goals": 4.14,
+    "expected_away_goals": 0.88,
+    "likely_score": [
+      4,
+      0
+    ],
+    "likely_scores": [
+      [
+        4,
+        0,
+        0.081
+      ],
+      [
+        3,
+        0,
+        0.0783
+      ],
+      [
+        4,
+        1,
+        0.0714
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Elversberg",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.4158,
+    "p_draw": 0.2267,
+    "p_away": 0.3575,
+    "expected_home_goals": 1.9,
+    "expected_away_goals": 1.75,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0913
+      ],
+      [
+        2,
+        1,
+        0.0821
+      ],
+      [
+        1,
+        2,
+        0.0758
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Freiburg",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.5827,
+    "p_draw": 0.221,
+    "p_away": 0.1962,
+    "expected_home_goals": 2.04,
+    "expected_away_goals": 1.12,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.102
+      ],
+      [
+        2,
+        1,
+        0.0989
+      ],
+      [
+        2,
+        0,
+        0.0887
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Leverkusen",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.7251,
+    "p_draw": 0.167,
+    "p_away": 0.1079,
+    "expected_home_goals": 2.55,
+    "expected_away_goals": 0.91,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1025
+      ],
+      [
+        2,
+        1,
+        0.0929
+      ],
+      [
+        3,
+        0,
+        0.0871
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Mainz",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.2859,
+    "p_draw": 0.257,
+    "p_away": 0.4571,
+    "expected_home_goals": 1.24,
+    "expected_away_goals": 1.62,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1212
+      ],
+      [
+        1,
+        2,
+        0.0933
+      ],
+      [
+        0,
+        1,
+        0.0866
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "RB Leipzig",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.703,
+    "p_draw": 0.1841,
+    "p_away": 0.1129,
+    "expected_home_goals": 2.31,
+    "expected_away_goals": 0.83,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.116
+      ],
+      [
+        1,
+        0,
+        0.0958
+      ],
+      [
+        2,
+        1,
+        0.0957
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Schalke 04",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.3284,
+    "p_draw": 0.2668,
+    "p_away": 0.4048,
+    "expected_home_goals": 1.3,
+    "expected_away_goals": 1.46,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1265
+      ],
+      [
+        1,
+        2,
+        0.0879
+      ],
+      [
+        0,
+        1,
+        0.086
+      ]
+    ]
+  },
+  {
+    "matchday": 32,
+    "date": "2027-05-08",
+    "home_team": "Union Berlin",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.3926,
+    "p_draw": 0.2657,
+    "p_away": 0.3417,
+    "expected_home_goals": 1.45,
+    "expected_away_goals": 1.34,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1258
+      ],
+      [
+        2,
+        1,
+        0.0866
+      ],
+      [
+        1,
+        0,
+        0.0826
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Dortmund",
+    "away_team": "FC Koln",
+    "finished": false,
+    "p_home": 0.72,
+    "p_draw": 0.1741,
+    "p_away": 0.1059,
+    "expected_home_goals": 2.42,
+    "expected_away_goals": 0.84,
+    "likely_score": [
+      2,
+      0
+    ],
+    "likely_scores": [
+      [
+        2,
+        0,
+        0.1129
+      ],
+      [
+        2,
+        1,
+        0.0943
+      ],
+      [
+        3,
+        0,
+        0.0912
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Ein Frankfurt",
+    "away_team": "Elversberg",
+    "finished": false,
+    "p_home": 0.5358,
+    "p_draw": 0.2111,
+    "p_away": 0.253,
+    "expected_home_goals": 2.23,
+    "expected_away_goals": 1.51,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0893
+      ],
+      [
+        1,
+        1,
+        0.0845
+      ],
+      [
+        2,
+        2,
+        0.0672
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Hamburg",
+    "away_team": "Freiburg",
+    "finished": false,
+    "p_home": 0.3131,
+    "p_draw": 0.2604,
+    "p_away": 0.4265,
+    "expected_home_goals": 1.3,
+    "expected_away_goals": 1.55,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1227
+      ],
+      [
+        1,
+        2,
+        0.0904
+      ],
+      [
+        0,
+        1,
+        0.0832
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Hoffenheim",
+    "away_team": "Mainz",
+    "finished": false,
+    "p_home": 0.454,
+    "p_draw": 0.2333,
+    "p_away": 0.3127,
+    "expected_home_goals": 1.87,
+    "expected_away_goals": 1.53,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1004
+      ],
+      [
+        2,
+        1,
+        0.0892
+      ],
+      [
+        1,
+        2,
+        0.073
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Leverkusen",
+    "away_team": "Bayern Munich",
+    "finished": false,
+    "p_home": 0.2736,
+    "p_draw": 0.2041,
+    "p_away": 0.5223,
+    "expected_home_goals": 1.69,
+    "expected_away_goals": 2.35,
+    "likely_score": [
+      1,
+      2
+    ],
+    "likely_scores": [
+      [
+        1,
+        2,
+        0.0821
+      ],
+      [
+        1,
+        1,
+        0.0737
+      ],
+      [
+        2,
+        2,
+        0.0694
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "M'gladbach",
+    "away_team": "Augsburg",
+    "finished": false,
+    "p_home": 0.3955,
+    "p_draw": 0.2441,
+    "p_away": 0.3604,
+    "expected_home_goals": 1.66,
+    "expected_away_goals": 1.57,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1088
+      ],
+      [
+        2,
+        1,
+        0.0854
+      ],
+      [
+        1,
+        2,
+        0.0811
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Paderborn",
+    "away_team": "Union Berlin",
+    "finished": false,
+    "p_home": 0.3981,
+    "p_draw": 0.2898,
+    "p_away": 0.3121,
+    "expected_home_goals": 1.29,
+    "expected_away_goals": 1.11,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1371
+      ],
+      [
+        1,
+        0,
+        0.1103
+      ],
+      [
+        0,
+        0,
+        0.0984
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Stuttgart",
+    "away_team": "RB Leipzig",
+    "finished": false,
+    "p_home": 0.4491,
+    "p_draw": 0.2329,
+    "p_away": 0.318,
+    "expected_home_goals": 1.87,
+    "expected_away_goals": 1.56,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.0996
+      ],
+      [
+        2,
+        1,
+        0.0885
+      ],
+      [
+        1,
+        2,
+        0.0735
+      ]
+    ]
+  },
+  {
+    "matchday": 33,
+    "date": "2027-05-15",
+    "home_team": "Werder Bremen",
+    "away_team": "Schalke 04",
+    "finished": false,
+    "p_home": 0.5056,
+    "p_draw": 0.2701,
+    "p_away": 0.2243,
+    "expected_home_goals": 1.54,
+    "expected_away_goals": 0.94,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.128
+      ],
+      [
+        1,
+        0,
+        0.1226
+      ],
+      [
+        2,
+        0,
+        0.0993
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Augsburg",
+    "away_team": "Hamburg",
+    "finished": false,
+    "p_home": 0.5441,
+    "p_draw": 0.2363,
+    "p_away": 0.2196,
+    "expected_home_goals": 1.88,
+    "expected_away_goals": 1.12,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1107
+      ],
+      [
+        2,
+        1,
+        0.0985
+      ],
+      [
+        1,
+        0,
+        0.0879
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Bayern Munich",
+    "away_team": "Ein Frankfurt",
+    "finished": false,
+    "p_home": 0.8696,
+    "p_draw": 0.0803,
+    "p_away": 0.05,
+    "expected_home_goals": 4.09,
+    "expected_away_goals": 1.09,
+    "likely_score": [
+      4,
+      1
+    ],
+    "likely_scores": [
+      [
+        4,
+        1,
+        0.0718
+      ],
+      [
+        3,
+        1,
+        0.0703
+      ],
+      [
+        4,
+        0,
+        0.0659
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Elversberg",
+    "away_team": "Werder Bremen",
+    "finished": false,
+    "p_home": 0.4603,
+    "p_draw": 0.2405,
+    "p_away": 0.2992,
+    "expected_home_goals": 1.8,
+    "expected_away_goals": 1.42,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1079
+      ],
+      [
+        2,
+        1,
+        0.092
+      ],
+      [
+        1,
+        2,
+        0.0725
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "FC Koln",
+    "away_team": "Paderborn",
+    "finished": false,
+    "p_home": 0.4959,
+    "p_draw": 0.2644,
+    "p_away": 0.2397,
+    "expected_home_goals": 1.58,
+    "expected_away_goals": 1.03,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.126
+      ],
+      [
+        1,
+        0,
+        0.1099
+      ],
+      [
+        2,
+        1,
+        0.0946
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Freiburg",
+    "away_team": "Dortmund",
+    "finished": false,
+    "p_home": 0.3045,
+    "p_draw": 0.2559,
+    "p_away": 0.4396,
+    "expected_home_goals": 1.31,
+    "expected_away_goals": 1.61,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1198
+      ],
+      [
+        1,
+        2,
+        0.0917
+      ],
+      [
+        0,
+        1,
+        0.0807
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Mainz",
+    "away_team": "Stuttgart",
+    "finished": false,
+    "p_home": 0.3797,
+    "p_draw": 0.2484,
+    "p_away": 0.3719,
+    "expected_home_goals": 1.58,
+    "expected_away_goals": 1.56,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1125
+      ],
+      [
+        2,
+        1,
+        0.0842
+      ],
+      [
+        1,
+        2,
+        0.0833
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "RB Leipzig",
+    "away_team": "Hoffenheim",
+    "finished": false,
+    "p_home": 0.6162,
+    "p_draw": 0.1909,
+    "p_away": 0.1928,
+    "expected_home_goals": 2.49,
+    "expected_away_goals": 1.36,
+    "likely_score": [
+      2,
+      1
+    ],
+    "likely_scores": [
+      [
+        2,
+        1,
+        0.0897
+      ],
+      [
+        1,
+        1,
+        0.076
+      ],
+      [
+        3,
+        1,
+        0.0744
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Schalke 04",
+    "away_team": "Leverkusen",
+    "finished": false,
+    "p_home": 0.1959,
+    "p_draw": 0.2448,
+    "p_away": 0.5593,
+    "expected_home_goals": 0.96,
+    "expected_away_goals": 1.77,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1167
+      ],
+      [
+        0,
+        1,
+        0.1096
+      ],
+      [
+        0,
+        2,
+        0.1024
+      ]
+    ]
+  },
+  {
+    "matchday": 34,
+    "date": "2027-05-22",
+    "home_team": "Union Berlin",
+    "away_team": "M'gladbach",
+    "finished": false,
+    "p_home": 0.428,
+    "p_draw": 0.2575,
+    "p_away": 0.3145,
+    "expected_home_goals": 1.58,
+    "expected_away_goals": 1.33,
+    "likely_score": [
+      1,
+      1
+    ],
+    "likely_scores": [
+      [
+        1,
+        1,
+        0.1207
+      ],
+      [
+        2,
+        1,
+        0.0906
+      ],
+      [
+        1,
+        0,
+        0.0801
+      ]
+    ]
+  }
+]
