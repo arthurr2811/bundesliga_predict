@@ -73,8 +73,8 @@ def team_records(matches: pd.DataFrame, teams: Iterable[str]) -> pd.DataFrame:
     if unknown:
         raise ValueError(f"Spiele von Teams ausserhalb der Liga: {sorted(unknown)}")
 
-    home = played["home_team"].map(index).to_numpy()
-    away = played["away_team"].map(index).to_numpy()
+    home = played["home_team"].map(index).to_numpy(dtype=int)
+    away = played["away_team"].map(index).to_numpy(dtype=int)
     home_goals = played["home_goals"].to_numpy(dtype=int)
     away_goals = played["away_goals"].to_numpy(dtype=int)
 

@@ -69,8 +69,8 @@ def prepare(
     teams = tuple(sorted(set(matches["home_team"]) | set(matches["away_team"])))
     index = {team: i for i, team in enumerate(teams)}
 
-    home_idx = matches["home_team"].map(index).to_numpy()
-    away_idx = matches["away_team"].map(index).to_numpy()
+    home_idx = matches["home_team"].map(index).to_numpy(dtype=int)
+    away_idx = matches["away_team"].map(index).to_numpy(dtype=int)
     home_goals = matches["home_goals"].to_numpy(dtype=float)
     away_goals = matches["away_goals"].to_numpy(dtype=float)
 

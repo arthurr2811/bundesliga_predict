@@ -198,8 +198,8 @@ def simulate_season(
         raise ValueError(f"Offene Spiele von Teams ausserhalb der Liga: {sorted(unknown)}")
 
     rng = np.random.default_rng(config.seed)
-    home_index = fixtures["home_team"].map(index).to_numpy()
-    away_index = fixtures["away_team"].map(index).to_numpy()
+    home_index = fixtures["home_team"].map(index).to_numpy(dtype=int)
+    away_index = fixtures["away_team"].map(index).to_numpy(dtype=int)
 
     chunks = [
         _play_out(parameters, fixtures, start, home_index, away_index, runs, rng)
