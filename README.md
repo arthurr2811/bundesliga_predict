@@ -9,6 +9,8 @@ Parameter-Unsicherheit.
 **Live-Demo:** https://arthurr2811.github.io/bundesliga_predict/ (täglich
 aktualisiert)
 
+**Blogpost:** https://www.arthurraffel.dev/projekte/bundesliga-prognose
+
 Hintergrund, Modell, Backtest und Kalibrierung: [documentation.md](documentation.md).
 
 ## Setup
