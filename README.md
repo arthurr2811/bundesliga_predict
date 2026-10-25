@@ -43,16 +43,9 @@ Frontend lokal ansehen (braucht einen Server, `file://` blockiert `fetch`):
 ## Daten
 
 - **Laufende Saison:** OpenLigaDB, wird bei jedem `update` live geholt.
-- **Historie 2016/17–2025/26:** `data/processed/historic.csv` (committet; nur
-  Datum, Spieltag, Teams, Tore). Reicht für `update` und `simulate`.
-- **Roh-CSVs mit Wettquoten:** nicht im Repo. Nötig für `backtest`,
-  `calibrate` und `tune` (Markt-Baseline). Herunterladen von
-  [football-data.co.uk](https://www.football-data.co.uk/germanym.php)
-  (Bundesliga 1) und als `data/raw/historic_data/D1_<saison>.csv` ablegen,
-  z. B. `D1_2025-26.csv`. Sind sie vorhanden, haben sie Vorrang vor
-  `historic.csv`.
+- **Historie 2016/17–2025/26:** `data/processed/historic.csv`
 
-Nach einem Saisonende: Roh-CSV der abgelaufenen Saison ergänzen und
+Nach einem Saisonende: Raw-CSV der abgelaufenen Saison ergänzen und
 `historic.csv` neu schreiben:
 
     python -m bundesliga_predict.build_dataset --historic
@@ -70,7 +63,3 @@ täglich 06:00 UTC und manuell startbar:
    JSONs werden nicht versioniert, nur deployt.
 3. `python -m bundesliga_predict.build_site` legt Frontend und Daten in
    `_site/` zusammen, das wird auf GitHub Pages deployt.
-
-Hinweis: GitHub deaktiviert geplante Workflows nach 60 Tagen ohne Commit im
-Repo, was in der Sommerpause passieren kann. Wieder einschalten unter
-*Actions → Prognose aktualisieren → Enable workflow*.

@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Bundesliga season forecast (Dixon-Coles Poisson model + Monte-Carlo simulation),
 published as a static site on GitHub Pages and updated daily by GitHub Actions.
 Docs are in German: `README.md` (setup, commands), `documentation.md` (model,
-backtest, calibration, log), `deploymentplan.md` (Pages/Actions setup).
+backtest, calibration, log).
 
 ## Common Commands
 
